@@ -1,0 +1,48 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "city.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "City.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "city.tmx": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -57,
+                "y": -445.8333333333333
+            }
+        },
+        "galletcity_tiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 3,
+            "scaleInEditor": 3
+        }
+    },
+    "last.imagePath": "C:/Users/A-20/Study_2022_SJY/Prototype_WNJ/Assets/Grapics",
+    "map.fixedSize": false,
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+        "city.tmx",
+        "galletcity_tiles.tsx"
+    ],
+    "project": "BackGround.tiled-project",
+    "recentFiles": [
+        "galletcity_tiles.tsx",
+        "city.tmx",
+        "City.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 8,
+        "width": 8
+    }
+}

@@ -10,9 +10,7 @@ public class Player_Ctrl : MonoBehaviour
     float moveSpeed = 7f;
     Vector3 moveDir = Vector3.zero;
 
-    public GameObject m_BulletPrefab = null;
-    public GameObject m_ShootPos = null;
-    float m_ShootCool = 0f; //주기 계산
+    
 
     //---- 주인공 화면 밖으로 이탈하지 않도록 하기 위한 변수
     Vector3 HalfSize = Vector3.zero;
@@ -22,6 +20,8 @@ public class Player_Ctrl : MonoBehaviour
     float a_LmtBdTop = 0;
     float a_LmtBdRight = 0;
     float a_LmtBdBottom = 0;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +47,8 @@ public class Player_Ctrl : MonoBehaviour
         }
 
         LimitMove();
+
+       
     }
 
     void LimitMove()
@@ -70,4 +72,6 @@ public class Player_Ctrl : MonoBehaviour
         transform.position = m_CacCurPos;
 
     }
+
+    
 }
