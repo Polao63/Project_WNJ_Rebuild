@@ -106,17 +106,17 @@ public class Bullet : MonoBehaviour
 
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.tag == "Monster")
-    //    {
-    //        Monster_Ctrl a_RefMon = collision.gameObject.GetComponent<Monster_Ctrl>();
-    //        if (a_RefMon != null)
-    //        {
-    //            a_RefMon.TakeDamage(1000);
-    //        }
-    //        Destroy(gameObject);
-    //    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
+            if (a_RefMon != null)
+            {
+                a_RefMon.TakeDamage(1000);
+            }
+            Destroy(gameObject);
+        }
 
-    //}
+    }
 }

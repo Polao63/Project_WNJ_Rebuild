@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum MonType
+public enum AI_Type
 {
-    MT_Zombi,
-    MT_Missle,
-    MT_Boss
+    AI_ShootBullet,
+    AI_Charge,
+    AI_ShootNRun
+}
+
+public enum Mon_Type
+{
+    MT_Small,
+    MT_Medium,
+    MT_Big
 }
 
 public enum BossAttState
@@ -20,15 +27,16 @@ public enum BossAttState
 
 public class Enemy_Ctrl : MonoBehaviour
 {
-    public MonType m_MonType = MonType.MT_Zombi;
+    public Mon_Type m_MoType = Mon_Type.MT_Small; 
+    public AI_Type m_AIType = AI_Type.AI_Charge;
 
     //---- 몬스터 체력 변수
     float m_MaxHP = 200f;
     float m_CurHP = 200f;
-    public Image m_HpSdBar = null;
+    //public Image m_HpSdBar = null;
 
 
-    float m_Speed = 4; //이동속도
+    public float m_Speed = 4; //이동속도
     Vector3 m_CurPos; //위치 계산용 변수
     Vector3 m_SpawnPos; //스폰 위치
 
@@ -49,42 +57,105 @@ public class Enemy_Ctrl : MonoBehaviour
     Player_Ctrl m_RefHero = null;
     Vector3 m_DirVec;
 
+    public GameObject Explosion_Prefab = null;
+    public bool isHoming = false;
+
+    int Mon_Score = 10;
+
 
     // Start is called before the first frame update
     void Start()
     {
         m_SpawnPos = this.transform.position;
-        m_Rand_Y = UnityEngine.Random.Range(0.2f, 2.6f);
 
-        if (m_MonType == MonType.MT_Missle)
+        float m_MaxHP = 200f;
+        float m_CurHP = 200f;
+
+        if (m_MoType == Mon_Type.MT_Small)
+        {
+            m_CurHP = m_MaxHP;
+            Mon_Score = 10;
+            m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
+        }
+        if (m_MoType == Mon_Type.MT_Medium)
         {
             m_MaxHP *= 2f;
             m_CurHP = m_MaxHP;
+            Mon_Score = 50;
             m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
         }
-        else if (m_MonType == MonType.MT_Boss)
+        if (m_MoType == Mon_Type.MT_Big)
         {
-            m_MaxHP = 3000f;
+            m_MaxHP *= 3f;
             m_CurHP = m_MaxHP;
+            Mon_Score = 100;
             m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
-
-            Shoot_Time = 2f;
-            m_BossState = BossAttState.BS_MOVE;
         }
+        //else if (m_MonType == MonType.MT_Boss)
+        //{
+        //    m_MaxHP = 3000f;
+        //    m_CurHP = m_MaxHP;
+        //    m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
+
+        //    Shoot_Time = 2f;
+        //    m_BossState = BossAttState.BS_MOVE;
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_MonType == MonType.MT_Zombi)
-        { Zombi_Ai_Update(); }
+        //if (m_MonType == MonType.MT_Zombi)
+        //{ Zombi_Ai_Update(); }
         //else if (m_MonType == MonType.MT_Missle)
         //{ Missle_AI_Update(); }
         //else if (m_MonType == MonType.MT_Boss)
         //{ Boss_AI_Update(); }
 
+        if (m_AIType == AI_Type.AI_Charge)
+        { AI_Charge_Update(); }
+
         if (this.transform.position.x < CameraResolution.m_ScreenWMin.x - 2)
         { Destroy(gameObject); }
+    }
+
+
+    void AI_Charge_Update()
+    {
+        m_CurPos = transform.position;
+        if (isHoming)
+        {
+            GameObject Target_Obj = GameObject.FindObjectOfType<Player_Ctrl>().gameObject;
+            Vector3 m_DesiredDir;
+            m_DesiredDir = Target_Obj.transform.position - transform.position;
+            m_DesiredDir.z = 0f;
+            m_DesiredDir.Normalize();
+
+            //적을 향해 회전 이동하는 코드
+
+            if (-1.5f <= m_DesiredDir.y)
+            {
+                //스프라이트 회전
+                float angle = Mathf.Atan2(m_DesiredDir.x, -m_DesiredDir.y) * Mathf.Rad2Deg;
+                Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = angleAxis;
+
+
+                m_DirVec = transform.up;
+                transform.Translate(Vector3.up * -m_Speed * Time.deltaTime);
+            }
+
+        }
+        else 
+        {
+            //if(GetComponent<PathFollow>() == null)
+            //{  }
+            m_CurPos.y += (-1f * Time.deltaTime * m_Speed);
+            transform.position = m_CurPos;
+
+        }
+        
+        
     }
 
     void Zombi_Ai_Update()
@@ -127,8 +198,8 @@ public class Enemy_Ctrl : MonoBehaviour
         if (m_CurHP < 0)
         { m_CurHP = 0; }
 
-        if (m_HpSdBar != null)
-        { m_HpSdBar.fillAmount = m_CurHP / m_MaxHP; }
+        //if (m_HpSdBar != null)
+        //{ m_HpSdBar.fillAmount = m_CurHP / m_MaxHP; }
 
         if (m_CurHP <= 0)
         {//몬스터 사망처리
@@ -139,8 +210,10 @@ public class Enemy_Ctrl : MonoBehaviour
             { //Game_Manager.Inst.SpawnCoin(transform.position); 
             }
 
-            Game_Manager.Inst.P1_score += 10;
+            Game_Manager.Inst.P1_score += Mon_Score;
 
+            GameObject Explo = Instantiate(Explosion_Prefab);
+            Explo.transform.position = this.transform.position;
             Destroy(gameObject); //<-- 몬스터 GameObject 제거
         }
 
@@ -263,7 +336,7 @@ public class Enemy_Ctrl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {// 주인공이 쏜 총알만 데미지가 발생하도록 처리
-        if (collision.tag == "AllyBullet")
+        if (collision.tag == "PlayerBullet")
         {
             Destroy(collision.gameObject); //몬스터에 충돌된 총알삭제
             TakeDamage(80f);
