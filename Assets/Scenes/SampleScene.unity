@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 379596659}
   - component: {fileID: 379596658}
   - component: {fileID: 379596657}
+  - component: {fileID: 379596661}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -561,7 +562,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 74041c24ac1855e4b92edb523cf9aaa6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -605,6 +606,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &379596661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379596656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da59a3fdb0ac044596fab6835f78e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrollSpeed: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,11 +1121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoType: 0
   m_AIType: 1
-  m_Speed: 4
+  m_Speed: 2
   m_BulletPrefab: {fileID: 0}
   m_ShootPos: {fileID: 0}
   Explosion_Prefab: {fileID: 9016051681658124431, guid: a94cea347a0087b41979dc117176e2ef, type: 3}
-  isHoming: 0
+  isHoming: 1
 --- !u!4 &1033309581
 Transform:
   m_ObjectHideFlags: 0
@@ -1120,7 +1134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033309579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.01, y: 2.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1776026805}

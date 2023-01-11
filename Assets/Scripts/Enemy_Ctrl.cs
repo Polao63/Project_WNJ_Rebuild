@@ -125,31 +125,27 @@ public class Enemy_Ctrl : MonoBehaviour
         m_CurPos = transform.position;
         if (isHoming)
         {
-            GameObject Target_Obj = GameObject.FindObjectOfType<Player_Ctrl>().gameObject;
-            Vector3 m_DesiredDir;
-            m_DesiredDir = Target_Obj.transform.position - transform.position;
-            m_DesiredDir.z = 0f;
-            m_DesiredDir.Normalize();
+            m_DirVec.x = 0f;
+            m_DirVec.z = 0f;
+            m_DirVec.y = -1f;
 
-            //적을 향해 회전 이동하는 코드
-
-            if (-1.5f <= m_DesiredDir.y)
+            if (m_RefHero != null)
             {
-                //스프라이트 회전
-                float angle = Mathf.Atan2(m_DesiredDir.x, -m_DesiredDir.y) * Mathf.Rad2Deg;
-                Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
-                transform.rotation = angleAxis;
+                Vector3 a_CacVec = m_RefHero.transform.position - transform.position;
+                m_DirVec = a_CacVec;
 
-
+                if (-1f >= a_CacVec.y)
+                {
+                    float angle = Mathf.Atan2(a_CacVec.x, -a_CacVec.y) * Mathf.Rad2Deg;
+                    Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
+                    transform.rotation = angleAxis;
+                }
                 m_DirVec = transform.up;
                 transform.Translate(Vector3.up * -m_Speed * Time.deltaTime);
             }
-
         }
         else 
         {
-            //if(GetComponent<PathFollow>() == null)
-            //{  }
             m_CurPos.y += (-1f * Time.deltaTime * m_Speed);
             transform.position = m_CurPos;
 
