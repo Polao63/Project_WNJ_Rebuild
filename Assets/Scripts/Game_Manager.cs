@@ -139,6 +139,6 @@ public class Game_Manager : MonoBehaviour
         else if (P2_ScoreText != null && P2_In == true)
         { P2_ScoreText.text = P2_score.ToString(); }
 
-        CoinText.text = "CREDIT " + Coin.ToString();
+        CoinText.text = "Credit(s) " + Coin.ToString();
     }
 }
