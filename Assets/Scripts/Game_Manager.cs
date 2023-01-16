@@ -70,6 +70,7 @@ public class Game_Manager : MonoBehaviour
         if (Lives <= 0)
         {
             Pause = true;
+            Time.timeScale = 0f;
             GameOver.SetActive(true);
             Timer += Time.deltaTime;
             if (Timer >= 3f)

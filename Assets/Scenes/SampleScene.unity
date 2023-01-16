@@ -562,7 +562,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74041c24ac1855e4b92edb523cf9aaa6, type: 2}
+  - {fileID: 2100000, guid: 83cb9fa7937d002458ecc9085c35f6a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1818,7 +1818,7 @@ MonoBehaviour:
   P2_score: 0
   Hi_score: 0
   Coin: 0
-  Lives: 3
+  Lives: 1
   Pause: 0
 --- !u!4 &2069358731
 Transform:

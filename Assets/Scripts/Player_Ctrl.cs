@@ -77,20 +77,13 @@ public class Player_Ctrl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy_Bullet")
+        if (collision.tag == "Enemy_Bullet" || collision.tag == "Enemy")
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
             GameObject Explo = Instantiate(Explosion_Prefab);
             Explo.transform.position = this.transform.position;
-        }
-
-        if (collision.tag == "Enemy")
-        {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-            GameObject Explo = Instantiate(Explosion_Prefab);
-            Explo.transform.position = this.transform.position;
+            GameObject.FindObjectOfType<Game_Manager>().Lives--;
         }
     }
 
