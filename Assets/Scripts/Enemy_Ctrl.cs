@@ -338,5 +338,11 @@ public class Enemy_Ctrl : MonoBehaviour
             TakeDamage(80f);
         }
 
+        if (collision.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+            TakeDamage(80f);
+
+        }
     }
 }

@@ -21,7 +21,9 @@ public class Player_Ctrl : MonoBehaviour
     float a_LmtBdRight = 0;
     float a_LmtBdBottom = 0;
 
-    
+    public GameObject Explosion_Prefab = null;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -73,5 +75,24 @@ public class Player_Ctrl : MonoBehaviour
 
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy_Bullet")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            GameObject Explo = Instantiate(Explosion_Prefab);
+            Explo.transform.position = this.transform.position;
+        }
+
+        if (collision.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            GameObject Explo = Instantiate(Explosion_Prefab);
+            Explo.transform.position = this.transform.position;
+        }
+    }
+
+
 }
