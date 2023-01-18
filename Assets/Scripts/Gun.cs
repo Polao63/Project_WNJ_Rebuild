@@ -9,6 +9,8 @@ public class Gun : MonoBehaviour
 
     Bullet a_BulletSc;
 
+    Vector2 direction;
+
     [HideInInspector] public bool IsHoming = false;
 
     // Start is called before the first frame update
@@ -25,6 +27,7 @@ public class Gun : MonoBehaviour
 
     void FireUpdate()
     {
+        direction = (transform.localRotation * Vector2.up).normalized;
         if (m_ShootCool > 0)
         {
             m_ShootCool -= Time.deltaTime;
@@ -58,6 +61,8 @@ public class Gun : MonoBehaviour
                 a_CloneObj.transform.position = this.transform.position;
 
                 a_BulletSc = a_CloneObj.GetComponent<Bullet>();
+                a_BulletSc.direction = direction;
+                a_CloneObj.transform.rotation = transform.rotation;
 
                 m_ShootCool = 0.15f;
             }

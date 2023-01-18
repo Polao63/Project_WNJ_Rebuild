@@ -23,12 +23,18 @@ public class Player_Ctrl : MonoBehaviour
 
     public GameObject Explosion_Prefab = null;
 
+    bool Invincible = false;
+    bool inplay = false;
+
+    public static Player_Ctrl inst;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        inst = this;
+        inplay = true;
     }
 
     // Update is called once per frame
@@ -48,7 +54,11 @@ public class Player_Ctrl : MonoBehaviour
             // ¶Ç´Â transform.Translate(moveDir * moveSpeed * Time.deltaTime);
         }
 
-        LimitMove();
+        if (inplay == true)
+        {
+            LimitMove();
+        }
+        
 
        
     }
@@ -77,13 +87,33 @@ public class Player_Ctrl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy_Bullet" || collision.tag == "Enemy")
+        if (Invincible != true)
         {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-            GameObject Explo = Instantiate(Explosion_Prefab);
-            Explo.transform.position = this.transform.position;
-            GameObject.FindObjectOfType<Game_Manager>().Lives--;
+            if (collision.tag == "Enemy_Bullet" || collision.tag == "Enemy")
+            {
+                Destroy(collision.gameObject);
+                gameObject.SetActive(false);
+                GameObject Explo = Instantiate(Explosion_Prefab);
+                Explo.transform.position = this.transform.position;
+                GameObject.FindObjectOfType<Game_Manager>().Lives--;
+            }
+        }
+    }
+
+    public void Respawn()
+    {
+        Debug.Log("respawned");
+        Invincible = true;
+        gameObject.SetActive(true);
+        this.gameObject.transform.position = new Vector3(0,-6, 0);
+
+        
+        
+        if (transform.position.y == -3)
+        {
+            inplay = true;
+            Invincible = false;
+            return;
         }
     }
 

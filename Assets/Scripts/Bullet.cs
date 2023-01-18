@@ -15,6 +15,8 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public GameObject Target_Obj = null;//타겟 참조 변수
     Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
 
+    public Vector2 direction = new Vector2(0, 1);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,8 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_DirVec.Normalize();
+
         if (IsHoming == true)//유도탄
         {
             if (Target_Obj == null && IsTarget == false)//추적햐아 할 타겟이 없으면
