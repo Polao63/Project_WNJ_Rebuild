@@ -16,11 +16,6 @@ public class Player_Ctrl : MonoBehaviour
     Vector3 HalfSize = Vector3.zero;
     Vector3 m_CacCurPos = Vector3.zero;
 
-    float a_LmtBdLeft = 0;
-    float a_LmtBdTop = 0;
-    float a_LmtBdRight = 0;
-    float a_LmtBdBottom = 0;
-
     public GameObject Explosion_Prefab = null;
 
     bool Invincible = false;
