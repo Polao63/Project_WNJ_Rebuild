@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player_Ctrl : MonoBehaviour
 {
-    float h = 0f;
-    float v = 0f;
+    public float h = 0f;
+    public float v = 0f;
 
     float moveSpeed = 7f;
     Vector3 moveDir = Vector3.zero;
@@ -46,6 +46,26 @@ public class Player_Ctrl : MonoBehaviour
             { moveDir.Normalize(); }
 
             transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+            //if (h != 0)
+            //{
+            //    if (h < 1 || h > -1)
+            //    {
+            //        if (h <= 0.5)
+            //        { h = 0; }
+            //        Bit_Ctrl.inst.angle = h * 180 - 90;
+            //        if (h == 0)
+            //        { return; }
+            //    }
+            //}
+            //if (v != 0)
+            //{
+            //    if (v < 1 || v > -1)
+            //    {
+            //        Bit_Ctrl.inst.angle = v * 180 + 180;
+            //    }
+            //}
+
             // ¶Ç´Â transform.Translate(moveDir * moveSpeed * Time.deltaTime);
         }
 

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "city.tmx",
+    "activeFile": "Desert.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -13,36 +13,54 @@
             "scaleInDock": 1,
             "scaleInEditor": 3
         },
+        "Desert.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 136.66666666666666,
+                "y": 160.33333333333331
+            }
+        },
         "city.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -40.5,
-                "y": -447.25
+                "x": -41,
+                "y": -447.75
             }
         },
         "galletcity_tiles.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 3,
             "scaleInEditor": 3
+        },
+        "maptiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
-    "last.imagePath": "C:/Users/A-20/Study_2022_SJY/Prototype_WNJ/Assets/Grapics",
+    "last.imagePath": "C:/Users/A-20/Study_2022_SJY/Project_WNJ_Rebuild/Assets/Image",
     "map.fixedSize": false,
     "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
     "openFiles": [
         "city.tmx",
-        "galletcity_tiles.tsx"
+        "galletcity_tiles.tsx",
+        "maptiles.tsx",
+        "Desert.tmx"
     ],
     "project": "BackGround.tiled-project",
     "recentFiles": [
-        "galletcity_tiles.tsx",
         "city.tmx",
+        "galletcity_tiles.tsx",
+        "maptiles.tsx",
+        "Desert.tmx",
         "City.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 8,
-        "width": 8
+        "height": 16,
+        "width": 16
     }
 }

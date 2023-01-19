@@ -33,6 +33,9 @@ public class Gun : MonoBehaviour
             m_ShootCool -= Time.deltaTime;
         }
 
+        if (Input.GetKeyDown(KeyCode.X) == true && Input.GetKeyDown(KeyCode.Z) == true)
+        { Debug.Log("zx"); }
+
         if (Input.GetKey(KeyCode.X) == true)
         {
 

@@ -941,6 +941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eca21d73b2422342a64ed24d0cfbdf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  h: 0
+  v: 0
   Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
 --- !u!50 &857926597
 Rigidbody2D:
@@ -1863,7 +1865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1751044007
 Transform:
   m_ObjectHideFlags: 0
@@ -1943,6 +1945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caac2db6037dadc4d97319f7a9f1888e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angle: 0
 --- !u!1 &1776026803
 GameObject:
   m_ObjectHideFlags: 0
