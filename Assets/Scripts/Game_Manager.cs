@@ -30,6 +30,8 @@ public class Game_Manager : MonoBehaviour
 
     public static Game_Manager Inst;
 
+    public GameObject Hide;
+
     private void Awake()
     {
         //60프레임 유지
@@ -141,5 +143,12 @@ public class Game_Manager : MonoBehaviour
         { P2_ScoreText.text = P2_score.ToString(); }
 
         CoinText.text = "Credit(s) " + Coin.ToString();
+
+        if (GameObject.FindObjectOfType<Player_Ctrl>().transform.position.y > 4)
+        {
+            Hide.SetActive(false);
+        }
+        else
+        { Hide.SetActive(true); }
     }
 }

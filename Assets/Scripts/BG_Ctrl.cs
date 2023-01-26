@@ -19,8 +19,8 @@ public class BG_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Offset += Time.deltaTime * ScrollSpeed;
-        //Offset += Time.deltaTime * ScrollSpeed * (player_Ctrl.gameObject.transform.position.y + 5f) / 2;
+        //Offset += Time.deltaTime * ScrollSpeed;
+        Offset += Time.deltaTime * ScrollSpeed * (player_Ctrl.gameObject.transform.position.y + 5f) / 2;
         m_Renderer.material.mainTextureOffset = new Vector2(0, Offset);
     }
 }
