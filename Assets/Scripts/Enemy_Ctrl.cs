@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public enum AI_Type
 {
@@ -64,21 +66,18 @@ public class Enemy_Ctrl : MonoBehaviour
     int Mon_Score = 10;
 
     //waypoint
-    private Transform[] points;
+    private Transform[] WayPointList;
     public int nextIdx = 1;
 
-    private Transform tr;
+    GameObject Target_Obj = null;//타겟 참조 변수
+    Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
 
-    public float speed = 1.0f;
-    public float damping = 3.0f;
+    public float speed = 2.0f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-        tr = GetComponent<Transform>();
-        points = GameObject.Find("Path").GetComponentsInChildren<Transform>();
 
         m_SpawnPos = this.transform.position;
 
@@ -115,7 +114,6 @@ public class Enemy_Ctrl : MonoBehaviour
         //    m_BossState = BossAttState.BS_MOVE;
         //}
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -132,8 +130,6 @@ public class Enemy_Ctrl : MonoBehaviour
         if (this.transform.position.x < CameraResolution.m_ScreenWMin.x - 2)
         { Destroy(gameObject); }
     }
-
-
     void AI_Charge_Update()
     {
         m_CurPos = transform.position;
@@ -161,6 +157,7 @@ public class Enemy_Ctrl : MonoBehaviour
 
         else if (isTracking)
         {
+            this.GetComponentInChildren<SpriteRenderer>().flipY = true;
             MoveWayPoint();
         }
 
@@ -173,44 +170,36 @@ public class Enemy_Ctrl : MonoBehaviour
         
         
     }
-
-    
-
     void MoveWayPoint()
     {
+        WayPointList = GameObject.Find("Path").GetComponentsInChildren<Transform>();
+
+        Target_Obj = WayPointList[nextIdx].gameObject;
+
         //TODO : 유도탄 소스 참고해서 만들기
 
-        if (nextIdx >= points.Length)
-        { nextIdx = 1; }
+        m_DesiredDir = Target_Obj.transform.position - transform.position;
+        m_DesiredDir.z = 0f;
+        m_DesiredDir.Normalize();
 
-        //if (transform.position == points[nextIdx].position)
-        //{
-        //    nextIdx++;
-        //}
+        //적을 향해 회전 이동하는 코드
 
-        //현재 위치에서 다음 웨이포인트를 바라보는 벡터를 계산
-        Vector3 direction =  points[nextIdx].position - transform.position;
-        //산출된 벡터의 회전 각도를 쿼터니언 타입으로 산출
-        Quaternion rot = Quaternion.LookRotation(direction);
-
-        tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
-
-        transform.position = Vector3.MoveTowards(transform.position, points[nextIdx].position, Time.deltaTime * m_Speed);
-        //tr.Translate(Vector3.down * Time.deltaTime * m_Speed);
+        //스프라이트 회전
+        float angle = Mathf.Atan2(-m_DesiredDir.x, m_DesiredDir.y) * Mathf.Rad2Deg;
+        Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = angleAxis;
 
 
+        m_DirVec = -transform.up;
+        transform.Translate(Vector3.up * speed * Time.deltaTime);
 
+        
 
-
-
-        ////현재 위치에서 다음 웨이포인트를 바라보는 벡터를 계산
-        //Vector3 direction =  points[nextIdx].position - tr.position;
-        ////산출된 벡터의 회전 각도를 쿼터니언 타입으로 산출
-        //Quaternion rot = Quaternion.LookRotation(direction);
-        ////현재 각도에서 회전해야 할 각도까지 부드럽게 회전 처리
         //tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
-        ////전진 방향으로 이동 처리
-        //tr.Translate(Vector3.up * Time.deltaTime * -m_Speed);
+
+        //transform.position = Vector3.MoveTowards(transform.position, points[nextIdx].position, Time.deltaTime * m_Speed);
+        ////tr.Translate(Vector3.down * Time.deltaTime * m_Speed);
+
     }
 
     void Zombi_Ai_Update()
@@ -405,14 +394,13 @@ public class Enemy_Ctrl : MonoBehaviour
 
         if (collision.tag == "WAYPOINT")
         {
-            nextIdx++;
+            Debug.Log("1");
+            if (nextIdx >= WayPointList.Length-1)
+            { nextIdx = 1; }
+            else { nextIdx++; }
+
         }
 
-
-            //if (collision.CompareTag("WAYPOINT"))
-            //{
-            //    nextIdx = (++nextIdx >= points.Length) ? 1 : nextIdx;
-            //}
     }
 
 
