@@ -59,13 +59,27 @@ public class Enemy_Ctrl : MonoBehaviour
 
     public GameObject Explosion_Prefab = null;
     public bool isHoming = false;
+    public bool isTracking = false;
 
     int Mon_Score = 10;
+
+    //waypoint
+    private Transform[] points;
+    public int nextIdx = 1;
+
+    private Transform tr;
+
+    public float speed = 1.0f;
+    public float damping = 3.0f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+
+        tr = GetComponent<Transform>();
+        points = GameObject.Find("Path").GetComponentsInChildren<Transform>();
+
         m_SpawnPos = this.transform.position;
 
         float m_MaxHP = 200f;
@@ -144,7 +158,13 @@ public class Enemy_Ctrl : MonoBehaviour
                 transform.Translate(Vector3.up * -m_Speed * Time.deltaTime);
             }
         }
-        else 
+
+        else if (isTracking)
+        {
+            MoveWayPoint();
+        }
+
+        else
         {
             m_CurPos.y += (-1f * Time.deltaTime * m_Speed);
             transform.position = m_CurPos;
@@ -152,6 +172,45 @@ public class Enemy_Ctrl : MonoBehaviour
         }
         
         
+    }
+
+    
+
+    void MoveWayPoint()
+    {
+        //TODO : 유도탄 소스 참고해서 만들기
+
+        if (nextIdx >= points.Length)
+        { nextIdx = 1; }
+
+        //if (transform.position == points[nextIdx].position)
+        //{
+        //    nextIdx++;
+        //}
+
+        //현재 위치에서 다음 웨이포인트를 바라보는 벡터를 계산
+        Vector3 direction =  points[nextIdx].position - transform.position;
+        //산출된 벡터의 회전 각도를 쿼터니언 타입으로 산출
+        Quaternion rot = Quaternion.LookRotation(direction);
+
+        tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
+
+        transform.position = Vector3.MoveTowards(transform.position, points[nextIdx].position, Time.deltaTime * m_Speed);
+        //tr.Translate(Vector3.down * Time.deltaTime * m_Speed);
+
+
+
+
+
+
+        ////현재 위치에서 다음 웨이포인트를 바라보는 벡터를 계산
+        //Vector3 direction =  points[nextIdx].position - tr.position;
+        ////산출된 벡터의 회전 각도를 쿼터니언 타입으로 산출
+        //Quaternion rot = Quaternion.LookRotation(direction);
+        ////현재 각도에서 회전해야 할 각도까지 부드럽게 회전 처리
+        //tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
+        ////전진 방향으로 이동 처리
+        //tr.Translate(Vector3.up * Time.deltaTime * -m_Speed);
     }
 
     void Zombi_Ai_Update()
@@ -343,5 +402,18 @@ public class Enemy_Ctrl : MonoBehaviour
            TakeDamage(80f);
 
         }
+
+        if (collision.tag == "WAYPOINT")
+        {
+            nextIdx++;
+        }
+
+
+            //if (collision.CompareTag("WAYPOINT"))
+            //{
+            //    nextIdx = (++nextIdx >= points.Length) ? 1 : nextIdx;
+            //}
     }
+
+
 }

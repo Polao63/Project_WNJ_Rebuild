@@ -352,7 +352,10 @@ MonoBehaviour:
   m_BulletPrefab: {fileID: 0}
   m_ShootPos: {fileID: 0}
   Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
-  isHoming: 1
+  isHoming: 0
+  isTracking: 1
+  speed: 1
+  damping: 3
 --- !u!4 &1033309581
 Transform:
   m_ObjectHideFlags: 0
@@ -516,6 +519,9 @@ MonoBehaviour:
   m_ShootPos: {fileID: 0}
   Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
   isHoming: 0
+  isTracking: 0
+  speed: 1
+  damping: 3
 --- !u!114 &1449434575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,8 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e3953c345d782428b46fcc8a55a38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathCreator: {fileID: 0}
-  endOfPathInstruction: 1
 --- !u!1 &1776026803
 GameObject:
   m_ObjectHideFlags: 0

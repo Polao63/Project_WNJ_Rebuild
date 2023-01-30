@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Effect
   - Enemy_Bullet
+  - WAYPOINT
   layers:
   - Default
   - TransparentFX
