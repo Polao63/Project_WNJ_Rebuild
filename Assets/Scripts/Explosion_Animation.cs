@@ -9,7 +9,6 @@ public class Explosion_Animation : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Player") == null)//플레이어 폭발
         {
-            Debug.Log("1");
             Player_Ctrl.inst.Respawn();
 
             //GameObject.FindObjectOfType<Game_Manager>().Respawned = true;

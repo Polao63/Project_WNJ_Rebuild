@@ -144,11 +144,16 @@ public class Game_Manager : MonoBehaviour
 
         CoinText.text = "Credit(s) " + Coin.ToString();
 
-        if (GameObject.FindObjectOfType<Player_Ctrl>().transform.position.y > 4)
+        if (GameObject.FindObjectOfType<Player_Ctrl>() != null)
         {
-            Hide.SetActive(false);
+            if (GameObject.FindObjectOfType<Player_Ctrl>().transform.position.y > 4)
+            {
+                Hide.SetActive(false);
+            }
+            else
+            { Hide.SetActive(true); }
         }
-        else
-        { Hide.SetActive(true); }
+        else return;
+        
     }
 }

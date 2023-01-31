@@ -66,13 +66,12 @@ public class Enemy_Ctrl : MonoBehaviour
     int Mon_Score = 10;
 
     //waypoint
+    public GameObject Path_Root = null;
     private Transform[] WayPointList;
     public int nextIdx = 1;
 
     GameObject Target_Obj = null;//타겟 참조 변수
     Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
-
-    public float speed = 2.0f;
 
 
     // Start is called before the first frame update
@@ -135,6 +134,7 @@ public class Enemy_Ctrl : MonoBehaviour
         m_CurPos = transform.position;
         if (isHoming)
         {
+            this.GetComponentInChildren<SpriteRenderer>().flipY = false;
             m_DirVec.x = 0f;
             m_DirVec.z = 0f;
             m_DirVec.y = -1f;
@@ -163,6 +163,8 @@ public class Enemy_Ctrl : MonoBehaviour
 
         else
         {
+            this.GetComponentInChildren<SpriteRenderer>().flipY = false;
+            transform.rotation = Quaternion.Euler(0,0,0);
             m_CurPos.y += (-1f * Time.deltaTime * m_Speed);
             transform.position = m_CurPos;
 
@@ -172,17 +174,13 @@ public class Enemy_Ctrl : MonoBehaviour
     }
     void MoveWayPoint()
     {
-        WayPointList = GameObject.Find("Path").GetComponentsInChildren<Transform>();
+        WayPointList = Path_Root.GetComponentsInChildren<Transform>();
 
         Target_Obj = WayPointList[nextIdx].gameObject;
-
-        //TODO : 유도탄 소스 참고해서 만들기
 
         m_DesiredDir = Target_Obj.transform.position - transform.position;
         m_DesiredDir.z = 0f;
         m_DesiredDir.Normalize();
-
-        //적을 향해 회전 이동하는 코드
 
         //스프라이트 회전
         float angle = Mathf.Atan2(-m_DesiredDir.x, m_DesiredDir.y) * Mathf.Rad2Deg;
@@ -191,14 +189,7 @@ public class Enemy_Ctrl : MonoBehaviour
 
 
         m_DirVec = -transform.up;
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
-
-        
-
-        //tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
-
-        //transform.position = Vector3.MoveTowards(transform.position, points[nextIdx].position, Time.deltaTime * m_Speed);
-        ////tr.Translate(Vector3.down * Time.deltaTime * m_Speed);
+        transform.Translate(Vector3.up * m_Speed * Time.deltaTime);
 
     }
 
@@ -394,11 +385,12 @@ public class Enemy_Ctrl : MonoBehaviour
 
         if (collision.tag == "WAYPOINT")
         {
-            Debug.Log("1");
             if (nextIdx >= WayPointList.Length-1)
-            { nextIdx = 1; }
+            {
+                Destroy(gameObject);
+                //nextIdx = 1;
+            }
             else { nextIdx++; }
-
         }
 
     }

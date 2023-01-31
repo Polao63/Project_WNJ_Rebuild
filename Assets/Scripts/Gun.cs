@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public bool isEnemy;
+    public bool Autoshot;
+
     public GameObject m_BulletPrefab = null;
     float m_ShootCool = 0f; //주기 계산
+    public float m_MaxShootCool = 2f;
 
     Bullet a_BulletSc;
 
@@ -22,7 +26,10 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FireUpdate();
+        if (isEnemy)
+        { EnemyShoot(); }
+        else { FireUpdate(); }
+        
     }
 
     void FireUpdate()
@@ -72,4 +79,29 @@ public class Gun : MonoBehaviour
         }
     }
 
+    void EnemyShoot()
+    {
+        direction = (transform.localRotation * Vector2.up).normalized;
+        if (Autoshot)
+        {
+            
+            if (m_ShootCool > 0)
+            {
+                m_ShootCool -= Time.deltaTime;
+            }
+
+            if (m_ShootCool <= 0f)
+            {
+                GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
+                a_CloneObj.transform.position = this.transform.position;
+
+                a_BulletSc = a_CloneObj.GetComponent<Bullet>();
+                a_BulletSc.direction = direction;
+                a_CloneObj.transform.rotation = transform.rotation;
+
+                m_ShootCool = m_MaxShootCool;
+            }
+
+        }
+    }
 }

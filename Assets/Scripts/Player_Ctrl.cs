@@ -60,9 +60,9 @@ public class Player_Ctrl : MonoBehaviour
             //}
             //if (v != 0)
             //{
-            //    if (v < 1 || v > -1)
+            //    if (Mathf.Abs(v) > 0 )
             //    {
-            //        Bit_Ctrl.inst.angle = v * 180 + 180;
+            //        Bit_Ctrl.inst.angle = v * 180 - 180;
             //    }
             //}
 

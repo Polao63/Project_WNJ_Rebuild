@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Vector3 m_DirVec = Vector3.up; //날아가야 할 방향 벡터
-    float m_MoveSpeed = 15f;
+    public float m_MoveSpeed = 15f;
+    public bool isEnemyBullet = false;
 
     //유도탄 변수
     [HideInInspector] public bool IsHoming = false;//유도 On
@@ -112,7 +113,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" || !isEnemyBullet)
         {
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
             if (a_RefMon != null)
@@ -121,6 +122,5 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
-
     }
 }
