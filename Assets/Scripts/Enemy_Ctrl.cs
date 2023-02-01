@@ -193,30 +193,6 @@ public class Enemy_Ctrl : MonoBehaviour
 
     }
 
-    void Zombi_Ai_Update()
-    {
-        m_CurPos = transform.position;
-        m_CurPos.x += (-1f * Time.deltaTime * m_Speed);
-        m_CacPosY += Time.deltaTime * (m_Speed / 2.2f);
-        m_CurPos.y = m_SpawnPos.y + Mathf.Sin(m_CacPosY) * m_Rand_Y;
-
-        transform.position = m_CurPos;
-
-        //총알 발사
-        if (m_BulletPrefab == null)
-        { return; }
-
-        Shoot_Time += Time.deltaTime;
-        if (shoot_Delay <= Shoot_Time)
-        {
-            GameObject a_NewObj = Instantiate(m_BulletPrefab) as GameObject;
-            Bullet a_BulletSc = a_NewObj.GetComponent<Bullet>();
-            a_BulletSc.BulletSpawn(m_ShootPos.transform.position, Vector3.left, BulletMvSpeed);
-
-            Shoot_Time = 0f;
-        }
-    }
-
     public void TakeDamage(float a_Value)
     {
         if (m_CurHP <= 0)
@@ -253,6 +229,58 @@ public class Enemy_Ctrl : MonoBehaviour
         }
 
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {// 주인공이 쏜 총알만 데미지가 발생하도록 처리
+        if (collision.tag == "PlayerBullet")
+        {
+            Destroy(collision.gameObject); //몬스터에 충돌된 총알삭제
+            TakeDamage(80f);
+        }
+
+        if (collision.tag == "Player")
+        {
+            TakeDamage(80f);
+
+        }
+
+        if (collision.tag == "WAYPOINT")
+        {
+            if (nextIdx >= WayPointList.Length - 1)
+            {
+                Destroy(gameObject);
+                //nextIdx = 1;
+            }
+            else { nextIdx++; }
+        }
+
+    }
+
+    //void Zombi_Ai_Update()
+    //{
+    //    m_CurPos = transform.position;
+    //    m_CurPos.x += (-1f * Time.deltaTime * m_Speed);
+    //    m_CacPosY += Time.deltaTime * (m_Speed / 2.2f);
+    //    m_CurPos.y = m_SpawnPos.y + Mathf.Sin(m_CacPosY) * m_Rand_Y;
+
+    //    transform.position = m_CurPos;
+
+    //    //총알 발사
+    //    if (m_BulletPrefab == null)
+    //    { return; }
+
+    //    Shoot_Time += Time.deltaTime;
+    //    if (shoot_Delay <= Shoot_Time)
+    //    {
+    //        GameObject a_NewObj = Instantiate(m_BulletPrefab) as GameObject;
+    //        Bullet a_BulletSc = a_NewObj.GetComponent<Bullet>();
+    //        a_BulletSc.BulletSpawn(m_ShootPos.transform.position, Vector3.left, BulletMvSpeed);
+
+    //        Shoot_Time = 0f;
+    //    }
+    //}
+
+
 
     //void Missle_AI_Update()
     //{
@@ -369,31 +397,7 @@ public class Enemy_Ctrl : MonoBehaviour
 
     //}
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {// 주인공이 쏜 총알만 데미지가 발생하도록 처리
-        if (collision.tag == "PlayerBullet")
-        {
-            Destroy(collision.gameObject); //몬스터에 충돌된 총알삭제
-            TakeDamage(80f);
-        }
 
-        if (collision.tag == "Player")
-        {
-           TakeDamage(80f);
-
-        }
-
-        if (collision.tag == "WAYPOINT")
-        {
-            if (nextIdx >= WayPointList.Length-1)
-            {
-                Destroy(gameObject);
-                //nextIdx = 1;
-            }
-            else { nextIdx++; }
-        }
-
-    }
 
 
 }

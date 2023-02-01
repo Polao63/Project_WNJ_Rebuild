@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isEnemy)
+        if (isEnemy && Autoshot)
         { EnemyShoot(); }
         else { FireUpdate(); }
         
@@ -82,26 +82,22 @@ public class Gun : MonoBehaviour
     void EnemyShoot()
     {
         direction = (transform.localRotation * Vector2.up).normalized;
-        if (Autoshot)
+        if (m_ShootCool > 0)
         {
-            
-            if (m_ShootCool > 0)
-            {
-                m_ShootCool -= Time.deltaTime;
-            }
-
-            if (m_ShootCool <= 0f)
-            {
-                GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
-                a_CloneObj.transform.position = this.transform.position;
-
-                a_BulletSc = a_CloneObj.GetComponent<Bullet>();
-                a_BulletSc.direction = direction;
-                a_CloneObj.transform.rotation = transform.rotation;
-
-                m_ShootCool = m_MaxShootCool;
-            }
-
+            m_ShootCool -= Time.deltaTime;
         }
+
+        if (m_ShootCool <= 0f)
+        {
+            GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
+            a_CloneObj.transform.position = this.transform.position;
+
+            a_BulletSc = a_CloneObj.GetComponent<Bullet>();
+            a_BulletSc.direction = direction;
+            a_CloneObj.transform.rotation = transform.rotation;
+
+            m_ShootCool = m_MaxShootCool;
+        }
+        
     }
 }

@@ -8,6 +8,8 @@ public class Game_Manager : MonoBehaviour
 {
     Player_Ctrl player_Ctrl;
 
+    public float test_speed;
+
     public Text P1_ScoreText = null;
     public Text CoinText = null;
 
@@ -64,6 +66,9 @@ public class Game_Manager : MonoBehaviour
     void Update()
     {
         UI_Update();
+
+        //test_speed = (0.2f * (player_Ctrl.gameObject.transform.position.y + 5f) / 2);
+   
 
         if (Input.GetKeyDown(KeyCode.P))//디버그용 스테이지 스킵
         { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
@@ -147,10 +152,7 @@ public class Game_Manager : MonoBehaviour
         }
         else return;
 
-        if (SpeedBar != null)
-        {
-            SpeedBar.fillAmount = 1 / (0.2f * (player_Ctrl.gameObject.transform.position.y + 5f) / 2);
-        }
+        
         
     }
 }
