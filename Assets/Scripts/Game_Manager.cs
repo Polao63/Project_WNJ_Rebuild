@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
+    Player_Ctrl player_Ctrl;
 
     public Text P1_ScoreText = null;
-    public Text P2_ScoreText = null;
     public Text CoinText = null;
+
+    public Image SpeedBar = null;
 
     public GameObject GameOver = null;
 
     public bool P1_In = true;
-    public bool P2_In = false;
 
     public int P1_score = 0;
-    public int P2_score = 0;
     public int Hi_score = 0;
     public int Coin = 0;
     public int Lives = 0;
@@ -50,6 +50,8 @@ public class Game_Manager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        player_Ctrl = GameObject.FindObjectOfType<Player_Ctrl>().GetComponent<Player_Ctrl>();
     }
 
     // Start is called before the first frame update
@@ -132,16 +134,6 @@ public class Game_Manager : MonoBehaviour
         else if (P1_ScoreText != null && P1_In == true)
         { P1_ScoreText.text = P1_score.ToString(); }
 
-        if (P2_ScoreText != null && P2_In != true)
-        {
-            if (Coin > 0)
-            { P2_ScoreText.text = "PRESS START"; }
-            else if (Coin == 0)
-            { P2_ScoreText.text = "INSERT COIN"; }
-        }
-        else if (P2_ScoreText != null && P2_In == true)
-        { P2_ScoreText.text = P2_score.ToString(); }
-
         CoinText.text = "Credit(s) " + Coin.ToString();
 
         if (GameObject.FindObjectOfType<Player_Ctrl>() != null)
@@ -154,6 +146,11 @@ public class Game_Manager : MonoBehaviour
             { Hide.SetActive(true); }
         }
         else return;
+
+        if (SpeedBar != null)
+        {
+            SpeedBar.fillAmount = 1 / (0.2f * (player_Ctrl.gameObject.transform.position.y + 5f) / 2);
+        }
         
     }
 }
