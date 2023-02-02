@@ -26,9 +26,9 @@ public class Game_Manager : MonoBehaviour
 
     public bool Pause = false;
 
-    float Timer = 0;
+    public float Timer = 0;
 
-    float CT_Time = 9.9f;
+    public float CT_Time = 9.9f;
 
     public static Game_Manager Inst;
 
@@ -59,6 +59,7 @@ public class Game_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Pause = false;
         GameOver.SetActive(false);
     }
 
@@ -66,9 +67,9 @@ public class Game_Manager : MonoBehaviour
     void Update()
     {
         UI_Update();
-
+        var obj = GameObject.FindGameObjectWithTag("Enemy_Bullet");
         //test_speed = (0.2f * (player_Ctrl.gameObject.transform.position.y + 5f) / 2);
-   
+
 
         if (Input.GetKeyDown(KeyCode.P))//디버그용 스테이지 스킵
         { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
@@ -79,11 +80,12 @@ public class Game_Manager : MonoBehaviour
         if (Lives <= 0)
         {
             Pause = true;
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             GameOver.SetActive(true);
             Timer += Time.deltaTime;
             if (Timer >= 3f)
             {
+                
                 GameOver.GetComponentInChildren<Text>().text = "CONTINUE?\n" + ((int)CT_Time).ToString();
                 CT_Time -= Time.deltaTime;
                 if (Input.GetKeyDown(KeyCode.Keypad1) && Coin > 0)
@@ -93,13 +95,21 @@ public class Game_Manager : MonoBehaviour
                     Lives = 3;
                     Timer = 0;
                     CT_Time = 9.9f;
-                    SceneManager.LoadScene(gameObject.scene.name);
+                    GameOver.SetActive(false);
+                    
+                    if (obj != null)
+                    {
+                        Destroy(obj);
+                    }
+                   
+                    //SceneManager.LoadScene(gameObject.scene.name);
                 }
 
                 if (CT_Time < 0)
                 {
                     Timer = 0;
                     CT_Time = 9.9f;
+                    GameOver.SetActive(false);
                     SceneManager.LoadScene(1);
 
                     Destroy(GameObject.Find("PlayerShip"));

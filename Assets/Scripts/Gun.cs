@@ -26,10 +26,12 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isEnemy && Autoshot)
-        { EnemyShoot(); }
-        else { FireUpdate(); }
-        
+        if (!GameObject.FindObjectOfType<Game_Manager>().Pause)
+        {
+            if (isEnemy && Autoshot)
+            { EnemyShoot(); }
+            else { FireUpdate(); }
+        }
     }
 
     void FireUpdate()

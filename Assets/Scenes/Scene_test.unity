@@ -632,8 +632,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379596656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0275, y: -0.015, z: 0}
-  m_LocalScale: {x: 5.603478, y: 10.013515, z: 1}
+  m_LocalPosition: {x: 0.0113, y: -0.015, z: 0}
+  m_LocalScale: {x: 5.635978, y: 10.013515, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1648,7 +1648,7 @@ MonoBehaviour:
   isEnemy: 1
   Autoshot: 1
   m_BulletPrefab: {fileID: 255028663374546713, guid: 1d6bb1b653d9eee4bbe66c54533a5f67, type: 3}
-  m_MaxShootCool: 2
+  m_MaxShootCool: 0.1
   IsHoming: 0
 --- !u!1 &1312222442
 GameObject:
@@ -2350,6 +2350,8 @@ MonoBehaviour:
   Coin: 0
   Lives: 2
   Pause: 0
+  Timer: 0
+  CT_Time: 9.9
   Hide: {fileID: 257322089}
 --- !u!4 &2069358731
 Transform:

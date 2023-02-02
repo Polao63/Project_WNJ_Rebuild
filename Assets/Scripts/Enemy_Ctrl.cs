@@ -128,6 +128,9 @@ public class Enemy_Ctrl : MonoBehaviour
 
         if (this.transform.position.x < CameraResolution.m_ScreenWMin.x - 2)
         { Destroy(gameObject); }
+
+        if (GameObject.Find("Game_Mgr").GetComponent<Game_Manager>().Pause)
+        { m_Speed = 0; }
     }
     void AI_Charge_Update()
     {

@@ -23,12 +23,15 @@ public class Bullet : MonoBehaviour
     {
         if (gameObject.tag == "Enemy_Bullet")
         { m_DirVec = Vector3.down; }
-        Destroy(gameObject, 3f);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        if ( Mathf.Abs(this.transform.position.y) > 8)
+        { Destroy(gameObject); }
+
         m_DirVec.Normalize();
 
         if (IsHoming == true)//유도탄
@@ -53,6 +56,9 @@ public class Bullet : MonoBehaviour
         {//총알이 화면을 벗어나면 제거 
             Destroy(gameObject);
         }
+
+        if (GameObject.Find("Game_Mgr").GetComponent<Game_Manager>().Pause)
+        { m_MoveSpeed = 0; }
     }
 
     public void BulletSpawn(Vector3 a_StPos, Vector3 a_DirVec, float a_MvSpeed = 15f, float att = 20f)

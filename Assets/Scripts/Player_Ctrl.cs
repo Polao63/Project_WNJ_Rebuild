@@ -23,6 +23,8 @@ public class Player_Ctrl : MonoBehaviour
 
     public static Player_Ctrl inst;
 
+    float inv_Time = 0f;
+
 
 
     // Start is called before the first frame update
@@ -73,7 +75,25 @@ public class Player_Ctrl : MonoBehaviour
         {
             LimitMove();
         }
-        
+
+        if (Invincible == true)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 110);
+            inv_Time -= Time.deltaTime;
+            if (inv_Time <= 0)
+            {
+                GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                Invincible = false;
+                inplay = true;
+            }
+        }
+
+        if (GameObject.FindObjectOfType<Game_Manager>().Lives <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
+        else if(GameObject.FindObjectOfType<Game_Manager>().Lives > 0)
+        { this.gameObject.SetActive(true); }
 
        
     }
@@ -120,16 +140,9 @@ public class Player_Ctrl : MonoBehaviour
         Debug.Log("respawned");
         Invincible = true;
         gameObject.SetActive(true);
-        this.gameObject.transform.position = new Vector3(0,-6, 0);
+        this.gameObject.transform.position = new Vector3(0,-3, 0);
+        inv_Time = 3f;
 
-        
-        
-        if (transform.position.y == -3)
-        {
-            inplay = true;
-            Invincible = false;
-            return;
-        }
     }
 
 
