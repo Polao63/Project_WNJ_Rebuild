@@ -88,14 +88,6 @@ public class Player_Ctrl : MonoBehaviour
             }
         }
 
-        if (GameObject.FindObjectOfType<Game_Manager>().Lives <= 0)
-        {
-            this.gameObject.SetActive(false);
-        }
-        else if(GameObject.FindObjectOfType<Game_Manager>().Lives > 0)
-        { this.gameObject.SetActive(true); }
-
-       
     }
 
     void LimitMove()
@@ -137,6 +129,13 @@ public class Player_Ctrl : MonoBehaviour
 
     public void Respawn()
     {
+        GameObject[] Bullet2Des = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+        //Debug.Log(Bullet2Des.Length);
+        for (int i = 0; i < Bullet2Des.Length; i++)
+        {
+            Destroy(Bullet2Des[i]);
+        }
+
         Debug.Log("respawned");
         Invincible = true;
         gameObject.SetActive(true);

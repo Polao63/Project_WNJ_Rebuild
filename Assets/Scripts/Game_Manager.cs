@@ -75,12 +75,16 @@ public class Game_Manager : MonoBehaviour
         { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
 
         if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
-        { if (Coin < 9) { Coin++; } }
+        {
+            CT_Time = 9.9f;
+            if (Coin < 9) { Coin++; } 
+        }
 
         if (Lives <= 0)
         {
             Pause = true;
             //Time.timeScale = 0f;
+            GameOver.GetComponentInChildren<Text>().text = "GAME OVER";
             GameOver.SetActive(true);
             Timer += Time.deltaTime;
             if (Timer >= 3f)
@@ -96,6 +100,7 @@ public class Game_Manager : MonoBehaviour
                     Timer = 0;
                     CT_Time = 9.9f;
                     GameOver.SetActive(false);
+                    Player_Ctrl.inst.Respawn();
                     
                     if (obj != null)
                     {
