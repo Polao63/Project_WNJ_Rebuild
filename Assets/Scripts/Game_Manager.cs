@@ -67,7 +67,7 @@ public class Game_Manager : MonoBehaviour
     void Update()
     {
         UI_Update();
-        var obj = GameObject.FindGameObjectWithTag("Enemy_Bullet");
+        
         //test_speed = (0.2f * (player_Ctrl.gameObject.transform.position.y + 5f) / 2);
 
 
@@ -101,12 +101,6 @@ public class Game_Manager : MonoBehaviour
                     CT_Time = 9.9f;
                     GameOver.SetActive(false);
                     Player_Ctrl.inst.Respawn();
-                    
-                    if (obj != null)
-                    {
-                        Destroy(obj);
-                    }
-                   
                     //SceneManager.LoadScene(gameObject.scene.name);
                 }
 
