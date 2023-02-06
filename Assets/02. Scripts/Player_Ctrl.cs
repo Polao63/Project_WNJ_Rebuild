@@ -122,7 +122,7 @@ public class Player_Ctrl : MonoBehaviour
                 gameObject.SetActive(false);
                 GameObject Explo = Instantiate(Explosion_Prefab);
                 Explo.transform.position = this.transform.position;
-                GameObject.FindObjectOfType<Game_Manager>().Lives--;
+                
             }
         }
     }

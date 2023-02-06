@@ -12,8 +12,9 @@ public class Game_Manager : MonoBehaviour
 
     public Text P1_ScoreText = null;
     public Text CoinText = null;
+    public Text Lives_Text = null;
 
-    public Image SpeedBar = null;
+    //public Image SpeedBar = null;
 
     public GameObject GameOver = null;
 
@@ -72,7 +73,17 @@ public class Game_Manager : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.P))//디버그용 스테이지 스킵
-        { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
+        {
+            Debug.Log(SceneManager.GetActiveScene().name);
+
+            //if (SceneManager.GetActiveScene().name.Contains("Stage_"))
+            //{
+            //    SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex)
+            //}
+            //;
+            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1,LoadSceneMode.Additive);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+        }
 
         if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
         {
@@ -133,6 +144,8 @@ public class Game_Manager : MonoBehaviour
         //    { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
         //}
 
+
+
     }
 
     void UI_Update()
@@ -149,6 +162,8 @@ public class Game_Manager : MonoBehaviour
         { P1_ScoreText.text = P1_score.ToString(); }
 
         CoinText.text = "Credit(s) " + Coin.ToString();
+
+        Lives_Text.text = "= " + (Lives).ToString();
 
         if (GameObject.FindObjectOfType<Player_Ctrl>() != null)
         {
