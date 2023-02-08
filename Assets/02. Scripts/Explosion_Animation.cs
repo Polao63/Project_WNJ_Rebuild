@@ -13,6 +13,8 @@ public class Explosion_Animation : MonoBehaviour
             if (Game_Manager.Inst.Lives > 0)
             { Player_Ctrl.inst.Respawn(); }
 
+
+
             //GameObject.FindObjectOfType<Game_Manager>().Respawned = true;
             //if(GameObject.FindObjectOfType<Game_Manager>().Lives >= 1)
             //SceneManager.LoadScene(gameObject.scene.name);

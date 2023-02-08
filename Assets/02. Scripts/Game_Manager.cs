@@ -24,11 +24,12 @@ public class Game_Manager : MonoBehaviour
     public int Hi_score = 0;
     public int Coin = 0;
     public int Lives = 0;
+    public int Cur_stage = 1;
+    int Cur_SubStage = 1;
 
     public bool Pause = false;
 
     public float Timer = 0;
-
     public float CT_Time = 9.9f;
 
     public static Game_Manager Inst;
@@ -75,14 +76,11 @@ public class Game_Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))//디버그용 스테이지 스킵
         {
             Debug.Log(SceneManager.GetActiveScene().name);
-
-            //if (SceneManager.GetActiveScene().name.Contains("Stage_"))
-            //{
-            //    SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex)
-            //}
-            //;
-            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1,LoadSceneMode.Additive);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+            Next_Scene();
+        }
+        if (Input.GetKeyDown(KeyCode.O))//디버그용 스테이지 스킵
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_1_2"));
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
@@ -144,8 +142,37 @@ public class Game_Manager : MonoBehaviour
         //    { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
         //}
 
+        if(0.0f < m_Dealy)
+        {
+            m_Dealy -= Time.deltaTime;
+            if(m_Dealy <= 0)
+            {
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()));
+            }
+        }
 
+    }
 
+    float m_Dealy = 0.0f;
+    public void Next_Scene()
+    {
+        AsyncOperation nextscene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
+
+        if (SceneManager.GetActiveScene().name.Contains("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()))
+        {
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+           
+            Cur_SubStage++;
+
+            m_Dealy = 1.0f;
+            // SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()));
+            if (Cur_SubStage >= 5)
+            {
+                Cur_SubStage = 1;
+                Cur_stage++;
+            }
+        }
+       
     }
 
     void UI_Update()
