@@ -595,7 +595,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74041c24ac1855e4b92edb523cf9aaa6, type: 2}
+  - {fileID: 2100000, guid: 83cb9fa7937d002458ecc9085c35f6a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1104,6 +1104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  Aim2Player: 0
   Autoshot: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 2
@@ -1402,8 +1403,6 @@ MonoBehaviour:
   m_MoType: 0
   m_AIType: 1
   m_Speed: 0
-  m_BulletPrefab: {fileID: 0}
-  m_ShootPos: {fileID: 0}
   Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
   isHoming: 1
   isTracking: 0
@@ -1516,6 +1515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  Aim2Player: 0
   Autoshot: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 2
@@ -1726,6 +1726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  Aim2Player: 0
   Autoshot: 1
   m_BulletPrefab: {fileID: 255028663374546713, guid: 1d6bb1b653d9eee4bbe66c54533a5f67, type: 3}
   m_MaxShootCool: 1
@@ -1908,8 +1909,6 @@ MonoBehaviour:
   m_MoType: 2
   m_AIType: 1
   m_Speed: 2
-  m_BulletPrefab: {fileID: 0}
-  m_ShootPos: {fileID: 0}
   Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
   isHoming: 0
   isTracking: 0
@@ -2035,6 +2034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  Aim2Player: 0
   Autoshot: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 2
@@ -2103,7 +2103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1751044007
 Transform:
   m_ObjectHideFlags: 0
@@ -2331,6 +2331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  Aim2Player: 0
   Autoshot: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 2
@@ -2505,6 +2506,7 @@ MonoBehaviour:
   Hi_score: 0
   Coin: 0
   Lives: 2
+  Cur_stage: 1
   Pause: 0
   Timer: 0
   CT_Time: 9.9

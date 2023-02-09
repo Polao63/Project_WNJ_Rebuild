@@ -45,15 +45,15 @@ public class Game_Manager : MonoBehaviour
         Inst = this;
 
         //스테이지 로드시 파괴되지 않게
-        var obj = FindObjectsOfType<Game_Manager>();
-        if (obj.Length == 1)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //var obj = FindObjectsOfType<Game_Manager>();
+        //if (obj.Length == 1)
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
 
         player_Ctrl = GameObject.FindObjectOfType<Player_Ctrl>().GetComponent<Player_Ctrl>();
     }
@@ -91,6 +91,7 @@ public class Game_Manager : MonoBehaviour
 
         if (Lives <= 0)
         {
+            Lives = 0;
             Pause = true;
             //Time.timeScale = 0f;
             GameOver.GetComponentInChildren<Text>().text = "GAME OVER";
@@ -109,6 +110,12 @@ public class Game_Manager : MonoBehaviour
                     Timer = 0;
                     CT_Time = 9.9f;
                     GameOver.SetActive(false);
+                    GameObject[] Bullet2Des = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+                    //Debug.Log(Bullet2Des.Length);
+                    for (int i = 0; i < Bullet2Des.Length; i++)
+                    {
+                        Destroy(Bullet2Des[i]);
+                    }
                     Player_Ctrl.inst.Respawn();
                     //SceneManager.LoadScene(gameObject.scene.name);
                 }
@@ -132,22 +139,30 @@ public class Game_Manager : MonoBehaviour
         else { GameOver.SetActive(false); }
 
         //스테이지 자동 이동
-        //if (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null)
-        //{
-        //    if (GameObject.FindWithTag("Enemy") == null
-        //        && GameObject.FindWithTag("Effect") == null
-        //        && GameObject.FindWithTag("PowerUP") == null
-        //        && GameObject.FindWithTag("Bullet") == null
-        //        && GameObject.FindWithTag("Player_Bullet") == null)
-        //    { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
-        //}
+        if (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null)
+        {
+            if (GameObject.FindWithTag("Enemy") == null
+                && GameObject.FindWithTag("Effect") == null
+                //&& GameObject.FindWithTag("PowerUP") == null
+                && GameObject.FindWithTag("Enemy_Bullet") == null
+                && GameObject.FindWithTag("Player_Bullet") == null)
+            { Next_Scene(); }
+        }
 
-        if(0.0f < m_Dealy)
+        if (0.0f < m_Dealy)
         {
             m_Dealy -= Time.deltaTime;
             if(m_Dealy <= 0)
             {
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()));
+                if (SceneManager.GetSceneByName("Credits_Scene").isLoaded == false)
+                {
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()));
+                }
+                else 
+                {
+                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Scene_Play").buildIndex); 
+                }
+                
             }
         }
 
@@ -156,16 +171,14 @@ public class Game_Manager : MonoBehaviour
     float m_Dealy = 0.0f;
     public void Next_Scene()
     {
-        AsyncOperation nextscene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
-
         if (SceneManager.GetActiveScene().name.Contains("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()))
         {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
            
             Cur_SubStage++;
 
-            m_Dealy = 1.0f;
-            // SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()));
+            m_Dealy = 0.1f;
             if (Cur_SubStage >= 5)
             {
                 Cur_SubStage = 1;

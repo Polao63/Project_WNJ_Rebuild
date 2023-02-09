@@ -25,6 +25,7 @@ public class Player_Ctrl : MonoBehaviour
 
     float inv_Time = 0f;
 
+    float delta = 0f;
 
 
     // Start is called before the first frame update
@@ -55,20 +56,51 @@ public class Player_Ctrl : MonoBehaviour
             //    {
             //        if (h <= 0.5)
             //        { h = 0; }
-            //        Bit_Ctrl.inst.angle = h * 180 - 90;
+            //        Bit_Ctrl.inst.angle = (h * 180) / 2;
             //        if (h == 0)
             //        { return; }
             //    }
             //}
+
+            if (h < 1 || h > -1)
+            {
+                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1)
+                {
+
+                    delta = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+                    if (Mathf.Abs(Bit_Ctrl.inst.angle) <= 90)
+                    {
+
+                        if (Bit_Ctrl.inst.angle > 90)
+                        {
+                            Bit_Ctrl.inst.angle = 90;
+                        }
+                        else if (Bit_Ctrl.inst.angle < -90)
+                        {
+                            Bit_Ctrl.inst.angle = -90;
+                        }
+                        Bit_Ctrl.inst.angle = (delta * 180); 
+                    }
+
+                    
+                }
+            }
+                
+            //if (h <= 1 || h >= -1)
+            //{
+            //    if (Mathf.Abs(h) > 0)
+            //    {
+            //        Bit_Ctrl.inst.angle = (h * 180) / 2;
+            //    }
+            //}
             //if (v != 0)
             //{
-            //    if (Mathf.Abs(v) > 0 )
+            //    if (Mathf.Abs(v) > 0)
             //    {
-            //        Bit_Ctrl.inst.angle = v * 180 - 180;
+            //        Bit_Ctrl.inst.angle = (v * 180) / 2;
             //    }
             //}
 
-            // ¶Ç´Â transform.Translate(moveDir * moveSpeed * Time.deltaTime);
         }
 
         if (inplay == true)
@@ -114,28 +146,26 @@ public class Player_Ctrl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Invincible != true)
+
+        if (collision.tag == "Enemy_Bullet" || collision.tag == "Enemy")
         {
-            if (collision.tag == "Enemy_Bullet" || collision.tag == "Enemy")
+            if (collision.tag == "Enemy")
             {
-                Destroy(collision.gameObject);
+                collision.GetComponent<Enemy_Ctrl>().TakeDamage(999f);
+            }
+            else Destroy(collision.gameObject);
+            
+            if (Invincible != true)
+            {
                 gameObject.SetActive(false);
                 GameObject Explo = Instantiate(Explosion_Prefab);
                 Explo.transform.position = this.transform.position;
-                
             }
         }
     }
 
     public void Respawn()
     {
-        GameObject[] Bullet2Des = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
-        //Debug.Log(Bullet2Des.Length);
-        for (int i = 0; i < Bullet2Des.Length; i++)
-        {
-            Destroy(Bullet2Des[i]);
-        }
-
         Debug.Log("respawned");
         Invincible = true;
         gameObject.SetActive(true);

@@ -16,7 +16,7 @@ public class Bit_Ctrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        angle = transform.localRotation.z;
     }
 
     // Update is called once per frame
@@ -24,6 +24,8 @@ public class Bit_Ctrl : MonoBehaviour
     {
         if (360 < angle)
         { angle -= 360f; }
+
+       
 
         RotUpdate(angle);
     }

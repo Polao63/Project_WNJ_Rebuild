@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public bool isEnemy;
+    public bool Aim2Player;
     public bool Autoshot;
 
     public GameObject m_BulletPrefab = null;
@@ -15,12 +16,15 @@ public class Gun : MonoBehaviour
 
     Vector2 direction;
 
+    Player_Ctrl m_RefHero = null;
+    Vector3 m_DirVec;
+
     [HideInInspector] public bool IsHoming = false;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
     }
 
     // Update is called once per frame
@@ -31,6 +35,24 @@ public class Gun : MonoBehaviour
             if (isEnemy && Autoshot)
             { EnemyShoot(); }
             else { FireUpdate(); }
+        }
+
+        if (Aim2Player == true)
+        {
+            GameObject Target_Obj = m_RefHero.gameObject;
+
+            Vector3 m_DesiredDir = Target_Obj.transform.position - transform.position;
+            m_DesiredDir.z = 0f;
+            m_DesiredDir.Normalize();
+
+            //스프라이트 회전
+            float angle = Mathf.Atan2(-m_DesiredDir.x, m_DesiredDir.y) * Mathf.Rad2Deg;
+            Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = angleAxis;
+
+
+            m_DirVec = -transform.up;
+            //transform.Translate(Vector3.up * 10 * Time.deltaTime);
         }
     }
 
@@ -83,6 +105,7 @@ public class Gun : MonoBehaviour
 
     void EnemyShoot()
     {
+       
         direction = (transform.localRotation * Vector2.up).normalized;
         if (m_ShootCool > 0)
         {

@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MoveSpeed: -2
+  isEnemyBullet: 1
   IsHoming: 0
   IsTarget: 0
   Target_Obj: {fileID: 0}

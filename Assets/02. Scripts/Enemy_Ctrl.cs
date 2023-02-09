@@ -19,14 +19,6 @@ public enum Mon_Type
     MT_Big
 }
 
-public enum BossAttState
-{
-    BS_MOVE,// 등장
-    BS_NORMAL_ATT, //기본 공격
-    BS_FEVER1_ATT, //피버1 타입 공격
-    BS_FEVER2_ATT,
-}
-
 public class Enemy_Ctrl : MonoBehaviour
 {
     public Mon_Type m_MoType = Mon_Type.MT_Small; 
@@ -44,17 +36,6 @@ public class Enemy_Ctrl : MonoBehaviour
 
     float m_CacPosY = 0f; //사인 함수에 들어갈 누적 각도 계산용
     float m_Rand_Y = 0f; // 랜덤한 진폭값 저장용 변수
-
-    //---- 총알 발사 변수
-    public GameObject m_BulletPrefab = null;
-    public GameObject m_ShootPos = null;
-    float Shoot_Time = 0f; // 총알 발사 주기 계산용 변수
-    float shoot_Delay = 1.5f;// 총알 쿨타임
-    float BulletMvSpeed = 10f; // 총알 이동 속도
-
-    //---- 보스의 행동 패턴 관련
-    BossAttState m_BossState = BossAttState.BS_MOVE;
-    int m_ShootCount = 0;
 
     Player_Ctrl m_RefHero = null;
     Vector3 m_DirVec;
@@ -80,8 +61,8 @@ public class Enemy_Ctrl : MonoBehaviour
 
         m_SpawnPos = this.transform.position;
 
-        float m_MaxHP = 200f;
-        float m_CurHP = 200f;
+        m_MaxHP = 200f;
+        m_CurHP = 200f;
 
         if (m_MoType == Mon_Type.MT_Small)
         {
@@ -103,26 +84,11 @@ public class Enemy_Ctrl : MonoBehaviour
             Mon_Score = 100;
             m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
         }
-        //else if (m_MonType == MonType.MT_Boss)
-        //{
-        //    m_MaxHP = 3000f;
-        //    m_CurHP = m_MaxHP;
-        //    m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
-
-        //    Shoot_Time = 2f;
-        //    m_BossState = BossAttState.BS_MOVE;
-        //}
+        
     }
     // Update is called once per frame
     void Update()
     {
-        //if (m_MonType == MonType.MT_Zombi)
-        //{ Zombi_Ai_Update(); }
-        //else if (m_MonType == MonType.MT_Missle)
-        //{ Missle_AI_Update(); }
-        //else if (m_MonType == MonType.MT_Boss)
-        //{ Boss_AI_Update(); }
-
         if (m_AIType == AI_Type.AI_Charge)
         { AI_Charge_Update(); }
 
@@ -206,23 +172,18 @@ public class Enemy_Ctrl : MonoBehaviour
         if (m_CurHP < a_Value)
         { a_CacDmg = m_CurHP; }
 
-        //Game_Manager.Inst.DamageText(-a_CacDmg, a_CacPos, Color.red);
-
         m_CurHP -= a_Value;
         if (m_CurHP < 0)
         { m_CurHP = 0; }
 
-        //if (m_HpSdBar != null)
-        //{ m_HpSdBar.fillAmount = m_CurHP / m_MaxHP; }
-
         if (m_CurHP <= 0)
         {//몬스터 사망처리
 
-            //보상
-            int Dice = Random.Range(0, 10);
-            if (Dice < 3)
-            { //Game_Manager.Inst.SpawnCoin(transform.position); 
-            }
+            ////보상
+            //int Dice = Random.Range(0, 10);
+            //if (Dice < 3)
+            //{ //Game_Manager.Inst.SpawnCoin(transform.position); 
+            //}
 
             Game_Manager.Inst.P1_score += Mon_Score;
 
@@ -247,16 +208,18 @@ public class Enemy_Ctrl : MonoBehaviour
 
         }
 
-        if (collision.tag == "WAYPOINT")
+        if (isTracking)
         {
-            if (nextIdx >= WayPointList.Length - 1)
+            if (collision.tag == "WAYPOINT")
             {
-                Destroy(gameObject);
-                //nextIdx = 1;
+                if (nextIdx >= WayPointList.Length - 1)
+                {
+                    Destroy(gameObject);
+                    //nextIdx = 1;
+                }
+                else { nextIdx++; }
             }
-            else { nextIdx++; }
         }
-
     }
 
     //void Zombi_Ai_Update()
