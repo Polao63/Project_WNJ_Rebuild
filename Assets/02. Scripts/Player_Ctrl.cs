@@ -62,29 +62,29 @@ public class Player_Ctrl : MonoBehaviour
             //    }
             //}
 
-            if (h < 1 || h > -1)
-            {
-                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1)
-                {
+            //if (h < 1 || h > -1)
+            //{
+            //    if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1)
+            //    {
 
-                    delta = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
-                    if (Mathf.Abs(Bit_Ctrl.inst.angle) <= 90)
-                    {
+            //        delta = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+            //        if (Mathf.Abs(Bit_Ctrl.inst.angle) <= 90)
+            //        {
 
-                        if (Bit_Ctrl.inst.angle > 90)
-                        {
-                            Bit_Ctrl.inst.angle = 90;
-                        }
-                        else if (Bit_Ctrl.inst.angle < -90)
-                        {
-                            Bit_Ctrl.inst.angle = -90;
-                        }
-                        Bit_Ctrl.inst.angle = (delta * 180); 
-                    }
+            //            if (Bit_Ctrl.inst.angle > 90)
+            //            {
+            //                Bit_Ctrl.inst.angle = 90;
+            //            }
+            //            else if (Bit_Ctrl.inst.angle < -90)
+            //            {
+            //                Bit_Ctrl.inst.angle = -90;
+            //            }
+            //            Bit_Ctrl.inst.angle = (delta * 180); 
+            //        }
 
                     
-                }
-            }
+            //    }
+            //}
                 
             //if (h <= 1 || h >= -1)
             //{
