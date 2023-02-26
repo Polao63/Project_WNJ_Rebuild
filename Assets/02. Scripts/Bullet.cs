@@ -2,8 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Bullet_Type
+{
+    Normal,
+    Pierce,
+    Charge_Shot,
+    Fire
+}
+
 public class Bullet : MonoBehaviour
 {
+    public Bullet_Type B_Type;
+
     Vector3 m_DirVec = Vector3.up; //날아가야 할 방향 벡터
     public float m_MoveSpeed = 15f;
     public bool isEnemyBullet = false;
@@ -44,6 +54,17 @@ public class Bullet : MonoBehaviour
             else//Target Lost
             { transform.position += m_DirVec * Time.deltaTime * m_MoveSpeed; }
         }
+        else if (B_Type == Bullet_Type.Fire)//화염방사
+        {
+            //if (GameObject.FindGameObjectsWithTag("Player_Bullet").Length >= 10)
+            //{
+            //    Destroy(gameObject);
+            //}
+            transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed);
+            transform.localScale += Vector3.one * Time.deltaTime;
+            Destroy(gameObject,0.5f);
+        }
+
         else//일반 총알
         { transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed); }
 

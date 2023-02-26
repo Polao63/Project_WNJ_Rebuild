@@ -9,6 +9,7 @@ TagManager:
   - Effect
   - Enemy_Bullet
   - WAYPOINT
+  - Homing_Missile
   layers:
   - Default
   - TransparentFX

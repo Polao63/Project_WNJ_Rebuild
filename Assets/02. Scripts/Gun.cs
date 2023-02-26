@@ -80,7 +80,7 @@ public class Gun : MonoBehaviour
                 if (a_BulletSc != null)
                 { a_BulletSc.IsHoming = IsHoming; }
 
-                m_ShootCool = 0.15f;
+                m_ShootCool = m_MaxShootCool;
             }
 
         }
@@ -98,7 +98,7 @@ public class Gun : MonoBehaviour
                 a_BulletSc.direction = direction;
                 a_CloneObj.transform.rotation = transform.rotation;
 
-                m_ShootCool = 0.15f;
+                m_ShootCool = m_MaxShootCool;
             }
         }
     }
