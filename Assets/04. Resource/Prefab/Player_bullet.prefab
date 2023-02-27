@@ -117,7 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232fed02a2b6c7942b250118d9e0e3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 2
+  B_Type: 0
+  m_MoveSpeed: 15
   isEnemyBullet: 0
   IsHoming: 0
   IsTarget: 0

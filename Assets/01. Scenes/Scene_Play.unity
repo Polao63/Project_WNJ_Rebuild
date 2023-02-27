@@ -417,7 +417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &257322090
 Transform:
   m_ObjectHideFlags: 0
@@ -826,8 +826,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1269060885}
-  - {fileID: 2016040027}
   - {fileID: 1112676529}
+  - {fileID: 2016040027}
   - {fileID: 336998668}
   - {fileID: 1751044007}
   - {fileID: 1073847371}
@@ -1254,7 +1254,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1112676529
 Transform:
   m_ObjectHideFlags: 0
@@ -1267,7 +1267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 857926595}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1112676530
 MonoBehaviour:
@@ -1968,12 +1968,12 @@ GameObject:
   - component: {fileID: 2016040027}
   - component: {fileID: 2016040028}
   m_Layer: 0
-  m_Name: Gun (1)
+  m_Name: FlameShot
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2016040027
 Transform:
   m_ObjectHideFlags: 0
@@ -1986,7 +1986,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 857926595}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2016040028
 MonoBehaviour:
@@ -2004,7 +2004,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   m_BulletPrefab: {fileID: 1658428471224065995, guid: e1e02cc01dc809c4f82c6e03f22f9032, type: 3}
-  m_MaxShootCool: 0.01
+  m_MaxShootCool: 0.1
   IsHoming: 0
 --- !u!1 &2069358729
 GameObject:
