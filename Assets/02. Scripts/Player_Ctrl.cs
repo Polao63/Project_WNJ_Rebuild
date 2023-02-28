@@ -10,6 +10,8 @@ public class Player_Ctrl : MonoBehaviour
     float moveSpeed = 7f;
     Vector3 moveDir = Vector3.zero;
 
+    public GameObject wave = null;
+
     
 
     //---- 주인공 화면 밖으로 이탈하지 않도록 하기 위한 변수
@@ -118,6 +120,11 @@ public class Player_Ctrl : MonoBehaviour
                 Invincible = false;
                 inplay = true;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Instantiate(wave);
         }
 
     }

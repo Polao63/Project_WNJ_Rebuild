@@ -32,7 +32,10 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         if (gameObject.tag == "Enemy_Bullet")
-        { m_DirVec = Vector3.down; }
+        { 
+            m_DirVec = Vector3.down;
+            m_MoveSpeed = m_MoveSpeed * -1;
+        }
        
     }
 
@@ -56,10 +59,6 @@ public class Bullet : MonoBehaviour
         }
         else if (B_Type == Bullet_Type.Fire)//화염방사
         {
-            //if (GameObject.FindGameObjectsWithTag("Player_Bullet").Length >= 10)
-            //{
-            //    Destroy(gameObject);
-            //}
             transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed);
             transform.localScale += Vector3.one * Time.deltaTime;
             Destroy(gameObject,0.5f);

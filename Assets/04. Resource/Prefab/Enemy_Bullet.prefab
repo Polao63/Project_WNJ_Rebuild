@@ -117,12 +117,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232fed02a2b6c7942b250118d9e0e3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: -2
+  B_Type: 0
+  m_MoveSpeed: 3
   isEnemyBullet: 1
   IsHoming: 0
   IsTarget: 0
   Target_Obj: {fileID: 0}
-  direction: {x: 0, y: 1}
+  direction: {x: 0, y: -1}
 --- !u!61 &4423846094129528387
 BoxCollider2D:
   m_ObjectHideFlags: 0
