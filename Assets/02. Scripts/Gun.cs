@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour
     public bool Aim2Player;
     public bool Autoshot;
 
+
+    float Chargetime = 0f;
     public GameObject m_BulletPrefab = null;
     float m_ShootCool = 0f; //주기 계산
     public float m_MaxShootCool = 2f;
@@ -100,6 +102,31 @@ public class Gun : MonoBehaviour
 
                 m_ShootCool = m_MaxShootCool;
             }
+        }
+
+        if (Input.GetKey(KeyCode.V) == true)
+        {
+
+            if (Chargetime < 3f)
+            {
+                Debug.Log("chargeing... current : " + Chargetime);
+                Chargetime += Time.deltaTime * 2; 
+            }
+
+        }
+        else if(Input.GetKeyUp(KeyCode.V))
+        {
+            GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
+            a_CloneObj.transform.localScale = Vector3.one * (Chargetime+1);
+            a_CloneObj.transform.position = this.transform.position;
+
+            a_BulletSc = a_CloneObj.GetComponent<Bullet>();
+            a_BulletSc.direction = direction;
+            a_CloneObj.transform.rotation = transform.rotation;
+
+            m_ShootCool = m_MaxShootCool;
+            
+            Chargetime = 0;
         }
     }
 
