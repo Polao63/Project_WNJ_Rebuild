@@ -12,6 +12,8 @@ public class Player_Ctrl : MonoBehaviour
 
     public GameObject wave = null;
 
+    public GameObject M_Laser = null;
+
     
 
     //---- 주인공 화면 밖으로 이탈하지 않도록 하기 위한 변수
@@ -124,7 +126,17 @@ public class Player_Ctrl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Instantiate(wave);
+            GameObject Wave = Instantiate(wave);
+            Wave.transform.position = gameObject.transform.position;
+        }
+
+        if (Input.GetKey(KeyCode.V))
+        {
+            M_Laser.SetActive(true);
+        }
+        else
+        {
+            M_Laser.SetActive(false);
         }
 
     }

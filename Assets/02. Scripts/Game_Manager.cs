@@ -139,15 +139,15 @@ public class Game_Manager : MonoBehaviour
         else { GameOver.SetActive(false); }
 
         //스테이지 자동 이동
-        if (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null)
-        {
-            if (GameObject.FindWithTag("Enemy") == null
-                && GameObject.FindWithTag("Effect") == null
-                //&& GameObject.FindWithTag("PowerUP") == null
-                && GameObject.FindWithTag("Enemy_Bullet") == null
-                && GameObject.FindWithTag("Player_Bullet") == null)
-            { Next_Scene(); }
-        }
+        //if (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null)
+        //{
+        //    if (GameObject.FindWithTag("Enemy") == null
+        //        && GameObject.FindWithTag("Effect") == null
+        //        //&& GameObject.FindWithTag("PowerUP") == null
+        //        && GameObject.FindWithTag("Enemy_Bullet") == null
+        //        && GameObject.FindWithTag("Player_Bullet") == null)
+        //    { Next_Scene(); }
+        //}
 
         if (0.0f < m_Dealy)
         {
