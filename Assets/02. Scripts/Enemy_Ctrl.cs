@@ -196,11 +196,11 @@ public class Enemy_Ctrl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {// 주인공이 쏜 총알만 데미지가 발생하도록 처리
-        if (collision.tag == "PlayerBullet")
-        {
-            Destroy(collision.gameObject); //몬스터에 충돌된 총알삭제
-            TakeDamage(80f);
-        }
+        //if (collision.tag == "PlayerBullet")
+        //{
+        //    Destroy(collision.gameObject); //몬스터에 충돌된 총알삭제
+        //    TakeDamage(80f);
+        //}
 
         if (collision.tag == "Player")
         {

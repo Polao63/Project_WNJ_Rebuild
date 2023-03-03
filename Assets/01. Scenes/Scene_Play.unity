@@ -795,6 +795,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803083228}
   m_CullTransparentMesh: 1
+--- !u!1 &830259858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830259859}
+  m_Layer: 0
+  m_Name: Gun_Rocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &830259859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830259858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1092442451}
+  - {fileID: 966201081}
+  m_Father: {fileID: 857926595}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &857926594
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +864,7 @@ Transform:
   - {fileID: 1751044007}
   - {fileID: 1073847371}
   - {fileID: 1963708718}
+  - {fileID: 830259859}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -850,7 +883,7 @@ MonoBehaviour:
   h: 0
   v: 0
   Init_moveSpeed: 7
-  SuperB: 4
+  SuperB: 0
   Super_Obj:
   - {fileID: 1963708716}
   - {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
@@ -950,6 +983,7 @@ MonoBehaviour:
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
+  R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 2
   IsHoming: 0
@@ -1135,6 +1169,56 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!1 &966201080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 966201081}
+  - component: {fileID: 966201082}
+  m_Layer: 0
+  m_Name: Gun (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &966201081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966201080}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.11, y: 0.353, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 830259859}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &966201082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966201080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 0
+  Aim2Player: 0
+  Autoshot: 0
+  R_2: 1
+  m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
+  m_MaxShootCool: 0.3
+  IsHoming: 0
 --- !u!1 &1011459636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1330,56 @@ Transform:
   m_Father: {fileID: 857926595}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1092442450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1092442451}
+  - component: {fileID: 1092442452}
+  m_Layer: 0
+  m_Name: Gun (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1092442451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092442450}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.117, y: 0.353, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 830259859}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1092442452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092442450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 0
+  Aim2Player: 0
+  Autoshot: 0
+  R_2: 0
+  m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
+  m_MaxShootCool: 0.3
+  IsHoming: 0
 --- !u!1 &1112676528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1396,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1112676529
 Transform:
   m_ObjectHideFlags: 0
@@ -1292,6 +1426,7 @@ MonoBehaviour:
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
+  R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
   IsHoming: 0
@@ -1661,6 +1796,7 @@ MonoBehaviour:
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
+  R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 2
   IsHoming: 0
@@ -1808,6 +1944,7 @@ MonoBehaviour:
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
+  R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 2
   IsHoming: 0
@@ -2176,6 +2313,7 @@ MonoBehaviour:
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
+  R_2: 0
   m_BulletPrefab: {fileID: 1658428471224065995, guid: e1e02cc01dc809c4f82c6e03f22f9032, type: 3}
   m_MaxShootCool: 0.1
   IsHoming: 0

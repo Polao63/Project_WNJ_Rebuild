@@ -9,10 +9,15 @@ public class Gun : MonoBehaviour
     public bool Autoshot;
 
 
+    public bool R_2 = false;
+
+
     float Chargetime = 0f;
     public GameObject m_BulletPrefab = null;
     float m_ShootCool = 0f; //주기 계산
     public float m_MaxShootCool = 2f;
+    float rocket2_shoot;
+
 
     Bullet a_BulletSc;
 
@@ -27,6 +32,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
+        rocket2_shoot = m_MaxShootCool / 2;
     }
 
     // Update is called once per frame
@@ -91,8 +97,12 @@ public class Gun : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Z) == true)
         {
+            if (rocket2_shoot > 0f) rocket2_shoot -= Time.deltaTime;
+
             if (m_ShootCool <= 0f)
             {
+                if (R_2 && rocket2_shoot > 0f) return;
+
                 GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
                 a_CloneObj.transform.position = this.transform.position;
 
@@ -101,8 +111,10 @@ public class Gun : MonoBehaviour
                 a_CloneObj.transform.rotation = transform.rotation;
 
                 m_ShootCool = m_MaxShootCool;
+                if (R_2) rocket2_shoot = m_MaxShootCool / 2; ;
             }
         }
+        else { if (R_2) rocket2_shoot = m_MaxShootCool / 2; ; }
 
         if (Input.GetKey(KeyCode.V) == true)
         {

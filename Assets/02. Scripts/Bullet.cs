@@ -7,12 +7,14 @@ public enum Bullet_Type
     Normal,
     Pierce,
     Charge_Shot,
-    Fire
+    Fire,
+    Rocket
 }
 
 public class Bullet : MonoBehaviour
 {
     public Bullet_Type B_Type;
+    public GameObject Explosion_Splash;
 
     Vector3 m_DirVec = Vector3.up; //날아가야 할 방향 벡터
     public float m_MoveSpeed = 15f;
@@ -27,6 +29,7 @@ public class Bullet : MonoBehaviour
     Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
 
     public Vector2 direction = new Vector2(0, 1);
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +64,11 @@ public class Bullet : MonoBehaviour
         {
             transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed);
             transform.localScale += Vector3.one * Time.deltaTime;
-            Destroy(gameObject,0.5f);
+            Destroy(gameObject, 0.5f);
+        }
+        else if (B_Type == Bullet_Type.Rocket)
+        {
+            transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed);
         }
 
         else//일반 총알
@@ -141,6 +148,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.tag == "Enemy" && !isEnemyBullet)
         {
+            if (B_Type == Bullet_Type.Rocket)
+            {
+                GameObject go = Instantiate(Explosion_Splash);
+                go.transform.position = gameObject.transform.position; 
+            }
+
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
             if (a_RefMon != null)
             {

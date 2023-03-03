@@ -176,7 +176,7 @@ public class Player_Ctrl : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("LASER OFF!!");
+                    //Debug.Log("LASER OFF!!");
                     M_LASER.SetActive(false);
                     moveSpeed = Init_moveSpeed;
                 }
