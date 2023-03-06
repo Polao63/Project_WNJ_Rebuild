@@ -20,6 +20,8 @@ public class Bullet : MonoBehaviour
     public float m_MoveSpeed = 15f;
     public bool isEnemyBullet = false;
 
+    public int pierce = 2;
+
     //유도탄 변수
     [HideInInspector] public bool IsHoming = false;//유도 On
     [HideInInspector] public bool IsTarget = false;
@@ -66,10 +68,15 @@ public class Bullet : MonoBehaviour
             transform.localScale += Vector3.one * Time.deltaTime;
             Destroy(gameObject, 0.5f);
         }
-        else if (B_Type == Bullet_Type.Rocket)
+        else if (B_Type == Bullet_Type.Rocket)//로켓
         {
             transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed);
         }
+        else if (B_Type == Bullet_Type.Pierce)
+        {
+            transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed * 1.2f);
+        }
+
 
         else//일반 총알
         { transform.Translate(m_DirVec * Time.deltaTime * m_MoveSpeed); }
@@ -151,7 +158,7 @@ public class Bullet : MonoBehaviour
             if (B_Type == Bullet_Type.Rocket)
             {
                 GameObject go = Instantiate(Explosion_Splash);
-                go.transform.position = gameObject.transform.position; 
+                go.transform.position = collision.gameObject.transform.position; 
             }
 
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
@@ -159,7 +166,23 @@ public class Bullet : MonoBehaviour
             {
                 a_RefMon.TakeDamage(1000);
             }
-            Destroy(gameObject);
+
+            if (B_Type == Bullet_Type.Pierce)
+            {
+                if (pierce <= 1)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    pierce--;
+                }
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+           
         }
     }
 }

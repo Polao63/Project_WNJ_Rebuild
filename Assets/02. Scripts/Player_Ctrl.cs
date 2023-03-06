@@ -26,6 +26,8 @@ public class Player_Ctrl : MonoBehaviour
 
     public GameObject WAVE = null;
     public GameObject M_LASER = null;
+
+    public bool Nemesis_system = false;
     
     //---- 주인공 화면 밖으로 이탈하지 않도록 하기 위한 변수
     Vector3 HalfSize = Vector3.zero;
@@ -215,10 +217,12 @@ public class Player_Ctrl : MonoBehaviour
                 {
                     Debug.Log("ZE_WARUDO! TOKIO TOMARE!!");
                     Time.timeScale = 0.5f;
+                    moveSpeed = Init_moveSpeed * 2;
                 }
                 else
                 {
                     Time.timeScale = 1.0f;
+                    moveSpeed = Init_moveSpeed;
                 }
                 
 

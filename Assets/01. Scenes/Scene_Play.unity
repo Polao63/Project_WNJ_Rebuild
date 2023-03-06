@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 3471744942632467956, guid: cfa402cf6c14ec9469fc65203776fcdd, type: 3}
-  m_MaxShootCool: 3
+  m_MaxShootCool: 0.5
 --- !u!1 &197293754
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &830259859
 Transform:
   m_ObjectHideFlags: 0
@@ -889,6 +889,7 @@ MonoBehaviour:
   - {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
   WAVE: {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
   M_LASER: {fileID: 1963708716}
+  Nemesis_system: 0
   Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
 --- !u!50 &857926597
 Rigidbody2D:
@@ -1217,7 +1218,7 @@ MonoBehaviour:
   Autoshot: 0
   R_2: 1
   m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
-  m_MaxShootCool: 0.3
+  m_MaxShootCool: 0.7
   IsHoming: 0
 --- !u!1 &1011459636
 GameObject:
@@ -1378,7 +1379,7 @@ MonoBehaviour:
   Autoshot: 0
   R_2: 0
   m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
-  m_MaxShootCool: 0.3
+  m_MaxShootCool: 0.7
   IsHoming: 0
 --- !u!1 &1112676528
 GameObject:
@@ -1396,7 +1397,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1112676529
 Transform:
   m_ObjectHideFlags: 0
@@ -1965,7 +1966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1891838103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2101,7 +2102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 3471744942632467956, guid: cfa402cf6c14ec9469fc65203776fcdd, type: 3}
-  m_MaxShootCool: 3
+  m_MaxShootCool: 0.5
 --- !u!1 &1963708716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,6 +2248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b0a353360c73647a239259ee137b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Splash: 1
 --- !u!95 &1963708722
 Animator:
   serializedVersion: 5

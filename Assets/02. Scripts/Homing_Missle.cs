@@ -5,6 +5,16 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Homing_Missle : MonoBehaviour
 {
+    private void Awake()
+    {
+        var obj = FindObjectsOfType<Homing_Missle>();
+        if (obj.Length > 2)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     //유도탄 변수
     [HideInInspector] public bool IsTarget = false;
     //한번이라도 타겟이 잡힌적 있는가?
@@ -20,6 +30,14 @@ public class Homing_Missle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if ((CameraResolution.m_ScreenWMax.x + 1f < transform.position.x)
+            || (CameraResolution.m_ScreenWMin.x - 1f > transform.position.x)
+            || (CameraResolution.m_ScreenWMax.y + 1f < transform.position.y)
+            || (CameraResolution.m_ScreenWMin.y - 1f > transform.position.y))
+        {//총알이 화면을 벗어나면 제거 
+            Destroy(gameObject);
+        }
+
 
         if (Target_Obj == null && IsTarget == false)//추적햐아 할 타겟이 없으면
         { FindEnemy(); }//타겟 찾는 함수

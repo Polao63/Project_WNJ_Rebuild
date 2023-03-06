@@ -118,8 +118,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   B_Type: 0
+  Explosion_Splash: {fileID: 0}
   m_MoveSpeed: 15
   isEnemyBullet: 0
+  pierce: 3
   IsHoming: 0
   IsTarget: 0
   Target_Obj: {fileID: 0}
