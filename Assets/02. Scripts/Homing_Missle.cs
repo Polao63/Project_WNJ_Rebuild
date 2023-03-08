@@ -104,7 +104,7 @@ public class Homing_Missle : MonoBehaviour
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
             if (a_RefMon != null)
             {
-                a_RefMon.TakeDamage(1000);
+                a_RefMon.TakeDamage(Player_Ctrl.inst.BulletDamage);
             }
             Destroy(gameObject);
         }

@@ -32,6 +32,15 @@ public class Game_Manager : MonoBehaviour
     public float Timer = 0;
     public float CT_Time = 9.9f;
 
+    public Image fill_SuperGauge = null;
+    public RawImage Super_Icon;
+
+    public float fillamount_SuperGauge = 0f;
+    public float Super_Cooltime = 30f;
+    [HideInInspector]public bool Super_Ready = false;
+
+    public Sprite[] Sp_Super_Icon;
+
     public static Game_Manager Inst;
 
     public GameObject Hide;
@@ -213,8 +222,49 @@ public class Game_Manager : MonoBehaviour
             }
             else
             { Hide.SetActive(true); }
+
+            switch(GameObject.FindObjectOfType<Player_Ctrl>().SuperB)
+            {
+                case SUPER_BOMB.MEGALASER:
+                    Super_Icon.texture = Sp_Super_Icon[0].texture;
+                    break;
+                case SUPER_BOMB.ATOMIC_WAVE:
+                    Super_Icon.texture = Sp_Super_Icon[1].texture;
+                    break;
+                case SUPER_BOMB.OVERLOAD:
+                    Super_Icon.texture = Sp_Super_Icon[2].texture;
+                    break;
+                case SUPER_BOMB.SHIELD_RECOVERY:
+                    Super_Icon.texture = Sp_Super_Icon[3].texture;
+                    break;
+                case SUPER_BOMB.ZE_WARUDO:
+                    Super_Icon.texture = Sp_Super_Icon[4].texture;
+                    break;
+                case SUPER_BOMB.LUCKY_3:
+                    Super_Icon.texture = Sp_Super_Icon[5].texture;
+                    break;
+
+            }
+
         }
         else return;
+
+        if (!Super_Ready)
+        {
+            Super_Icon.color = new Color32(128, 128, 128, 255);
+            fillamount_SuperGauge += Time.deltaTime / Super_Cooltime;
+            fill_SuperGauge.fillAmount = 1 - fillamount_SuperGauge;
+        }
+        else
+        {
+            Super_Icon.color = Color.white;
+
+        }
+        
+        if (fill_SuperGauge.fillAmount <= 0)
+        {
+            Super_Ready = true;
+        }
 
         
         

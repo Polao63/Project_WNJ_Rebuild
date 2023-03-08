@@ -15,7 +15,7 @@ public class M_Laser : MonoBehaviour
     {
         if (collision.tag == "Enemy" && Splash)
         {
-            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(1000);
+            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage / 3);
         }
         
     }

@@ -44,6 +44,8 @@ public class Player_Ctrl : MonoBehaviour
 
     float delta = 0f;
 
+    public float BulletDamage = 10f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,18 @@ public class Player_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Invincible == true)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 110);
+            inv_Time -= Time.deltaTime;
+            if (inv_Time <= 0)
+            {
+                GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                Invincible = false;
+                inplay = true;
+            }
+        }
+
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
@@ -126,17 +140,7 @@ public class Player_Ctrl : MonoBehaviour
                 LimitMove();
             }
 
-            if (Invincible == true)
-            {
-                GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 110);
-                inv_Time -= Time.deltaTime;
-                if (inv_Time <= 0)
-                {
-                    GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-                    Invincible = false;
-                    inplay = true;
-                }
-            } 
+            
         }
 
         SUPER_MOVE();
@@ -175,6 +179,8 @@ public class Player_Ctrl : MonoBehaviour
                     M_LASER.SetActive(true);
                     moveSpeed = Init_moveSpeed / 3;
                     M_LASER.transform.position = gameObject.transform.position;
+                    //Game_Manager.Inst.fillamount_SuperGauge = 0;
+                    //Game_Manager.Inst.Super_Ready = false;
                 }
                 else
                 {
@@ -187,37 +193,45 @@ public class Player_Ctrl : MonoBehaviour
 
             case SUPER_BOMB.ATOMIC_WAVE:
 
-                if (Input.GetKeyDown(KeyCode.C))
+                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("ATOMIC WAVE!!");
                     GameObject Wave = Instantiate(WAVE);
                     Wave.transform.position = gameObject.transform.position;
+                    Game_Manager.Inst.fillamount_SuperGauge = 0;
+                    Game_Manager.Inst.Super_Ready = false;
                 }
 
                 break;
 
             case SUPER_BOMB.OVERLOAD:
-                if (Input.GetKeyDown(KeyCode.C))
+                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("OVERLOAD!!");
+                    Game_Manager.Inst.fillamount_SuperGauge = 0;
+                    Game_Manager.Inst.Super_Ready = false;
                 }
 
                 break;
 
             case SUPER_BOMB.SHIELD_RECOVERY:
-                if (Input.GetKeyDown(KeyCode.C))
+                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("SHIELD:RECOVERED");
+                    Game_Manager.Inst.fillamount_SuperGauge = 0;
+                    Game_Manager.Inst.Super_Ready = false;
                 }
 
                 break;
 
             case SUPER_BOMB.ZE_WARUDO:
-                if (Input.GetKey(KeyCode.C))
+                if (Input.GetKey(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("ZE_WARUDO! TOKIO TOMARE!!");
                     Time.timeScale = 0.5f;
                     moveSpeed = Init_moveSpeed * 2;
+                    //Game_Manager.Inst.fillamount_SuperGauge = 0;
+                    //Game_Manager.Inst.Super_Ready = false;
                 }
                 else
                 {
@@ -229,9 +243,11 @@ public class Player_Ctrl : MonoBehaviour
                 break;
 
             case SUPER_BOMB.LUCKY_3:
-                if (Input.GetKeyDown(KeyCode.C))
+                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("Lucky 3");
+                    Game_Manager.Inst.fillamount_SuperGauge = 0;
+                    Game_Manager.Inst.Super_Ready = false;
                 }
 
                 break;
@@ -246,10 +262,10 @@ public class Player_Ctrl : MonoBehaviour
         {
             if (collision.tag == "Enemy")
             {
-                collision.GetComponent<Enemy_Ctrl>().TakeDamage(999f);
+                collision.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage);
             }
             else Destroy(collision.gameObject);
-            
+
             if (Invincible != true)
             {
                 gameObject.SetActive(false);
@@ -257,6 +273,13 @@ public class Player_Ctrl : MonoBehaviour
                 Explo.transform.position = this.transform.position;
             }
         }
+
+
+        if (this.GetComponentInChildren<BoxCollider2D>().CompareTag("Enemy") == true)
+        {
+            Debug.Log("1");
+        }
+               
     }
 
     public void Respawn()

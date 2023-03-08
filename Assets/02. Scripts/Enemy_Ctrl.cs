@@ -61,8 +61,8 @@ public class Enemy_Ctrl : MonoBehaviour
 
         m_SpawnPos = this.transform.position;
 
-        m_MaxHP = 200f;
-        m_CurHP = 200f;
+        m_MaxHP = 10f;
+        m_CurHP = 10f;
 
         if (m_MoType == Mon_Type.MT_Small)
         {
@@ -186,6 +186,7 @@ public class Enemy_Ctrl : MonoBehaviour
             //}
 
             Game_Manager.Inst.P1_score += Mon_Score;
+            Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
 
             GameObject Explo = Instantiate(Explosion_Prefab);
             Explo.transform.position = this.transform.position;
@@ -222,61 +223,7 @@ public class Enemy_Ctrl : MonoBehaviour
         }
     }
 
-    //void Zombi_Ai_Update()
-    //{
-    //    m_CurPos = transform.position;
-    //    m_CurPos.x += (-1f * Time.deltaTime * m_Speed);
-    //    m_CacPosY += Time.deltaTime * (m_Speed / 2.2f);
-    //    m_CurPos.y = m_SpawnPos.y + Mathf.Sin(m_CacPosY) * m_Rand_Y;
-
-    //    transform.position = m_CurPos;
-
-    //    //총알 발사
-    //    if (m_BulletPrefab == null)
-    //    { return; }
-
-    //    Shoot_Time += Time.deltaTime;
-    //    if (shoot_Delay <= Shoot_Time)
-    //    {
-    //        GameObject a_NewObj = Instantiate(m_BulletPrefab) as GameObject;
-    //        Bullet a_BulletSc = a_NewObj.GetComponent<Bullet>();
-    //        a_BulletSc.BulletSpawn(m_ShootPos.transform.position, Vector3.left, BulletMvSpeed);
-
-    //        Shoot_Time = 0f;
-    //    }
-    //}
-
-
-
-    //void Missle_AI_Update()
-    //{
-    //    m_CurPos = transform.position;
-
-    //    m_DirVec.x = -1f;
-    //    m_DirVec.z = 0f;
-    //    m_DirVec.y = 0f;
-
-
-    //    if (m_RefHero != null)
-    //    {
-    //        Vector3 a_CacVec = m_RefHero.transform.position - transform.position;
-    //        m_DirVec = a_CacVec;
-
-    //        if (-3.5f <= a_CacVec.x)
-    //        {//미사일이 주인공과의 거리가 우측 방향으로 3.5 이상이면
-    //            m_DirVec.y = 0f;
-    //        }
-    //    }
-    //    m_DirVec.Normalize();
-    //    m_DirVec.x = -1f; ///무조건 왼쪽 방향으로 이동하기 위함.
-    //    m_DirVec.z = 0f;
-
-
-
-    //    m_CurPos += (m_DirVec * Time.deltaTime * m_Speed);
-    //    transform.position = m_CurPos;
-    //}
-
+    
     //void Boss_AI_Update()
     //{
     //    if (m_BossState == BossAttState.BS_MOVE)

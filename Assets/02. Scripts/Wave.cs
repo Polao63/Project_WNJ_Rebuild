@@ -18,10 +18,13 @@ public class Wave : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy_Bullet" 
-            || collision.tag == "Enemy")
+        if (collision.tag == "Enemy_Bullet")
         {
             Destroy(collision.gameObject);
+        }
+        else if (collision.tag == "Enemy")
+        {
+            collision.GetComponent<Enemy_Ctrl>().TakeDamage(999f);
         }
     }
 }

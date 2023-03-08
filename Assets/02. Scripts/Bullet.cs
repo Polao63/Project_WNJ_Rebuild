@@ -164,7 +164,7 @@ public class Bullet : MonoBehaviour
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
             if (a_RefMon != null)
             {
-                a_RefMon.TakeDamage(1000);
+                a_RefMon.TakeDamage(Player_Ctrl.inst.BulletDamage);
             }
 
             if (B_Type == Bullet_Type.Pierce)
