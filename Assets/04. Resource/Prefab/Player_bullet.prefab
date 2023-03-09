@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6039460692050424642}
   - component: {fileID: 6039460692050424645}
   - component: {fileID: 8513692480820713750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player_bullet
   m_TagString: Player_Bullet
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6039460692050424645
 MonoBehaviour:
   m_ObjectHideFlags: 0

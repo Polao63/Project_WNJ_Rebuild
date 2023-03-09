@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1882330021388282617}
   - component: {fileID: 1882330021388282616}
   - component: {fileID: 1882330021388282567}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,7 @@ MonoBehaviour:
   Explosion_Splash: {fileID: 2326934282136258156, guid: 9f10d1e47677d5c4ba80f177c75d2404, type: 3}
   m_MoveSpeed: 8
   isEnemyBullet: 0
+  pierce: 2
   IsHoming: 0
   IsTarget: 0
   Target_Obj: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8287250351952036849}
   - component: {fileID: 2550068408336388436}
   - component: {fileID: 4423846094129528387}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy_Bullet
   m_TagString: Enemy_Bullet
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2550068408336388436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,8 +119,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   B_Type: 0
+  Explosion_Splash: {fileID: 0}
   m_MoveSpeed: 3
   isEnemyBullet: 1
+  pierce: 2
   IsHoming: 0
   IsTarget: 0
   Target_Obj: {fileID: 0}

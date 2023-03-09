@@ -14,37 +14,37 @@ public enum SUPER_BOMB
 
 public class Player_Ctrl : MonoBehaviour
 {
+    [Header("Movement")]
     public float h = 0f;
     public float v = 0f;
-
     public float Init_moveSpeed = 7f;
     float moveSpeed = 0f;
     Vector3 moveDir = Vector3.zero;
-
-    public SUPER_BOMB SuperB;
-    public GameObject[] Super_Obj;
-
-    public GameObject WAVE = null;
-    public GameObject M_LASER = null;
-
-    public bool Nemesis_system = false;
-    
     //---- 주인공 화면 밖으로 이탈하지 않도록 하기 위한 변수
     Vector3 HalfSize = Vector3.zero;
     Vector3 m_CacCurPos = Vector3.zero;
 
-    public GameObject Explosion_Prefab = null;
+    [Header("SuperBomb")]
+    public SUPER_BOMB SuperB;
+    public GameObject[] Super_Obj;
+    public GameObject WAVE = null;
+    public GameObject M_LASER = null;
+    public bool Nemesis_system = false;
 
+
+    [Header("Player_Status")]
+    public GameObject Explosion_Prefab = null;
     bool Invincible = false;
     bool inplay = false;
+    float inv_Time = 0f;
+    public float BulletDamage = 10f;
+    int Sub_Count = 2;
 
     public static Player_Ctrl inst;
 
-    float inv_Time = 0f;
-
-    float delta = 0f;
-
-    public float BulletDamage = 10f;
+    //float delta = 0f;
+    public GameObject Sub_Parent = null;
+    public GameObject Sub_Hero_Prefab = null;
 
 
     // Start is called before the first frame update
@@ -144,6 +144,12 @@ public class Player_Ctrl : MonoBehaviour
         }
 
         SUPER_MOVE();
+
+        if (GameObject.FindObjectsOfType<Option_Ctrl>().Length < Sub_Count)
+        {
+            Option();
+        }
+        
     }
 
     void LimitMove()
@@ -290,6 +296,21 @@ public class Player_Ctrl : MonoBehaviour
         this.gameObject.transform.position = new Vector3(0,-3, 0);
         inv_Time = 3f;
 
+    }
+
+    void Option()
+    {
+
+
+        for (int ii = 0; ii < Sub_Count; ii++)
+        {
+            GameObject obj = Instantiate(Sub_Hero_Prefab) as GameObject;
+            obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;
+            obj.transform.SetParent(Sub_Parent.transform);
+            Option_Ctrl sub = obj.GetComponent<Option_Ctrl>();
+            if (sub != null)
+                sub.SubHeroSpawn(this.gameObject, (360 / Sub_Count) * ii);
+        }
     }
 
 

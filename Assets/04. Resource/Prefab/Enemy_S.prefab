@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5404954517194154097}
   - component: {fileID: 5404954517194154098}
   - component: {fileID: 5404954517194154099}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_S
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -148,6 +148,7 @@ MonoBehaviour:
   isEnemy: 1
   Aim2Player: 0
   Autoshot: 1
+  R_2: 0
   m_BulletPrefab: {fileID: 255028663374546713, guid: 1d6bb1b653d9eee4bbe66c54533a5f67, type: 3}
   m_MaxShootCool: 1
   IsHoming: 0
@@ -254,3 +255,4 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

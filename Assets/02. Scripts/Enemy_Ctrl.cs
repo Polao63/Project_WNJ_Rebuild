@@ -34,9 +34,6 @@ public class Enemy_Ctrl : MonoBehaviour
     Vector3 m_CurPos; //위치 계산용 변수
     Vector3 m_SpawnPos; //스폰 위치
 
-    float m_CacPosY = 0f; //사인 함수에 들어갈 누적 각도 계산용
-    float m_Rand_Y = 0f; // 랜덤한 진폭값 저장용 변수
-
     Player_Ctrl m_RefHero = null;
     Vector3 m_DirVec;
 

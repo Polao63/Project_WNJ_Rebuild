@@ -13,6 +13,8 @@ public enum Bullet_Type
 
 public class Bullet : MonoBehaviour
 {
+    Player_Ctrl m_ref_Player;
+
     public Bullet_Type B_Type;
     public GameObject Explosion_Splash;
 
@@ -30,7 +32,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public GameObject Target_Obj = null;//타겟 참조 변수
     Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
 
-    public Vector2 direction = new Vector2(0, 1);
+    [HideInInspector]public Vector2 direction = new Vector2(0, 1);
 
 
     // Start is called before the first frame update
@@ -41,7 +43,6 @@ public class Bullet : MonoBehaviour
             m_DirVec = Vector3.down;
             m_MoveSpeed = m_MoveSpeed * -1;
         }
-       
     }
 
     // Update is called once per frame
@@ -119,7 +120,9 @@ public class Bullet : MonoBehaviour
             a_CacDist = a_CacVec.magnitude;
 
             if (4f < a_CacDist)//총알로부터 4 반경 안에 있는 몬스터만
-            { continue; }
+            { 
+               continue; 
+            }
 
             a_FindMon = a_EnemyList[ii].gameObject;
             break;
@@ -141,14 +144,30 @@ public class Bullet : MonoBehaviour
 
         //스프라이트 회전
         float angle = Mathf.Atan2(-m_DesiredDir.x, m_DesiredDir.y) * Mathf.Rad2Deg;
+
+        //if (angle > 90)
+        //{
+        //    angle = 90;
+        //}
+        //else if (angle < -90)
+        //{
+        //    angle = -90;
+        //}
+
+        if (transform.position.y >= Target_Obj.transform.position.y)
+        {
+            FindEnemy();
+            angle = 0;
+        }
+
         Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = angleAxis;
-
 
         m_DirVec = transform.up;
         transform.Translate(Vector3.up * 10 * Time.deltaTime);
 
 
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

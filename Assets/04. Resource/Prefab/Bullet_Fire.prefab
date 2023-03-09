@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1658428471224065993}
   - component: {fileID: 1658428471224065994}
   - component: {fileID: -662996582213166827}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet_Fire
   m_TagString: Player_Bullet
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1658428471224065994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,8 +119,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   B_Type: 3
+  Explosion_Splash: {fileID: 0}
   m_MoveSpeed: 2
   isEnemyBullet: 0
+  pierce: 2
   IsHoming: 0
   IsTarget: 0
   Target_Obj: {fileID: 0}

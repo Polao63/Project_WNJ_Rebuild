@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b0a353360c73647a239259ee137b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Splash: 1
 --- !u!95 &4302041252369321789
 Animator:
   serializedVersion: 5
@@ -165,3 +166,4 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
