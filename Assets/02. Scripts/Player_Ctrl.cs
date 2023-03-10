@@ -12,6 +12,13 @@ public enum SUPER_BOMB
     LUCKY_3
 }
 
+public enum Cur_Option
+{
+    Search,
+    Hold,
+    Rolling
+}
+
 public class Player_Ctrl : MonoBehaviour
 {
     [Header("Movement")]
@@ -42,9 +49,15 @@ public class Player_Ctrl : MonoBehaviour
 
     public static Player_Ctrl inst;
 
+    [Header("Option")]
+    public Cur_Option C_option; 
     //float delta = 0f;
-    public GameObject Sub_Parent = null;
-    public GameObject Sub_Hero_Prefab = null;
+    public GameObject Sub_Rolling_Parent = null;
+    public GameObject Sub_Rolling_Prefab = null;
+
+    public GameObject Sub_Hold = null;
+
+    public GameObject Sub_Search = null;
 
 
     // Start is called before the first frame update
@@ -81,59 +94,6 @@ public class Player_Ctrl : MonoBehaviour
             { moveDir.Normalize(); }
 
             transform.position += moveDir * moveSpeed * Time.deltaTime;
-
-            { //if (h != 0)
-              //{
-              //    if (h < 1 || h > -1)
-              //    {
-              //        if (h <= 0.5)
-              //        { h = 0; }
-              //        Bit_Ctrl.inst.angle = (h * 180) / 2;
-              //        if (h == 0)
-              //        { return; }
-              //    }
-              //}
-
-                //if (h < 1 || h > -1)
-                //{
-                //    if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1)
-                //    {
-
-                //        delta = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
-                //        if (Mathf.Abs(Bit_Ctrl.inst.angle) <= 90)
-                //        {
-
-                //            if (Bit_Ctrl.inst.angle > 90)
-                //            {
-                //                Bit_Ctrl.inst.angle = 90;
-                //            }
-                //            else if (Bit_Ctrl.inst.angle < -90)
-                //            {
-                //                Bit_Ctrl.inst.angle = -90;
-                //            }
-                //            Bit_Ctrl.inst.angle = (delta * 180); 
-                //        }
-
-
-                //    }
-                //}
-
-                //if (h <= 1 || h >= -1)
-                //{
-                //    if (Mathf.Abs(h) > 0)
-                //    {
-                //        Bit_Ctrl.inst.angle = (h * 180) / 2;
-                //    }
-                //}
-                //if (v != 0)
-                //{
-                //    if (Mathf.Abs(v) > 0)
-                //    {
-                //        Bit_Ctrl.inst.angle = (v * 180) / 2;
-                //    }
-                //}}
-
-            }
 
             if (inplay == true)
             {
@@ -202,8 +162,8 @@ public class Player_Ctrl : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("ATOMIC WAVE!!");
-                    GameObject Wave = Instantiate(WAVE);
-                    Wave.transform.position = gameObject.transform.position;
+                    WAVE.SetActive(true);
+                    WAVE.transform.position = gameObject.transform.position;
                     Game_Manager.Inst.fillamount_SuperGauge = 0;
                     Game_Manager.Inst.Super_Ready = false;
                 }
@@ -300,17 +260,32 @@ public class Player_Ctrl : MonoBehaviour
 
     void Option()
     {
+        if (C_option == Cur_Option.Hold) { Sub_Hold.SetActive(true); }
+        else { Sub_Hold.SetActive(false); }
 
 
-        for (int ii = 0; ii < Sub_Count; ii++)
+        if (C_option == Cur_Option.Search)
         {
-            GameObject obj = Instantiate(Sub_Hero_Prefab) as GameObject;
-            obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;
-            obj.transform.SetParent(Sub_Parent.transform);
-            Option_Ctrl sub = obj.GetComponent<Option_Ctrl>();
-            if (sub != null)
-                sub.SubHeroSpawn(this.gameObject, (360 / Sub_Count) * ii);
+            Sub_Search.SetActive(true);
         }
+        else { Sub_Search.SetActive(false); }
+
+        if (C_option == Cur_Option.Rolling)
+        {
+            Sub_Rolling_Parent.SetActive(true);
+            for (int ii = 0; ii < Sub_Count; ii++)
+            {
+                GameObject obj = Instantiate(Sub_Rolling_Prefab) as GameObject;
+                obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;
+                obj.transform.SetParent(Sub_Rolling_Parent.transform);
+                Option_Ctrl sub = obj.GetComponent<Option_Ctrl>();
+                if (sub != null)
+                    sub.SubHeroSpawn(this.gameObject, (360 / Sub_Count) * ii);
+            }
+        }
+        else { Sub_Rolling_Parent.SetActive(false); }
+
+
     }
 
 

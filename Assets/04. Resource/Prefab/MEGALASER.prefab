@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4302041252369321760}
   - component: {fileID: 4302041252369321790}
   - component: {fileID: 4302041252369321789}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MEGALASER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
