@@ -8,16 +8,13 @@ public class Gun : MonoBehaviour
     public bool Aim2Player;
     public bool Autoshot;
 
-
     public bool R_2 = false;
-
 
     float Chargetime = 0f;
     public GameObject m_BulletPrefab = null;
     float m_ShootCool = 0f; //주기 계산
     public float m_MaxShootCool = 2f;
     float rocket2_shoot;
-
 
     Bullet a_BulletSc;
 
@@ -60,7 +57,6 @@ public class Gun : MonoBehaviour
 
 
             m_DirVec = -transform.up;
-            //transform.Translate(Vector3.up * 10 * Time.deltaTime);
         }
     }
 
@@ -71,9 +67,6 @@ public class Gun : MonoBehaviour
         {
             m_ShootCool -= Time.deltaTime;
         }
-
-        if (Input.GetKeyDown(KeyCode.X) == true && Input.GetKeyDown(KeyCode.Z) == true)
-        { Debug.Log("zx"); }
 
         if (Input.GetKey(KeyCode.X) == true)
         {
@@ -140,6 +133,10 @@ public class Gun : MonoBehaviour
             
             Chargetime = 0;
         }
+
+
+        //if (Input.GetKeyDown(KeyCode.X) == true && Input.GetKeyDown(KeyCode.Z) == true)
+        //{ Debug.Log("zx"); }
     }
 
     void EnemyShoot()

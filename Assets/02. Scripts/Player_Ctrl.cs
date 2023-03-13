@@ -2,6 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Main_Weapon
+{
+    Normal,
+    Flame,
+    Rocket
+}
+
+public enum Sub_Weapon
+{
+    Wide,
+    HomingMissile
+}
+
 public enum SUPER_BOMB
 {
     MEGALASER,
@@ -38,6 +51,19 @@ public class Player_Ctrl : MonoBehaviour
     public GameObject M_LASER = null;
     public bool Nemesis_system = false;
 
+    [Header("MainWeapon")]
+    public Main_Weapon M_Weapon;
+    public GameObject[] M_Weapon_Obj;
+
+    [Header("SubWeapon")]
+    public Sub_Weapon S_Weapon;
+    public GameObject[] S_Weapon_Obj;
+
+    [Header("Option")]
+    public Cur_Option C_option;
+    //float delta = 0f;
+    public GameObject[] Sub_Option_Obj;
+    public GameObject Sub_Rolling_Prefab = null;
 
     [Header("Player_Status")]
     public GameObject Explosion_Prefab = null;
@@ -48,17 +74,6 @@ public class Player_Ctrl : MonoBehaviour
     int Sub_Count = 2;
 
     public static Player_Ctrl inst;
-
-    [Header("Option")]
-    public Cur_Option C_option; 
-    //float delta = 0f;
-    public GameObject Sub_Rolling_Parent = null;
-    public GameObject Sub_Rolling_Prefab = null;
-
-    public GameObject Sub_Hold = null;
-
-    public GameObject Sub_Search = null;
-
 
     // Start is called before the first frame update
     void Start()
@@ -260,30 +275,30 @@ public class Player_Ctrl : MonoBehaviour
 
     void Option()
     {
-        if (C_option == Cur_Option.Hold) { Sub_Hold.SetActive(true); }
-        else { Sub_Hold.SetActive(false); }
+        if (C_option == Cur_Option.Hold) { Sub_Option_Obj[1].SetActive(true); }
+        else { Sub_Option_Obj[1].SetActive(false); }
 
 
         if (C_option == Cur_Option.Search)
         {
-            Sub_Search.SetActive(true);
+            Sub_Option_Obj[2].SetActive(true);
         }
-        else { Sub_Search.SetActive(false); }
+        else { Sub_Option_Obj[2].SetActive(false); }
 
         if (C_option == Cur_Option.Rolling)
         {
-            Sub_Rolling_Parent.SetActive(true);
+            Sub_Option_Obj[0].SetActive(true);
             for (int ii = 0; ii < Sub_Count; ii++)
             {
                 GameObject obj = Instantiate(Sub_Rolling_Prefab) as GameObject;
                 obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;
-                obj.transform.SetParent(Sub_Rolling_Parent.transform);
+                obj.transform.SetParent(Sub_Option_Obj[0].transform);
                 Option_Ctrl sub = obj.GetComponent<Option_Ctrl>();
                 if (sub != null)
                     sub.SubHeroSpawn(this.gameObject, (360 / Sub_Count) * ii);
             }
         }
-        else { Sub_Rolling_Parent.SetActive(false); }
+        else { Sub_Option_Obj[0].SetActive(false); }
 
 
     }
