@@ -182,6 +182,11 @@ public class Enemy_Ctrl : MonoBehaviour
             //{ //Game_Manager.Inst.SpawnCoin(transform.position); 
             //}
 
+            if (PlayerStatus.Scavenger)
+            {
+                
+            }
+
             Game_Manager.Inst.P1_score += Mon_Score;
             Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
 

@@ -17,7 +17,7 @@ public class Gun : MonoBehaviour
     float rocket2_shoot;
 
     Bullet a_BulletSc;
-
+     
     Vector2 direction;
 
     Player_Ctrl m_RefHero = null;

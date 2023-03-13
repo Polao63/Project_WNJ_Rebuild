@@ -9,7 +9,7 @@ public enum Main_Weapon
     Rocket
 }
 
-public enum Sub_Weapon
+public enum Cur_Sub_Weapon
 {
     Wide,
     HomingMissile
@@ -34,6 +34,8 @@ public enum Cur_Option
 
 public class Player_Ctrl : MonoBehaviour
 {
+    
+
     [Header("Movement")]
     public float h = 0f;
     public float v = 0f;
@@ -56,10 +58,14 @@ public class Player_Ctrl : MonoBehaviour
     public GameObject[] M_Weapon_Obj;
 
     [Header("SubWeapon")]
-    public Sub_Weapon S_Weapon;
+    public bool Sub_Weapon_On = false;
+    public GameObject Sub_Weapon_Parent = null;
+    public Cur_Sub_Weapon S_Weapon;
     public GameObject[] S_Weapon_Obj;
 
     [Header("Option")]
+    public bool Option_On = false;
+    public GameObject Option_Parent = null;
     public Cur_Option C_option;
     //float delta = 0f;
     public GameObject[] Sub_Option_Obj;
@@ -120,10 +126,15 @@ public class Player_Ctrl : MonoBehaviour
 
         SUPER_MOVE();
 
-        if (GameObject.FindObjectsOfType<Option_Ctrl>().Length < Sub_Count)
-        {
-            Option();
-        }
+        Sub_Weapon_Parent.gameObject.SetActive(Sub_Weapon_On);
+
+        if (Sub_Weapon_Parent.activeSelf)
+        { Sub_Weapon(); }
+
+        Option_Parent.gameObject.SetActive(Option_On);
+
+        if (Option_Parent.gameObject.activeSelf)
+        { Option(); }
         
     }
 
@@ -256,7 +267,7 @@ public class Player_Ctrl : MonoBehaviour
         }
 
 
-        if (this.GetComponentInChildren<BoxCollider2D>().CompareTag("Enemy") == true)
+        if (this.GetComponentInChildren<BoxCollider2D>().CompareTag("Enemy"))
         {
             Debug.Log("1");
         }
@@ -273,34 +284,40 @@ public class Player_Ctrl : MonoBehaviour
 
     }
 
+    void Sub_Weapon()
+    {
+        for (int ii = 0; ii < S_Weapon_Obj.Length; ii++)
+        {
+            if (ii == S_Weapon.GetHashCode())
+                S_Weapon_Obj[ii].SetActive(true);
+            else S_Weapon_Obj[ii].SetActive(false);
+        }
+    }
+
     void Option()
     {
-        if (C_option == Cur_Option.Hold) { Sub_Option_Obj[1].SetActive(true); }
-        else { Sub_Option_Obj[1].SetActive(false); }
-
-
-        if (C_option == Cur_Option.Search)
+        for (int ii = 0; ii < Sub_Option_Obj.Length; ii++)
         {
-            Sub_Option_Obj[2].SetActive(true);
+            if (ii == C_option.GetHashCode())
+                Sub_Option_Obj[ii].SetActive(true);
+            else Sub_Option_Obj[ii].SetActive(false);
         }
-        else { Sub_Option_Obj[2].SetActive(false); }
 
         if (C_option == Cur_Option.Rolling)
         {
-            Sub_Option_Obj[0].SetActive(true);
-            for (int ii = 0; ii < Sub_Count; ii++)
+            if (GameObject.FindObjectsOfType<Option_Ctrl>().Length < Sub_Count)
             {
-                GameObject obj = Instantiate(Sub_Rolling_Prefab) as GameObject;
-                obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;
-                obj.transform.SetParent(Sub_Option_Obj[0].transform);
-                Option_Ctrl sub = obj.GetComponent<Option_Ctrl>();
-                if (sub != null)
-                    sub.SubHeroSpawn(this.gameObject, (360 / Sub_Count) * ii);
+                for (int ii = 0; ii < Sub_Count; ii++)
+                {
+                    GameObject obj = Instantiate(Sub_Rolling_Prefab) as GameObject;
+                    obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;
+                    obj.transform.SetParent(Sub_Option_Obj[0].transform);
+                    Option_Ctrl sub = obj.GetComponent<Option_Ctrl>();
+                    if (sub != null)
+                        sub.SubHeroSpawn(this.gameObject, (360 / Sub_Count) * ii);
+                }
             }
         }
-        else { Sub_Option_Obj[0].SetActive(false); }
-
-
     }
 
 

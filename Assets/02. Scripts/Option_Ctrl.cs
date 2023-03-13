@@ -51,7 +51,6 @@ public class Option_Ctrl : MonoBehaviour
         { Search_Option(); }
         if (O_type == Option_Type.Hold)
         { Hold_Option(); }
-
         if (O_type == Option_Type.Rolling)
         { Rolling_Option(); }
 
