@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Main_Weapon
+public enum Cur_Main_Weapon
 {
     Normal,
     Flame,
-    Rocket
+    Rocket,
+    ChargeShot
 }
 
 public enum Cur_Sub_Weapon
@@ -54,7 +55,7 @@ public class Player_Ctrl : MonoBehaviour
     public bool Nemesis_system = false;
 
     [Header("MainWeapon")]
-    public Main_Weapon M_Weapon;
+    public Cur_Main_Weapon M_Weapon;
     public GameObject[] M_Weapon_Obj;
 
     [Header("SubWeapon")]
@@ -123,6 +124,8 @@ public class Player_Ctrl : MonoBehaviour
 
             
         }
+
+        Main_Weapon();
 
         SUPER_MOVE();
 
@@ -266,6 +269,12 @@ public class Player_Ctrl : MonoBehaviour
             }
         }
 
+        if (collision.tag == "Scv_Item")
+        {
+            Game_Manager.Inst.fillamount_SuperGauge += 0.01f * (PlayerStatus.Scavenger_Combo + 1);
+            PlayerStatus.Scavenger_Combo += 1;
+            Destroy(collision.gameObject);
+        }
 
         if (this.GetComponentInChildren<BoxCollider2D>().CompareTag("Enemy"))
         {
@@ -282,6 +291,16 @@ public class Player_Ctrl : MonoBehaviour
         this.gameObject.transform.position = new Vector3(0,-3, 0);
         inv_Time = 3f;
 
+    }
+
+    void Main_Weapon()
+    {
+        for (int ii = 0; ii < M_Weapon_Obj.Length; ii++)
+        {
+            if (ii == M_Weapon.GetHashCode())
+                M_Weapon_Obj[ii].SetActive(true);
+            else M_Weapon_Obj[ii].SetActive(false);
+        }
     }
 
     void Sub_Weapon()

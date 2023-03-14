@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class M_Laser : MonoBehaviour
 {
-    public bool Splash = true;
+    public bool Splash;
 
     private void Start()
     {
-        Splash = true;
     }
 
      void OnTriggerEnter2D(Collider2D collision)
@@ -24,8 +23,7 @@ public class M_Laser : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            if(Splash) collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage / 3);
-            else collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage*3);
+            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage*3);
         }
         
     }

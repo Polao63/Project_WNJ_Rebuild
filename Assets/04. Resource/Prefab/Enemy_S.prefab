@@ -55,6 +55,7 @@ MonoBehaviour:
   isTracking: 0
   Path_Root: {fileID: 0}
   nextIdx: 1
+  ItemDrop: {fileID: 7610104481678876749, guid: 79ceae08c03c1d44ca69c515bcd11876, type: 3}
 --- !u!50 &5404954517194154098
 Rigidbody2D:
   serializedVersion: 4

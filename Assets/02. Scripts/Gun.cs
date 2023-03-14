@@ -90,36 +90,37 @@ public class Gun : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Z) == true)
         {
-            if (rocket2_shoot > 0f) rocket2_shoot -= Time.deltaTime;
-
-            if (m_ShootCool <= 0f)
+            if (Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.ChargeShot)
             {
-                if (R_2 && rocket2_shoot > 0f) return;
+                if (Chargetime < 3f)
+                {
+                    Debug.Log("chargeing... current : " + Chargetime);
+                    Chargetime += Time.deltaTime * 2;
+                }
+            }
+            else 
+            {
+                if (rocket2_shoot > 0f) rocket2_shoot -= Time.deltaTime;
 
-                GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
-                a_CloneObj.transform.position = this.transform.position;
+                if (m_ShootCool <= 0f)
+                {
+                    if (R_2 && rocket2_shoot > 0f) return;
 
-                a_BulletSc = a_CloneObj.GetComponent<Bullet>();
-                a_BulletSc.direction = direction;
-                a_CloneObj.transform.rotation = transform.rotation;
+                    GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
+                    a_CloneObj.transform.position = this.transform.position;
 
-                m_ShootCool = m_MaxShootCool;
-                if (R_2) rocket2_shoot = m_MaxShootCool / 2; ;
+                    a_BulletSc = a_CloneObj.GetComponent<Bullet>();
+                    a_BulletSc.direction = direction;
+                    a_CloneObj.transform.rotation = transform.rotation;
+
+                    m_ShootCool = m_MaxShootCool;
+                    if (R_2) rocket2_shoot = m_MaxShootCool / 2; ;
+                }
             }
         }
         else { if (R_2) rocket2_shoot = m_MaxShootCool / 2; ; }
 
-        if (Input.GetKey(KeyCode.V) == true)
-        {
-
-            if (Chargetime < 3f)
-            {
-                Debug.Log("chargeing... current : " + Chargetime);
-                Chargetime += Time.deltaTime * 2; 
-            }
-
-        }
-        else if(Input.GetKeyUp(KeyCode.V))
+        if(Input.GetKeyUp(KeyCode.Z) && Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.ChargeShot)
         {
             GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
             a_CloneObj.transform.localScale = Vector3.one * (Chargetime+1);

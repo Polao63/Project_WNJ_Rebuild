@@ -7,7 +7,12 @@ public class PlayerStatus
     //--패시브 관련
     public static bool Scavenger = false;
     public static bool pity = false;
+    public static bool Nemesis = false;
 
-    public int Scavenger_Combo = 0;
+    //--시너지 관련
+
+
+    
+    public static int Scavenger_Combo = 0;
    
 }

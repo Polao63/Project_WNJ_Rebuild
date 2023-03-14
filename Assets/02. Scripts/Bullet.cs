@@ -34,7 +34,6 @@ public class Bullet : MonoBehaviour
 
     [HideInInspector]public Vector2 direction = new Vector2(0, 1);
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +46,7 @@ public class Bullet : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if ( Mathf.Abs(this.transform.position.y) > 8)
         { Destroy(gameObject); }
 
@@ -174,34 +173,30 @@ public class Bullet : MonoBehaviour
     {
         if (collision.tag == "Enemy" && !isEnemyBullet)
         {
-            if (B_Type == Bullet_Type.Rocket)
-            {
-                GameObject go = Instantiate(Explosion_Splash);
-                go.transform.position = collision.gameObject.transform.position; 
-            }
-
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
             if (a_RefMon != null)
             {
                 a_RefMon.TakeDamage(Player_Ctrl.inst.BulletDamage);
             }
 
-            if (B_Type == Bullet_Type.Pierce)
+            switch (B_Type)
             {
-                if (pierce <= 1)
-                {
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    pierce--;
-                }
+                case Bullet_Type.Rocket:
+                    GameObject go = Instantiate(Explosion_Splash);
+                    go.transform.position = collision.gameObject.transform.position;
+                    break;
+
+                case Bullet_Type.Pierce:
+                    if (pierce <= 1)
+                    { Destroy(gameObject); }
+                    else
+                    { pierce--; }
+                    break;
+
+                default:
+                    break;
             }
-            else
-            {
-                Destroy(gameObject);
-            }
-           
+            Destroy(gameObject);
         }
     }
 }

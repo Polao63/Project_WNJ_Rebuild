@@ -91,6 +91,11 @@ public class Game_Manager : MonoBehaviour
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_1_2"));
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            PlayerStatus.Scavenger = !PlayerStatus.Scavenger;
+            Debug.Log("Scavenger : " + PlayerStatus.Scavenger.ToString());
+        }
 
         if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
         {

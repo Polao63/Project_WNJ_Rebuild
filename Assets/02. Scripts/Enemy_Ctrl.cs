@@ -51,6 +51,9 @@ public class Enemy_Ctrl : MonoBehaviour
     GameObject Target_Obj = null;//타겟 참조 변수
     Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
 
+    public GameObject ItemDrop = null;
+
+    float delta = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +89,14 @@ public class Enemy_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (delta > 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            delta -= Time.deltaTime; 
+        }
+        if (delta <= 0)
+        { GetComponentInChildren<SpriteRenderer>().color = Color.white; }
+
         if (m_AIType == AI_Type.AI_Charge)
         { AI_Charge_Update(); }
 
@@ -170,25 +181,28 @@ public class Enemy_Ctrl : MonoBehaviour
         { a_CacDmg = m_CurHP; }
 
         m_CurHP -= a_Value;
+        delta = 0.1f;
+
+        
         if (m_CurHP < 0)
         { m_CurHP = 0; }
 
         if (m_CurHP <= 0)
         {//몬스터 사망처리
 
-            ////보상
-            //int Dice = Random.Range(0, 10);
-            //if (Dice < 3)
-            //{ //Game_Manager.Inst.SpawnCoin(transform.position); 
-            //}
-
             if (PlayerStatus.Scavenger)
             {
-                
+                if (ItemDrop != null)
+                {
+                    GameObject Item = Instantiate(ItemDrop) as GameObject;
+                    Item.transform.position = this.transform.position;
+                }
             }
-
+            else 
+            {
+                Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
+            }
             Game_Manager.Inst.P1_score += Mon_Score;
-            Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
 
             GameObject Explo = Instantiate(Explosion_Prefab);
             Explo.transform.position = this.transform.position;
@@ -206,10 +220,7 @@ public class Enemy_Ctrl : MonoBehaviour
         //}
 
         if (collision.tag == "Player")
-        {
-            TakeDamage(80f);
-
-        }
+        { TakeDamage(80f); }
 
         if (isTracking)
         {
