@@ -53,6 +53,7 @@ public class Player_Ctrl : MonoBehaviour
     public GameObject WAVE = null;
     public GameObject M_LASER = null;
     public bool Nemesis_system = false;
+    public bool M_LAZ_On = false;
 
     [Header("MainWeapon")]
     public Cur_Main_Weapon M_Weapon;
@@ -105,8 +106,8 @@ public class Player_Ctrl : MonoBehaviour
             }
         }
 
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
 
         if (h != 0f || v != 0f)
         {
@@ -168,22 +169,40 @@ public class Player_Ctrl : MonoBehaviour
         switch (SuperB)
         {
             case SUPER_BOMB.MEGALASER:
-                if (Input.GetKey(KeyCode.C))
+                if (Game_Manager.Inst.Super_Ready)
                 {
-                    Debug.Log("LASER ON!!");
-                    M_LASER.SetActive(true);
-                    moveSpeed = Init_moveSpeed / 3;
-                    M_LASER.transform.position = gameObject.transform.position;
-                    //Game_Manager.Inst.fillamount_SuperGauge = 0;
-                    //Game_Manager.Inst.Super_Ready = false;
+                    if (Nemesis_system)
+                    {
+                        if (Game_Manager.Inst.fillamount_SuperGauge > 0)
+                        {
+                            if (Input.GetKey(KeyCode.C))
+                            {
+                                Debug.Log("LASER ON!!");
+                                M_LASER.SetActive(true);
+                                M_LASER.transform.localScale = new Vector3(0.5f, 2, 1);
+                                moveSpeed = Init_moveSpeed / 2;
+                                M_LASER.transform.position = gameObject.transform.position;
+                                Game_Manager.Inst.fillamount_SuperGauge -= 0.1f;
+                            }
+                            else
+                            {
+                                //Debug.Log("LASER OFF!!");
+                                M_LASER.SetActive(false);
+                                moveSpeed = Init_moveSpeed;
+                            }
+                        }
+                        else { Game_Manager.Inst.Super_Ready = false; }
+                    }
+                    else
+                    {
+                        if (Input.GetKeyDown(KeyCode.C))
+                        {
+                            Game_Manager.Inst.Super_Ready = false;
+                            M_LASER.transform.localScale = new Vector3(2, 2, 1);
+                            M_LAZ_On = true;
+                        }
+                    }
                 }
-                else
-                {
-                    //Debug.Log("LASER OFF!!");
-                    M_LASER.SetActive(false);
-                    moveSpeed = Init_moveSpeed;
-                }
-
                 break;
 
             case SUPER_BOMB.ATOMIC_WAVE:
@@ -247,6 +266,22 @@ public class Player_Ctrl : MonoBehaviour
 
                 break;
 
+        }
+
+        if (M_LAZ_On && Game_Manager.Inst.fillamount_SuperGauge > 0)
+        {
+            Debug.Log("LASER ON!!");
+            M_LASER.SetActive(true);
+            moveSpeed = Init_moveSpeed / 3;
+            M_LASER.transform.position = gameObject.transform.position;
+            Game_Manager.Inst.fillamount_SuperGauge -= 0.004f;
+            if (Game_Manager.Inst.fillamount_SuperGauge <= 0) { M_LAZ_On = false; }
+        }
+        else if(M_LAZ_On == false)
+        {
+            Game_Manager.Inst.Super_Ready = false;
+            M_LASER.SetActive(false);
+            moveSpeed = Init_moveSpeed;
         }
     }
 
@@ -322,7 +357,7 @@ public class Player_Ctrl : MonoBehaviour
             else Sub_Option_Obj[ii].SetActive(false);
         }
 
-        if (C_option == Cur_Option.Rolling)
+        if (C_option == Cur_Option.Rolling && Sub_Option_Obj[2].activeSelf)
         {
             if (GameObject.FindObjectsOfType<Option_Ctrl>().Length < Sub_Count)
             {
@@ -330,10 +365,12 @@ public class Player_Ctrl : MonoBehaviour
                 {
                     GameObject obj = Instantiate(Sub_Rolling_Prefab) as GameObject;
                     obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;
-                    obj.transform.SetParent(Sub_Option_Obj[0].transform);
+                    obj.transform.SetParent(Sub_Option_Obj[2].transform);
                     Option_Ctrl sub = obj.GetComponent<Option_Ctrl>();
                     if (sub != null)
+                    {
                         sub.SubHeroSpawn(this.gameObject, (360 / Sub_Count) * ii);
+                    }  
                 }
             }
         }

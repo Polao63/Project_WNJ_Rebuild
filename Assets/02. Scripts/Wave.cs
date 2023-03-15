@@ -33,7 +33,7 @@ public class Wave : MonoBehaviour
         }
         else if (collision.tag == "Enemy")
         {
-            collision.GetComponent<Enemy_Ctrl>().TakeDamage(999f);
+            collision.GetComponent<Enemy_Ctrl>().TakeDamage(999f,false);
         }
     }
 }

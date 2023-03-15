@@ -77,6 +77,17 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (fillamount_SuperGauge <= 0)
+        {
+            fillamount_SuperGauge = 0f;
+        }
+        else if (fillamount_SuperGauge >= 1)
+        {
+            fillamount_SuperGauge = 1f;
+            Super_Ready = true;
+        }
+
         UI_Update();
         
         //test_speed = (0.2f * (player_Ctrl.gameObject.transform.position.y + 5f) / 2);
@@ -254,24 +265,21 @@ public class Game_Manager : MonoBehaviour
         }
         else return;
 
-        if (!Super_Ready)
+        if (Super_Ready == false)
         {
             Super_Icon.color = new Color32(128, 128, 128, 255);
-            fillamount_SuperGauge += Time.deltaTime / Super_Cooltime;
-            fill_SuperGauge.fillAmount = 1 - fillamount_SuperGauge;
+            if (fillamount_SuperGauge >= 0 && fillamount_SuperGauge < 1)
+            {
+                fillamount_SuperGauge += Time.deltaTime / Super_Cooltime;
+                fill_SuperGauge.fillAmount = 1 - fillamount_SuperGauge;
+            }
+            
         }
-        else
+        else if (Super_Ready == true)
         {
             Super_Icon.color = Color.white;
-
-        }
-        
-        if (fill_SuperGauge.fillAmount <= 0)
-        {
-            Super_Ready = true;
         }
 
-        
-        
+            
     }
 }

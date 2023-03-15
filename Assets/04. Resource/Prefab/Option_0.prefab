@@ -149,6 +149,11 @@ MonoBehaviour:
   O_type: 2
   angle: 0
   parent_Obj: {fileID: 0}
+  IsTarget: 0
+  Target_Obj: {fileID: 0}
+  m_MoveSpeed: 15
+  max_angle: 45
+  R_2: 0
 --- !u!50 &8092013473486693854
 Rigidbody2D:
   serializedVersion: 4

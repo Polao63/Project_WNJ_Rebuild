@@ -14,8 +14,7 @@ public class M_Laser : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            if (Splash) collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage / 3);
-            else collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage * 3);
+            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage * 3,false);
         }
     }
 
@@ -23,18 +22,8 @@ public class M_Laser : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage*3);
+            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage*3,false);
         }
         
-    }
-
-    void SplashDamage()
-    {
-        Splash = false;
-    }
-
-    void ExplosionDone()
-    {
-        Destroy(gameObject);
     }
 }

@@ -170,7 +170,7 @@ public class Enemy_Ctrl : MonoBehaviour
 
     }
 
-    public void TakeDamage(float a_Value)
+    public void TakeDamage(float a_Value, bool ScoreON = true)
     {
         if (m_CurHP <= 0)
         { return; }
@@ -200,7 +200,7 @@ public class Enemy_Ctrl : MonoBehaviour
             }
             else 
             {
-                Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
+                if(ScoreON) Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
             }
             Game_Manager.Inst.P1_score += Mon_Score;
 

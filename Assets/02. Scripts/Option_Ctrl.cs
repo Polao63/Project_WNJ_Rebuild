@@ -182,12 +182,21 @@ public class Option_Ctrl : MonoBehaviour
 
     void Rolling_Option()
     {
-        angle += Time.deltaTime * 500f;
+        parent_Obj = GameObject.Find("Option_Rolling");
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            angle += Time.deltaTime * 500f;
+        }
+        else { angle += Time.deltaTime * 1000f; }
+        
         if (360.0f < angle)
             angle -= 360.0f;
 
+
         if (parent_Obj == null)
+        {
             return;
+        }
 
         parent_Pos = parent_Obj.transform.position;
         transform.position = parent_Pos +

@@ -1722,7 +1722,8 @@ MonoBehaviour:
   - {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
   WAVE: {fileID: 124902492}
   M_LASER: {fileID: 1963708716}
-  Nemesis_system: 0
+  Nemesis_system: 1
+  M_LAZ_On: 0
   M_Weapon: 0
   M_Weapon_Obj:
   - {fileID: 1112676528}
@@ -1737,7 +1738,7 @@ MonoBehaviour:
   - {fileID: 1073847370}
   Option_On: 0
   Option_Parent: {fileID: 28029284}
-  C_option: 1
+  C_option: 2
   Sub_Option_Obj:
   - {fileID: 1445974202}
   - {fileID: 1763562476}
@@ -3969,7 +3970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2022586593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4078,7 +4079,7 @@ MonoBehaviour:
   CT_Time: 9.9
   fill_SuperGauge: {fileID: 5697198}
   Super_Icon: {fileID: 1891838104}
-  fillamount_SuperGauge: 0
+  fillamount_SuperGauge: 1
   Super_Cooltime: 30
   Super_Ready: 0
   Sp_Super_Icon:
