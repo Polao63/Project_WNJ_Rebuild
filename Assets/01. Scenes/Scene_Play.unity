@@ -1718,7 +1718,7 @@ MonoBehaviour:
   h: 0
   v: 0
   Init_moveSpeed: 7
-  SuperB: 0
+  SuperB: 1
   Super_Obj:
   - {fileID: 1963708716}
   - {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
@@ -3213,6 +3213,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3360577561837472893, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360577561837472893, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360577561837472893, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
+      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3360577561837472893, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
