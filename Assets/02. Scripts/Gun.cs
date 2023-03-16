@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour
     public bool Aim2Player;
     public bool Autoshot;
 
+    public float Autoshot_delay = 0f;
+
     public bool R_2 = false;
 
     float Chargetime = 0f;
@@ -142,14 +144,19 @@ public class Gun : MonoBehaviour
 
     void EnemyShoot()
     {
-       
+        if (Autoshot_delay > 0)
+        {
+            Autoshot_delay -= Time.deltaTime;
+        }
+
+
         direction = (transform.localRotation * Vector2.up).normalized;
         if (m_ShootCool > 0)
         {
             m_ShootCool -= Time.deltaTime;
         }
 
-        if (m_ShootCool <= 0f)
+        if (m_ShootCool <= 0f && Autoshot_delay <= 0)
         {
             GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
             a_CloneObj.transform.position = this.transform.position;

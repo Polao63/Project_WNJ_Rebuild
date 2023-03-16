@@ -122,8 +122,6 @@ public class Player_Ctrl : MonoBehaviour
             {
                 LimitMove();
             }
-
-            
         }
 
         Main_Weapon();
@@ -169,38 +167,41 @@ public class Player_Ctrl : MonoBehaviour
         switch (SuperB)
         {
             case SUPER_BOMB.MEGALASER:
-                if (Game_Manager.Inst.Super_Ready)
+                if (Nemesis_system)
                 {
-                    if (Nemesis_system)
+                    if (Game_Manager.Inst.fillamount_SuperGauge > 0 && Game_Manager.Inst.Super_ChargeStart == false)
                     {
-                        if (Game_Manager.Inst.fillamount_SuperGauge > 0)
+                        if (Input.GetKey(KeyCode.C))
                         {
-                            if (Input.GetKey(KeyCode.C))
-                            {
-                                Debug.Log("LASER ON!!");
-                                M_LASER.SetActive(true);
-                                M_LASER.transform.localScale = new Vector3(0.5f, 2, 1);
-                                moveSpeed = Init_moveSpeed / 2;
-                                M_LASER.transform.position = gameObject.transform.position;
-                                Game_Manager.Inst.fillamount_SuperGauge -= 0.1f;
-                            }
-                            else
-                            {
-                                //Debug.Log("LASER OFF!!");
-                                M_LASER.SetActive(false);
-                                moveSpeed = Init_moveSpeed;
-                            }
+                            Debug.Log("LASER ON!!");
+                            M_LASER.SetActive(true);
+                            M_LASER.transform.localScale = new Vector3(0.5f, 2, 1);
+                            moveSpeed = Init_moveSpeed / 2;
+                            M_LASER.transform.position = gameObject.transform.position;
+                            Game_Manager.Inst.fillamount_SuperGauge -= 0.005f;
                         }
-                        else { Game_Manager.Inst.Super_Ready = false; }
+                        else
+                        {
+                            //Debug.Log("LASER OFF!!");
+                            M_LASER.SetActive(false);
+                            moveSpeed = Init_moveSpeed;
+                        }
                     }
-                    else
+                    else 
                     {
-                        if (Input.GetKeyDown(KeyCode.C))
-                        {
-                            Game_Manager.Inst.Super_Ready = false;
-                            M_LASER.transform.localScale = new Vector3(2, 2, 1);
-                            M_LAZ_On = true;
-                        }
+                        M_LASER.SetActive(false);
+                        moveSpeed = Init_moveSpeed;
+                        Game_Manager.Inst.Super_Ready = false;
+                        Game_Manager.Inst.Super_ChargeStart = true;
+                    }
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
+                    {
+                        Game_Manager.Inst.Super_Ready = false;
+                        M_LASER.transform.localScale = new Vector3(2, 2, 1);
+                        M_LAZ_On = true;
                     }
                 }
                 break;
@@ -268,7 +269,7 @@ public class Player_Ctrl : MonoBehaviour
 
         }
 
-        if (M_LAZ_On && Game_Manager.Inst.fillamount_SuperGauge > 0)
+        if (Nemesis_system == false && M_LAZ_On && Game_Manager.Inst.fillamount_SuperGauge > 0)
         {
             Debug.Log("LASER ON!!");
             M_LASER.SetActive(true);
@@ -277,7 +278,7 @@ public class Player_Ctrl : MonoBehaviour
             Game_Manager.Inst.fillamount_SuperGauge -= 0.004f;
             if (Game_Manager.Inst.fillamount_SuperGauge <= 0) { M_LAZ_On = false; }
         }
-        else if(M_LAZ_On == false)
+        else if(Nemesis_system == false && M_LAZ_On == false)
         {
             Game_Manager.Inst.Super_Ready = false;
             M_LASER.SetActive(false);
