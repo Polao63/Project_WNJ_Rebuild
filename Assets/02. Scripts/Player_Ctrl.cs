@@ -52,6 +52,7 @@ public class Player_Ctrl : MonoBehaviour
     public GameObject[] Super_Obj;
     public GameObject WAVE = null;
     public GameObject M_LASER = null;
+    public GameObject Crash_Bomb_Gun = null;
     public bool Nemesis_system = false;
     public bool M_LAZ_On = false;
 
@@ -208,6 +209,7 @@ public class Player_Ctrl : MonoBehaviour
 
             case SUPER_BOMB.ATOMIC_WAVE:
 
+                
                 if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("ATOMIC WAVE!!");
@@ -215,6 +217,14 @@ public class Player_Ctrl : MonoBehaviour
                     WAVE.transform.position = gameObject.transform.position;
                     Game_Manager.Inst.fillamount_SuperGauge = 0;
                     Game_Manager.Inst.Super_Ready = false;
+                    //if (Nemesis_system)
+                    //{
+
+                    //}
+                    //else
+                    //{
+
+                    //}
                 }
 
                 break;

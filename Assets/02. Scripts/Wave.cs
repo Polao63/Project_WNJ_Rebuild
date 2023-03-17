@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    int Bullet_Absorbed = 0;
+    public int Bullet_Absorbed = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,13 +20,17 @@ public class Wave : MonoBehaviour
     {
         if (Player_Ctrl.inst.Nemesis_system == true)
         {
-            transform.localScale -= Vector3.one * Time.deltaTime * 40f;
+            transform.localScale -= Vector3.one * Time.deltaTime * 80f;
             if (transform.localScale.x <= 0f
                 && transform.localScale.y <= 0f
                 && transform.localScale.z <= 0f)
             {
                 transform.localScale = new Vector3(30, 30, 30);
                 gameObject.SetActive(false);
+                Player_Ctrl.inst.Crash_Bomb_Gun.SetActive(true);
+                Crash_Bomb_Gun.inst.Bullet_Absorbed = Bullet_Absorbed;
+                Crash_Bomb_Gun.inst.shoted = false;
+                
                 transform.position = new Vector3(-5, 0, 0);
 
             }
@@ -51,6 +55,9 @@ public class Wave : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (this.gameObject.layer.ToString() == "Wave_Nem")
+            return;
+
         if (collision.tag == "Enemy_Bullet")
         {
             if (Player_Ctrl.inst.Nemesis_system == true)

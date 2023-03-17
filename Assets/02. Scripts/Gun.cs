@@ -90,7 +90,7 @@ public class Gun : MonoBehaviour
         else { IsHoming = false; }
 
 
-        if (Input.GetKey(KeyCode.Z) == true)
+        if (Input.GetKey(KeyCode.Z) == true && Player_Ctrl.inst.Crash_Bomb_Gun.activeSelf == false)
         {
             if (Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.ChargeShot)
             {

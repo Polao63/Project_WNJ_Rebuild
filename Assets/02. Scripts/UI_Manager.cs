@@ -21,6 +21,7 @@ public class UI_Manager : MonoBehaviour
 
     public Image fill_SuperGauge = null;
     public RawImage Super_Icon;
+    public Text SuperReady_Text = null;
 
     public GameObject Hide;
 
@@ -45,10 +46,13 @@ public class UI_Manager : MonoBehaviour
         //UI°ü·Ã
         if (P1_ScoreText != null)
         {
-            if (Game_Manager.Inst.Coin > 0)
-            { P1_ScoreText.text = "PRESS START"; }
-            else if (Game_Manager.Inst.Coin == 0)
-            { P1_ScoreText.text = "INSERT COIN"; }
+            //if (GameOver.activeSelf)
+            //{
+            //    if (Game_Manager.Inst.Coin > 0)
+            //    { P1_ScoreText.text = "PRESS START"; }
+            //    else if (Game_Manager.Inst.Coin == 0)
+            //    { P1_ScoreText.text = "INSERT COIN"; }
+            //}
         }
         else if (P1_ScoreText != null)
         { P1_ScoreText.text = Game_Manager.Inst.P1_score.ToString(); }
@@ -93,6 +97,7 @@ public class UI_Manager : MonoBehaviour
         else return;
 
         fill_SuperGauge.fillAmount = 1 - Game_Manager.Inst.fillamount_SuperGauge;
+        SuperReady_Text.gameObject.SetActive(Game_Manager.Inst.Super_Ready);
 
         if (Game_Manager.Inst.Super_Ready == false && Game_Manager.Inst.Super_ChargeStart == true)
         {
