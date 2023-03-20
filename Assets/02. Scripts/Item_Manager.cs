@@ -104,7 +104,15 @@ public class Item_Manager : MonoBehaviour
                 }
             }
         }
-        
+        else
+        {
+            Timer = 20f;
+            Cursor_num = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                Item_array[i] = 0;
+            }
+        }
 
 
     }
@@ -149,6 +157,76 @@ public class Item_Manager : MonoBehaviour
                 case "Shot_Flame":
                     Player_Ctrl.inst.M_Weapon = Cur_Main_Weapon.Flame;
                     break;
+                case "Shot_Rocket":
+                    Player_Ctrl.inst.M_Weapon = Cur_Main_Weapon.Rocket;
+                    break;
+                case "Shot_Charge":
+                    Player_Ctrl.inst.M_Weapon = Cur_Main_Weapon.ChargeShot;
+                    break;
+
+
+                case "Sub_Wide":
+                    if (Player_Ctrl.inst.Sub_Weapon_On == false)
+                    { Player_Ctrl.inst.Sub_Weapon_On = true; }
+                    Player_Ctrl.inst.S_Weapon = Cur_Sub_Weapon.Wide;
+                    break;
+                case "Sub_Homing":
+                    if (Player_Ctrl.inst.Sub_Weapon_On == false)
+                    { Player_Ctrl.inst.Sub_Weapon_On = true; }
+                    Player_Ctrl.inst.S_Weapon = Cur_Sub_Weapon.HomingMissile;
+                    break;
+
+
+                case "Op_Search":
+                    if (Player_Ctrl.inst.Option_On == false)
+                    { Player_Ctrl.inst.Option_On = true; }
+                    Player_Ctrl.inst.C_option = Cur_Option.Search;
+                    break;
+                case "Op_Hold":
+                    if (Player_Ctrl.inst.Option_On == false)
+                    { Player_Ctrl.inst.Option_On = true; }
+                    Player_Ctrl.inst.C_option = Cur_Option.Hold;
+                    break;
+                case "Op_Rolling":
+                    if (Player_Ctrl.inst.Option_On == false)
+                    { Player_Ctrl.inst.Option_On = true; }
+                    Player_Ctrl.inst.C_option = Cur_Option.Rolling;
+                    break;
+
+
+                case "Pa_Sacavenger":
+                    PlayerStatus.Scavenger = true;
+                    PlayerStatus.Scavenger_Combo = 0;
+                    break;
+                case "Pa_Pity":
+                    PlayerStatus.Pity = true;
+                    break;
+                case "Pa_Nemesis":
+                    PlayerStatus.Nemesis = true;
+                    break;
+
+
+                case "Sy_Mimic":
+                    PlayerStatus.Mimic = true;
+                    break;
+                case "Sy_H_Rocket":
+                    PlayerStatus.H_Rocket = true;
+                    break;
+                case "Sy_ChargeBarrier":
+                    PlayerStatus.ChargeBarrier = true;
+                    break;
+                case "Sy_ignition":
+                    PlayerStatus.ignition = true;
+                    break;
+
+
+                case "Health_Up":
+                    break;
+                case "ATK_Up":
+                    break;
+                case "Super_Up":
+                    break;
+
 
             }
         }

@@ -168,6 +168,8 @@ public class Player_Ctrl : MonoBehaviour
 
     void SUPER_MOVE()
     {
+        Nemesis_system = PlayerStatus.Nemesis;
+
         switch (SuperB)
         {
             case SUPER_BOMB.MEGALASER:
