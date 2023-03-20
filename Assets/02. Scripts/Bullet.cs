@@ -198,5 +198,16 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        ////if (PlayerStatus.ignition == true)
+        //{
+        //    if (Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.Flame)
+        //    {
+        //        if (collision.gameObject.)
+        //        { collision.gameObject.GetComponent<Homing_Missle>().m_MoveSpeed *= 2f; }
+        //    }
+        //}
+
+        
     }
 }

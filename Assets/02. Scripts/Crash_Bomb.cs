@@ -46,7 +46,10 @@ public class Crash_Bomb : MonoBehaviour
                     GetComponent<SpriteRenderer>().flipY = !GetComponent<SpriteRenderer>().flipY;
                 }
                 else
-                { Destroy(gameObject); }
+                { 
+                    Destroy(gameObject);
+                    transform.localScale = First_size;
+                }
 
             }
         }

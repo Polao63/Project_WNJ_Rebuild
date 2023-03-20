@@ -95,6 +95,9 @@ public class Player_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Item_Manager.inst.Item_Select == true)
+        { return; }
+
         if (Invincible == true)
         {
             GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 110);
