@@ -2370,7 +2370,7 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "\uCCB4\uB825\uC99D\uAC00 - \uBC84\uD2F8\uC218 \uC788\uB294 \uB370\uBBF8\uC9C0\uAC00
@@ -2745,18 +2745,24 @@ MonoBehaviour:
   - {fileID: 401299784}
   - {fileID: 750833185}
   Icon:
-  - {fileID: 21300000, guid: 4907fa31e6fe023408116b8d179ff993, type: 3}
-  - {fileID: 21300000, guid: 3c859fe8c2ffdd74780fbe0320984d89, type: 3}
-  - {fileID: 21300000, guid: 73370174193aafd418e491232f4487ef, type: 3}
-  - {fileID: 21300000, guid: ca9c50e859a1a7b48b5370e70fcea639, type: 3}
-  - {fileID: 21300000, guid: c0c98543f9ed49c46a5358f6158fcc4f, type: 3}
   - {fileID: 21300000, guid: 9ba8fed523221af4fa51a73d46a0b06f, type: 3}
   - {fileID: 21300000, guid: 4e0a15649f3d426428217703d774514b, type: 3}
   - {fileID: 21300000, guid: 0d4ce26b07a5b6744b00096ccb42ff85, type: 3}
-  - {fileID: 21300000, guid: 1cd67e664eccf134a80279d042ac653e, type: 3}
   - {fileID: 21300000, guid: a3066864169bf6f438283ca7cae4aced, type: 3}
+  - {fileID: 21300000, guid: 1cd67e664eccf134a80279d042ac653e, type: 3}
+  - {fileID: 21300000, guid: 76183fc610b2f0747ba08dc5b2ed338d, type: 3}
+  - {fileID: 21300000, guid: ca9c50e859a1a7b48b5370e70fcea639, type: 3}
+  - {fileID: 21300000, guid: c0c98543f9ed49c46a5358f6158fcc4f, type: 3}
+  - {fileID: 21300000, guid: 76183fc610b2f0747ba08dc5b2ed338d, type: 3}
   - {fileID: 21300000, guid: 76183fc610b2f0747ba08dc5b2ed338d, type: 3}
   - {fileID: 21300000, guid: 5446706fec530634299753b4d494177e, type: 3}
+  - {fileID: 21300000, guid: 76183fc610b2f0747ba08dc5b2ed338d, type: 3}
+  - {fileID: 21300000, guid: 76183fc610b2f0747ba08dc5b2ed338d, type: 3}
+  - {fileID: 21300000, guid: 76183fc610b2f0747ba08dc5b2ed338d, type: 3}
+  - {fileID: 21300000, guid: 76183fc610b2f0747ba08dc5b2ed338d, type: 3}
+  - {fileID: 21300000, guid: 4907fa31e6fe023408116b8d179ff993, type: 3}
+  - {fileID: 21300000, guid: 3c859fe8c2ffdd74780fbe0320984d89, type: 3}
+  - {fileID: 21300000, guid: 73370174193aafd418e491232f4487ef, type: 3}
   Item_array: 000000000000000000000000
 --- !u!4 &1481943225
 Transform:
@@ -4101,7 +4107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2022586593
 RectTransform:
   m_ObjectHideFlags: 0

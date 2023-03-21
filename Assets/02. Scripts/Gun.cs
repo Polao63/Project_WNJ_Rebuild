@@ -37,7 +37,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameObject.FindObjectOfType<Game_Manager>().Pause)
+        if (!GameObject.FindObjectOfType<Game_Manager>().Pause && Item_Manager.inst.Item_Select == false)
         {
             if (isEnemy && Autoshot)
             { EnemyShoot(); }

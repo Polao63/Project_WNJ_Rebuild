@@ -6,38 +6,6 @@ using UnityEngine.UI;
 
 public class Item_Manager : MonoBehaviour
 {
-    Dictionary<string, int> ItemList = new Dictionary<string, int> 
-    {
-        {"Shot_Flame", 01},
-        {"Shot_Rocket", 02},
-        {"Shot_Charge", 03},
-
-
-        {"Sub_Wide", 11},
-        {"Sub_Homing", 12},
-
-
-        {"Op_Search", 21},
-        {"Op_Hold", 22},
-        {"Op_Rolling", 23},
-
-
-        {"Pa_Scavenger", 31},
-        {"Pa_Pity", 32},
-        {"Pa_Nemesis", 33},
-
-
-        {"Sy_Mimic", 41},
-        {"Sy_H_Rocket", 42},
-        {"Sy_ChargeBarrier", 43},
-        {"Sy_ignition", 44},
-
-        {"Health_Up", 51},
-        {"ATK_Up", 52},
-        {"Super_Up", 53}
-
-    };
-
     public bool Item_Select = false;
 
     public GameObject Item_Select_Panel = null;
@@ -100,8 +68,25 @@ public class Item_Manager : MonoBehaviour
 
                 if (Item_array[ii] == Item_array[ii - 1])
                 {
+                    Debug.Log("중복된 아이템이 있습니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
                     Item_array[ii] = Item_Code_Random();
-                }
+                }                
+            }
+            if (Item_array[2] == Item_array[0])
+            {
+                Debug.Log("중복된 아이템이 있습니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
+                Item_array[2] = Item_Code_Random();
+            }
+
+            if (Help_Text != null)
+            {
+                Help_Text.text = Item_Dictionary.ItemList_HelpText[Item_Dictionary.ItemCodeList.FirstOrDefault(x => x.Value == Item_array[Cursor_num]).Key.ToString()];
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                Item_Box_Icon[i].GetComponent<RawImage>().texture 
+                    = Icon[Item_Dictionary.ItemList_IconSpriteCode[Item_Dictionary.ItemCodeList.FirstOrDefault(x => x.Value == Item_array[i]).Key.ToString()]].texture;
             }
         }
         else
@@ -147,11 +132,16 @@ public class Item_Manager : MonoBehaviour
             }
         }
 
+       
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             Timer = 0f;
+        }
 
-            Selected_Item = ItemList.FirstOrDefault(x => x.Value == Item_array[Cursor_num]).Key;
+        if (Timer <= 0f)
+        {
+            Selected_Item = Item_Dictionary.ItemCodeList.FirstOrDefault(x => x.Value == Item_array[Cursor_num]).Key;
             switch (Selected_Item)
             {
                 case "Shot_Flame":
@@ -223,12 +213,14 @@ public class Item_Manager : MonoBehaviour
                 case "Health_Up":
                     break;
                 case "ATK_Up":
+                    Player_Ctrl.inst.BulletDamage *= 1.2f;
                     break;
                 case "Super_Up":
                     break;
 
 
             }
+            Item_Dictionary.EquippedItemList[Selected_Item] = true;
         }
     }
 
@@ -246,7 +238,6 @@ public class Item_Manager : MonoBehaviour
             Timer_Text.text = Timer.ToString("N2");
         }
     }
-
 
     void Item_Random()
     {
@@ -270,9 +261,59 @@ public class Item_Manager : MonoBehaviour
         item_code = (ii * 10 + jj);
 
 
-        if (ItemList.ContainsValue(item_code) == false)
+        if (Item_Dictionary.ItemCodeList.ContainsValue(item_code) == false)
         {
+            Debug.Log("없는 아이템코드 입니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
             Item_Code_Random();
+        }
+        else if (Item_Dictionary.EquippedItemList[Item_Dictionary.ItemCodeList.FirstOrDefault(x => x.Value == item_code).Key.ToString()] == true)
+        {
+            Debug.Log("이미 장착한 아이템이 있습니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
+            Item_Code_Random();
+        }
+
+        if (item_code / 10 == 4)
+        {
+            switch (item_code)
+            {
+                case 41:
+                    if (!(Player_Ctrl.inst.Option_On 
+                        && Player_Ctrl.inst.C_option != Cur_Option.Rolling 
+                        && Player_Ctrl.inst.M_Weapon != Cur_Main_Weapon.Normal))
+                    {
+                        Debug.Log("시너지 등장 조건이 맞지 않습니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
+                        Item_Code_Random();
+                    }
+                    
+                    break;
+                case 42:
+                    if (!(Player_Ctrl.inst.Sub_Weapon_On
+                        && Player_Ctrl.inst.S_Weapon == Cur_Sub_Weapon.HomingMissile
+                        && Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.Rocket))
+                    {
+                        Debug.Log("시너지 등장 조건이 맞지 않습니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
+                        Item_Code_Random();
+                    }
+                    break;
+                case 43:
+                    if (!(Player_Ctrl.inst.Option_On
+                        && Player_Ctrl.inst.C_option == Cur_Option.Rolling
+                        && Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.ChargeShot))
+                    {
+                        Debug.Log("시너지 등장 조건이 맞지 않습니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
+                        Item_Code_Random();
+                    }
+                    break;
+                case 44:
+                    if (!(Player_Ctrl.inst.Sub_Weapon_On
+                        && Player_Ctrl.inst.S_Weapon == Cur_Sub_Weapon.HomingMissile
+                        && Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.Flame))
+                    {
+                        Debug.Log("시너지 등장 조건이 맞지 않습니다. 코드를 다시 설정합니다." + "코드 : " + item_code.ToString());
+                        Item_Code_Random();
+                    }
+                    break;
+            }
         }
 
         return item_code;

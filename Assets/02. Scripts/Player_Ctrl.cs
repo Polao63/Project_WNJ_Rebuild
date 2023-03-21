@@ -213,8 +213,6 @@ public class Player_Ctrl : MonoBehaviour
                 break;
 
             case SUPER_BOMB.ATOMIC_WAVE:
-
-                
                 if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("ATOMIC WAVE!!");
@@ -222,14 +220,6 @@ public class Player_Ctrl : MonoBehaviour
                     WAVE.transform.position = gameObject.transform.position;
                     Game_Manager.Inst.fillamount_SuperGauge = 0;
                     Game_Manager.Inst.Super_Ready = false;
-                    //if (Nemesis_system)
-                    //{
-
-                    //}
-                    //else
-                    //{
-
-                    //}
                 }
 
                 break;
@@ -299,6 +289,9 @@ public class Player_Ctrl : MonoBehaviour
             M_LASER.SetActive(false);
             moveSpeed = Init_moveSpeed;
         }
+
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
