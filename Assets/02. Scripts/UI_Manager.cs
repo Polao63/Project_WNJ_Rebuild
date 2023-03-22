@@ -97,10 +97,11 @@ public class UI_Manager : MonoBehaviour
         else return;
 
         fill_SuperGauge.fillAmount = 1 - Game_Manager.Inst.fillamount_SuperGauge;
-        SuperReady_Text.gameObject.SetActive(Game_Manager.Inst.Super_Ready);
+        
 
         if (Game_Manager.Inst.Super_Ready == false && Game_Manager.Inst.Super_ChargeStart == true)
         {
+            
             Super_Icon.color = new Color32(128, 128, 128, 255);
             if (Game_Manager.Inst.fillamount_SuperGauge >= 0 && Game_Manager.Inst.fillamount_SuperGauge < 1)
             {
@@ -110,7 +111,14 @@ public class UI_Manager : MonoBehaviour
         }
         else if (Game_Manager.Inst.Super_Ready == true)
         {
+            SuperReady_Text.text = "SUPER READY!";
+            SuperReady_Text.gameObject.SetActive(true);
             Super_Icon.color = Color.white;
+        }
+
+        if (Game_Manager.Inst.fillamount_SuperGauge > 0 && Game_Manager.Inst.fillamount_SuperGauge < 1)
+        {
+            SuperReady_Text.gameObject.SetActive(false);
         }
 
 

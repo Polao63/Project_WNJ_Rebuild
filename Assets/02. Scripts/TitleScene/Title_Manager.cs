@@ -71,9 +71,7 @@ public class Title_Manager : MonoBehaviour
 
     public void Start_Btn_Click()
     {
-        SceneManager.LoadScene("Stage_1_1");
-        SceneManager.LoadScene("Scene_Play", LoadSceneMode.Additive);
-
+        SceneManager.LoadScene("Cockpit_Scene");
     }
 
 }

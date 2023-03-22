@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerStatus
 {
+    public static SUPER_BOMB Selected_Super;
+
 
     //--패시브 관련
     public static bool Scavenger = false;

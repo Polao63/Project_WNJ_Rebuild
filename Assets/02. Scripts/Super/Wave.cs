@@ -69,9 +69,12 @@ public class Wave : MonoBehaviour
             { Destroy(collision.gameObject); }
             
         }
-        else if (collision.tag == "Enemy" && Player_Ctrl.inst.Nemesis_system == false)
+        else if (collision.tag == "Enemy")
         {
-            collision.GetComponent<Enemy_Ctrl>().TakeDamage(999f,false);
+            if (Player_Ctrl.inst.Nemesis_system == false)
+            {
+                collision.GetComponent<Enemy_Ctrl>().TakeDamage(999f, false);
+            }
         }
     }
 }

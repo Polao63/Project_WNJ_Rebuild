@@ -1617,18 +1617,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eca21d73b2422342a64ed24d0cfbdf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DEBUG_MODE: 1
   h: 0
   v: 0
   Init_moveSpeed: 7
-  SuperB: 1
+  SuperB: 2
   Super_Obj:
   - {fileID: 1963708716}
   - {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
   WAVE: {fileID: 124902492}
   M_LASER: {fileID: 1963708716}
   Crash_Bomb_Gun: {fileID: 533569240}
-  Nemesis_system: 1
-  M_LAZ_On: 0
+  Nemesis_system: 0
+  TimeLimitedSkill_On: 0
+  Super_Time: 0
   M_Weapon: 0
   M_Weapon_Obj:
   - {fileID: 1112676528}
@@ -3064,7 +3066,7 @@ MonoBehaviour:
   Autoshot_delay: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
-  m_MaxShootCool: 2
+  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!4 &1615440397 stripped
 Transform:
@@ -3187,6 +3189,10 @@ PrefabInstance:
     - target: {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
       propertyPath: m_Name
       value: wave
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
       propertyPath: m_IsActive
@@ -3604,7 +3610,7 @@ MonoBehaviour:
   Autoshot_delay: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
-  m_MaxShootCool: 2
+  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!1 &1891838102
 GameObject:

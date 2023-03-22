@@ -35,7 +35,9 @@ public enum Cur_Option
 
 public class Player_Ctrl : MonoBehaviour
 {
-    
+    [Header("DEBUG")]
+    public bool DEBUG_MODE = false;
+    //public bool DEBUG_MODE_IDDQD = false;
 
     [Header("Movement")]
     public float h = 0f;
@@ -54,7 +56,8 @@ public class Player_Ctrl : MonoBehaviour
     public GameObject M_LASER = null;
     public GameObject Crash_Bomb_Gun = null;
     public bool Nemesis_system = false;
-    public bool M_LAZ_On = false;
+    public bool TimeLimitedSkill_On = false;
+    public float Super_Time = 0f;
 
     [Header("MainWeapon")]
     public Cur_Main_Weapon M_Weapon;
@@ -104,7 +107,7 @@ public class Player_Ctrl : MonoBehaviour
             inv_Time -= Time.deltaTime;
             if (inv_Time <= 0)
             {
-                GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                GetComponentInChildren<SpriteRenderer>().color = Color.white;
                 Invincible = false;
                 inplay = true;
             }
@@ -168,7 +171,15 @@ public class Player_Ctrl : MonoBehaviour
 
     void SUPER_MOVE()
     {
-        Nemesis_system = PlayerStatus.Nemesis;
+        if (DEBUG_MODE == false)
+        {
+            SuperB = PlayerStatus.Selected_Super;
+
+            Nemesis_system = PlayerStatus.Nemesis;
+        }
+
+        if (Super_Time > 0)
+        { Super_Time -= Time.deltaTime; }
 
         switch (SuperB)
         {
@@ -207,7 +218,7 @@ public class Player_Ctrl : MonoBehaviour
                     {
                         Game_Manager.Inst.Super_Ready = false;
                         M_LASER.transform.localScale = new Vector3(2, 2, 1);
-                        M_LAZ_On = true;
+                        TimeLimitedSkill_On = true;
                     }
                 }
                 break;
@@ -228,8 +239,7 @@ public class Player_Ctrl : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("OVERLOAD!!");
-                    Game_Manager.Inst.fillamount_SuperGauge = 0;
-                    Game_Manager.Inst.Super_Ready = false;
+                    TimeLimitedSkill_On = true;
                 }
 
                 break;
@@ -245,21 +255,28 @@ public class Player_Ctrl : MonoBehaviour
                 break;
 
             case SUPER_BOMB.ZE_WARUDO:
-                if (Input.GetKey(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
+                if (Game_Manager.Inst.fillamount_SuperGauge > 0 && Game_Manager.Inst.Super_ChargeStart == false) 
                 {
-                    Debug.Log("ZE_WARUDO! TOKIO TOMARE!!");
-                    Time.timeScale = 0.5f;
-                    moveSpeed = Init_moveSpeed * 2;
-                    //Game_Manager.Inst.fillamount_SuperGauge = 0;
-                    //Game_Manager.Inst.Super_Ready = false;
+                    if (Input.GetKey(KeyCode.C))
+                    {
+                        Debug.Log("ZE_WARUDO! TOKIO TOMARE!!");
+                        Time.timeScale = 0.5f;
+                        moveSpeed = Init_moveSpeed * 2;
+                        Game_Manager.Inst.fillamount_SuperGauge -= 0.005f;
+                    }
+                    else
+                    {
+                        Time.timeScale = 1.0f;
+                        moveSpeed = Init_moveSpeed;
+                    }
                 }
                 else
                 {
                     Time.timeScale = 1.0f;
                     moveSpeed = Init_moveSpeed;
+                    Game_Manager.Inst.Super_Ready = false;
+                    Game_Manager.Inst.Super_ChargeStart = true;
                 }
-                
-
                 break;
 
             case SUPER_BOMB.LUCKY_3:
@@ -274,20 +291,42 @@ public class Player_Ctrl : MonoBehaviour
 
         }
 
-        if (Nemesis_system == false && M_LAZ_On && Game_Manager.Inst.fillamount_SuperGauge > 0)
+        if (Nemesis_system == false && TimeLimitedSkill_On && Game_Manager.Inst.fillamount_SuperGauge > 0)
         {
-            Debug.Log("LASER ON!!");
-            M_LASER.SetActive(true);
-            moveSpeed = Init_moveSpeed / 3;
-            M_LASER.transform.position = gameObject.transform.position;
-            Game_Manager.Inst.fillamount_SuperGauge -= 0.004f;
-            if (Game_Manager.Inst.fillamount_SuperGauge <= 0) { M_LAZ_On = false; }
+            switch (SuperB)
+            {
+                case SUPER_BOMB.MEGALASER:
+                    Debug.Log("LASER ON!!");
+                    M_LASER.SetActive(true);
+                    moveSpeed = Init_moveSpeed / 3;
+                    M_LASER.transform.position = gameObject.transform.position;
+                    Game_Manager.Inst.fillamount_SuperGauge -= 0.004f;
+                    if (Game_Manager.Inst.fillamount_SuperGauge <= 0) { TimeLimitedSkill_On = false; }
+                    break;
+                case SUPER_BOMB.OVERLOAD:
+                    BulletDamage = 20f;
+
+                    //수정 필요
+                    Super_Time = 8f;
+                    if (Super_Time <= 0) { TimeLimitedSkill_On = false; }
+                    break;
+                case SUPER_BOMB.LUCKY_3:
+
+
+                    Super_Time = 8f;
+                    if (Super_Time <= 0) { TimeLimitedSkill_On = false; }
+                    break;
+
+            }
+
+            
         }
-        else if(Nemesis_system == false && M_LAZ_On == false)
+        else if(Nemesis_system == false && TimeLimitedSkill_On == false)
         {
             Game_Manager.Inst.Super_Ready = false;
             M_LASER.SetActive(false);
             moveSpeed = Init_moveSpeed;
+            BulletDamage = 10f;
         }
 
 
