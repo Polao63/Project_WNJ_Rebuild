@@ -89,6 +89,7 @@ public class Enemy_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (delta > 0)
         {
             GetComponentInChildren<SpriteRenderer>().color = Color.red;
@@ -128,7 +129,7 @@ public class Enemy_Ctrl : MonoBehaviour
                     transform.rotation = angleAxis;
                 }
                 m_DirVec = transform.up;
-                transform.Translate(Vector3.up * -m_Speed * Time.deltaTime);
+                transform.Translate(Vector3.up * -m_Speed * Time.deltaTime, Space.Self);
             }
         }
 
@@ -200,7 +201,7 @@ public class Enemy_Ctrl : MonoBehaviour
             }
             else 
             {
-                if(ScoreON) Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
+                if (ScoreON && Player_Ctrl.inst.TimeLimitedSkill_On == false) Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
             }
             Game_Manager.Inst.P1_score += Mon_Score;
 

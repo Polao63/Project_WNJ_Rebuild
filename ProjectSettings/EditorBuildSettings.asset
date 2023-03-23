@@ -21,6 +21,15 @@ EditorBuildSettings:
     path: Assets/01. Scenes/Stage_1_2.unity
     guid: e2156949d87f4284898e916f415fbecd
   - enabled: 1
+    path: Assets/01. Scenes/Stage_1_3.unity
+    guid: d95b6b6c5d9e43d4faba4444f3262cf6
+  - enabled: 1
+    path: Assets/01. Scenes/Stage_1_4.unity
+    guid: 393269ea7fa3e944eb78257000295c36
+  - enabled: 1
+    path: Assets/01. Scenes/Stage_1_5.unity
+    guid: 5d787ffd8fbe0bc438b79be479b79c0a
+  - enabled: 1
     path: Assets/01. Scenes/Credits_Scene.unity
     guid: 8e3e9d7a814ed814283598b5b5d7bb5e
   - enabled: 1

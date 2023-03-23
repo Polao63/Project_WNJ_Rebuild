@@ -55,6 +55,7 @@ public class Player_Ctrl : MonoBehaviour
     public GameObject WAVE = null;
     public GameObject M_LASER = null;
     public GameObject Crash_Bomb_Gun = null;
+    public GameObject Shield_Obj = null;
     public bool Nemesis_system = false;
     public bool TimeLimitedSkill_On = false;
     public float Super_Time = 0f;
@@ -178,9 +179,6 @@ public class Player_Ctrl : MonoBehaviour
             Nemesis_system = PlayerStatus.Nemesis;
         }
 
-        if (Super_Time > 0)
-        { Super_Time -= Time.deltaTime; }
-
         switch (SuperB)
         {
             case SUPER_BOMB.MEGALASER:
@@ -240,6 +238,9 @@ public class Player_Ctrl : MonoBehaviour
                 {
                     Debug.Log("OVERLOAD!!");
                     TimeLimitedSkill_On = true;
+                    Super_Time = 8f;
+                    Game_Manager.Inst.Super_Ready = false;
+                    Game_Manager.Inst.fillamount_SuperGauge = 0f;
                 }
 
                 break;
@@ -247,7 +248,19 @@ public class Player_Ctrl : MonoBehaviour
             case SUPER_BOMB.SHIELD_RECOVERY:
                 if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
-                    Debug.Log("SHIELD:RECOVERED");
+                    Debug.Log("SHIELD");
+                    if (Shield_Obj != null)
+                    {
+                        if (Shield_Obj.activeSelf == true)
+                        {
+                            Shield_Obj.GetComponent<Shield>().shield_dur = 2;
+                        }
+                        else 
+                        {
+                            Shield_Obj.SetActive(true);
+                            Shield_Obj.GetComponent<Shield>().shield_dur = 1;
+                        }
+                    }
                     Game_Manager.Inst.fillamount_SuperGauge = 0;
                     Game_Manager.Inst.Super_Ready = false;
                 }
@@ -283,8 +296,9 @@ public class Player_Ctrl : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("Lucky 3");
-                    Game_Manager.Inst.fillamount_SuperGauge = 0;
-                    Game_Manager.Inst.Super_Ready = false;
+                    TimeLimitedSkill_On = true;
+                    Super_Time = 8f;
+
                 }
 
                 break;
@@ -293,6 +307,11 @@ public class Player_Ctrl : MonoBehaviour
 
         if (Nemesis_system == false && TimeLimitedSkill_On && Game_Manager.Inst.fillamount_SuperGauge > 0)
         {
+            if (Super_Time > 0)
+            { Super_Time -= Time.deltaTime; }
+
+            Game_Manager.Inst.Super_ChargeStart = false;
+
             switch (SuperB)
             {
                 case SUPER_BOMB.MEGALASER:
@@ -304,16 +323,12 @@ public class Player_Ctrl : MonoBehaviour
                     if (Game_Manager.Inst.fillamount_SuperGauge <= 0) { TimeLimitedSkill_On = false; }
                     break;
                 case SUPER_BOMB.OVERLOAD:
-                    BulletDamage = 20f;
+                    BulletDamage = 30f;
 
-                    //수정 필요
-                    Super_Time = 8f;
                     if (Super_Time <= 0) { TimeLimitedSkill_On = false; }
                     break;
                 case SUPER_BOMB.LUCKY_3:
 
-
-                    Super_Time = 8f;
                     if (Super_Time <= 0) { TimeLimitedSkill_On = false; }
                     break;
 
@@ -324,9 +339,11 @@ public class Player_Ctrl : MonoBehaviour
         else if(Nemesis_system == false && TimeLimitedSkill_On == false)
         {
             Game_Manager.Inst.Super_Ready = false;
+            Game_Manager.Inst.Super_ChargeStart = true;
             M_LASER.SetActive(false);
             moveSpeed = Init_moveSpeed;
             BulletDamage = 10f;
+            
         }
 
 
@@ -338,17 +355,37 @@ public class Player_Ctrl : MonoBehaviour
 
         if (collision.tag == "Enemy_Bullet" || collision.tag == "Enemy")
         {
-            if (collision.tag == "Enemy")
-            {
-                collision.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage);
-            }
-            else Destroy(collision.gameObject);
-
             if (Invincible != true)
             {
-                gameObject.SetActive(false);
-                GameObject Explo = Instantiate(Explosion_Prefab);
-                Explo.transform.position = this.transform.position;
+                if (collision.tag == "Enemy")
+                {
+                    collision.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage);
+                }
+                
+                if (Shield_Obj.activeSelf)
+                {
+                    if (Nemesis_system == true)
+                    {
+                        if (collision.tag == "Enemy_Bullet")
+                        {
+                            collision.GetComponent<Bullet>().m_MoveSpeed *= -2f;
+                            collision.GetComponent<Bullet>().Damage *= 1.5f;
+                            collision.GetComponent<Bullet>().isEnemyBullet = false;
+                            collision.gameObject.layer = LayerMask.NameToLayer("Bullet_P");
+                        }
+                    }
+                    else Destroy(collision.gameObject);
+
+                    Shield_Obj.GetComponent<Shield>().shield_dur--;
+                    if (Shield_Obj.GetComponent<Shield>().shield_dur <= 0)
+                    { Shield_Obj.SetActive(false); }
+                }
+                else 
+                {
+                    gameObject.SetActive(false);
+                    GameObject Explo = Instantiate(Explosion_Prefab);
+                    Explo.transform.position = this.transform.position;
+                }
             }
         }
 

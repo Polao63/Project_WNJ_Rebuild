@@ -129,7 +129,7 @@ public class Game_Manager : MonoBehaviour
             Cur_SubStage++;
 
             m_Dealy = 0.1f;
-            if (Cur_SubStage >= 5)
+            if (Cur_SubStage >= 10)
             {
                 Cur_SubStage = 1;
                 Cur_stage++;

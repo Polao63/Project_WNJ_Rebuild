@@ -41,7 +41,7 @@ public class Gun : MonoBehaviour
         {
             if (isEnemy && Autoshot)
             { EnemyShoot(); }
-            else { FireUpdate(); }
+            else if(isEnemy == false) { FireUpdate(); }
         }
 
         if (Aim2Player == true)
@@ -142,7 +142,7 @@ public class Gun : MonoBehaviour
         //{ Debug.Log("zx"); }
     }
 
-    void EnemyShoot()
+    public void EnemyShoot()
     {
         if (Autoshot_delay > 0)
         {

@@ -22,6 +22,8 @@ public class Bullet : MonoBehaviour
     public float m_MoveSpeed = 15f;
     public bool isEnemyBullet = false;
 
+    public float Damage = 10f;
+
     public int pierce = 2;
 
     //유도탄 변수
@@ -37,6 +39,8 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Damage = Player_Ctrl.inst.BulletDamage;
+
         if (gameObject.tag == "Enemy_Bullet")
         { 
             m_DirVec = Vector3.down;
@@ -176,7 +180,7 @@ public class Bullet : MonoBehaviour
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
             if (a_RefMon != null)
             {
-                a_RefMon.TakeDamage(Player_Ctrl.inst.BulletDamage);
+                a_RefMon.TakeDamage(Damage);
             }
 
             switch (B_Type)

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5404954517194154102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 2.45, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5404954518608357704}
@@ -149,6 +149,7 @@ MonoBehaviour:
   isEnemy: 1
   Aim2Player: 0
   Autoshot: 1
+  Autoshot_delay: 0
   R_2: 0
   m_BulletPrefab: {fileID: 255028663374546713, guid: 1d6bb1b653d9eee4bbe66c54533a5f67, type: 3}
   m_MaxShootCool: 1
@@ -178,7 +179,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5404954518608357710}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
