@@ -11,6 +11,7 @@ TagManager:
   - WAYPOINT
   - Homing_Missile
   - Scv_Item
+  - Boss_PowerUp
   layers:
   - Default
   - TransparentFX

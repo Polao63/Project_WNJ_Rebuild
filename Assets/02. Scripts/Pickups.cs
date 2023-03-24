@@ -16,9 +16,11 @@ public class Pickups : MonoBehaviour
         if ((CameraResolution.m_ScreenWMin.y - 1f > transform.position.y))
         {//총알이 화면을 벗어나면 제거 
             Destroy(gameObject);
-            PlayerStatus.Scavenger_Combo = 0;
-            Debug.Log("Combo Reset");
-
+            if (this.gameObject.tag == "Scv_Item")
+            { 
+                PlayerStatus.Scavenger_Combo = 0;
+                Debug.Log("Combo Reset");
+            }
         }
     }
 

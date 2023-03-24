@@ -395,6 +395,11 @@ public class Player_Ctrl : MonoBehaviour
             PlayerStatus.Scavenger_Combo += 1;
             Destroy(collision.gameObject);
         }
+        else if (collision.tag == "Boss_PowerUp")
+        {
+            Item_Manager.inst.Item_Select = true;
+            Destroy(collision.gameObject);
+        }
 
         if (this.GetComponentInChildren<BoxCollider2D>().CompareTag("Enemy"))
         {

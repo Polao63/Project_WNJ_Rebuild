@@ -55,6 +55,8 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Score_Counter_Stop();
+
         if (Input.GetKeyDown(KeyCode.P))//디버그용 스테이지 스킵
         {
             Debug.Log(SceneManager.GetActiveScene().name);
@@ -62,7 +64,7 @@ public class Game_Manager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.O))//디버그용 스테이지 스킵
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_1_2"));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_1_5"));
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -136,5 +138,13 @@ public class Game_Manager : MonoBehaviour
             }
         }
        
+    }
+
+    void Score_Counter_Stop()
+    {
+        if (P1_score >= 99999999)
+        { P1_score = 99999999; }
+        if (Hi_score >= 99999999)
+        { Hi_score = 99999999; }
     }
 }

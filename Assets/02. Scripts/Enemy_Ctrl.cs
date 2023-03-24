@@ -9,14 +9,16 @@ public enum AI_Type
 {
     AI_ShootBullet,
     AI_Charge,
-    AI_ShootNRun
+    AI_ShootNRun,
+    AI_Boss
 }
 
 public enum Mon_Type
 {
     MT_Small,
     MT_Medium,
-    MT_Big
+    MT_Big,
+    MT_BOSS
 }
 
 public class Enemy_Ctrl : MonoBehaviour
@@ -25,9 +27,13 @@ public class Enemy_Ctrl : MonoBehaviour
     public AI_Type m_AIType = AI_Type.AI_Charge;
 
     //---- 몬스터 체력 변수
-    float m_MaxHP = 200f;
-    float m_CurHP = 200f;
+    [HideInInspector] public float m_MaxHP = 200f;
+    //[HideInInspector] 
+    public float m_CurHP = 200f;
     //public Image m_HpSdBar = null;
+
+    public int Mon_Score = 10;
+    public GameObject ItemDrop = null;
 
 
     public float m_Speed = 4; //이동속도
@@ -41,9 +47,7 @@ public class Enemy_Ctrl : MonoBehaviour
     public bool isHoming = false;
     public bool isTracking = false;
 
-    int Mon_Score = 10;
-
-    //waypoint
+    [Header("Waypoint")]
     public GameObject Path_Root = null;
     private Transform[] WayPointList;
     public int nextIdx = 1;
@@ -51,44 +55,52 @@ public class Enemy_Ctrl : MonoBehaviour
     GameObject Target_Obj = null;//타겟 참조 변수
     Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
 
-    public GameObject ItemDrop = null;
+    
 
     float delta = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-
         m_SpawnPos = this.transform.position;
-
-        m_MaxHP = 10f;
-        m_CurHP = 10f;
+        m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
 
         if (m_MoType == Mon_Type.MT_Small)
         {
             m_CurHP = m_MaxHP;
-            Mon_Score = 10;
-            m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
+            Mon_Score = 10;    
         }
         if (m_MoType == Mon_Type.MT_Medium)
         {
             m_MaxHP *= 2f;
             m_CurHP = m_MaxHP;
             Mon_Score = 50;
-            m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
         }
         if (m_MoType == Mon_Type.MT_Big)
         {
             m_MaxHP *= 3f;
             m_CurHP = m_MaxHP;
             Mon_Score = 100;
-            m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
+        }
+        if (m_MoType == Mon_Type.MT_BOSS)
+        {
+            m_CurHP = m_MaxHP;
         }
         
     }
     // Update is called once per frame
     void Update()
     {
+        if (m_MoType == Mon_Type.MT_BOSS)
+        {
+            UI_Manager.Inst.Boss_UI.SetActive(true);
+            UI_Manager.Inst.Boss_MaxHP = m_MaxHP;
+            UI_Manager.Inst.Boss_CurHP = m_CurHP;           
+        }
+        else 
+        {
+            UI_Manager.Inst.Boss_UI.SetActive(false);
+        }
 
         if (delta > 0)
         {
@@ -96,7 +108,14 @@ public class Enemy_Ctrl : MonoBehaviour
             delta -= Time.deltaTime; 
         }
         if (delta <= 0)
-        { GetComponentInChildren<SpriteRenderer>().color = Color.white; }
+        {
+            if (((m_CurHP / m_MaxHP) <= 0.33f) && m_MoType == Mon_Type.MT_BOSS)
+            {
+                GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 150, 0, 255);
+            }
+            else 
+            { GetComponentInChildren<SpriteRenderer>().color = Color.white; }
+        }
 
         if (m_AIType == AI_Type.AI_Charge)
         { AI_Charge_Update(); }
@@ -201,7 +220,18 @@ public class Enemy_Ctrl : MonoBehaviour
             }
             else 
             {
-                if (ScoreON && Player_Ctrl.inst.TimeLimitedSkill_On == false) Game_Manager.Inst.fillamount_SuperGauge += 0.1f;
+                if (ScoreON && Player_Ctrl.inst.TimeLimitedSkill_On == false)
+                {
+                    if (m_MoType == Mon_Type.MT_BOSS)
+                    { 
+                        Game_Manager.Inst.fillamount_SuperGauge += 1f;
+                        GameObject Item = Instantiate(ItemDrop) as GameObject;
+                        Item.transform.position = this.transform.position;
+                        UI_Manager.Inst.Boss_UI.SetActive(false);
+                    }
+                    else 
+                    { Game_Manager.Inst.fillamount_SuperGauge += 0.1f; }
+                }
             }
             Game_Manager.Inst.P1_score += Mon_Score;
 

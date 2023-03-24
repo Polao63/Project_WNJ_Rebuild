@@ -24,8 +24,15 @@ public class UI_Manager : MonoBehaviour
     public Text SuperReady_Text = null;
 
     public GameObject Hide;
+    public GameObject Boss_UI;
+    public Image Boss_HP_Bar;
+
+    public float Boss_MaxHP;
+    public float Boss_CurHP;
 
     public static UI_Manager Inst;
+
+    public int Score_format = 8;
 
     // Start is called before the first frame update
     void Start()
@@ -53,9 +60,22 @@ public class UI_Manager : MonoBehaviour
             //    else if (Game_Manager.Inst.Coin == 0)
             //    { P1_ScoreText.text = "INSERT COIN"; }
             //}
+
+            for (int ii = 7; ii > 0; ii--)
+            {
+                if (Game_Manager.Inst.P1_score % (ii ^ 10) != 0)
+                {
+                    Score_format = ii+1;
+                    break;
+                }
+            }
+            if (Game_Manager.Inst.P1_score == 0)
+            { P1_ScoreText.text = Game_Manager.Inst.P1_score.ToString("D8"); }
+            else
+            { P1_ScoreText.text = Game_Manager.Inst.P1_score.ToString("D" + Score_format.ToString()); }
+
+            
         }
-        else if (P1_ScoreText != null)
-        { P1_ScoreText.text = Game_Manager.Inst.P1_score.ToString(); }
 
         CoinText.text = "Credit(s) " + Game_Manager.Inst.Coin.ToString();
 
@@ -97,6 +117,8 @@ public class UI_Manager : MonoBehaviour
         else return;
 
         fill_SuperGauge.fillAmount = 1 - Game_Manager.Inst.fillamount_SuperGauge;
+
+        Boss_HP_Bar.fillAmount = Boss_CurHP / Boss_MaxHP;
         
 
         if (Game_Manager.Inst.Super_Ready == false && Game_Manager.Inst.Super_ChargeStart == true)
