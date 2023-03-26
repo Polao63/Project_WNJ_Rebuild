@@ -12,15 +12,15 @@ public class M_Laser : MonoBehaviour
 
      void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && this.gameObject.tag == "Bullet_P")
         {
-            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage * 3,false);
+            collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage * 3, false);
         }
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && this.gameObject.tag == "Bullet_P")
         {
             collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage*3,false);
         }

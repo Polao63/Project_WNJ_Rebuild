@@ -30,6 +30,7 @@ public class Boss_NSBC_AI : MonoBehaviour
 
     int shooted = 0;
     bool Turn_Back = false;
+    bool Boss_Entered = false;
 
     public GameObject[] Gun_Aim;
 
@@ -54,45 +55,58 @@ public class Boss_NSBC_AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Random.InitState((int)(Time.time * 100));//랜덤 시드 초기화
-
-        if (Game_Manager.Inst.GetComponent<Game_Manager>().Pause)
-        { 
-            moveSpeed = 0;
-            Pattern_Dur = 0f;
-            val = 0;
+        if (transform.position.y > 3 && Boss_Entered == false)
+        {
+            transform.Translate(0, -Time.deltaTime, 0);
         }
         else 
-        { moveSpeed = GetComponent<Enemy_Ctrl>().m_Speed; }
-
-        if (val == 0)
-        { val = (int)Random.Range(1f, 4f); }//패턴 시간 랜덤으로 생성
-
-        if (this.transform.position.y <= 5f)//보스 입장 뒤
         {
-            //destructable.Boss_Entered = true;
-            if (Game_Manager.Inst.GetComponent<Game_Manager>().Pause == false)
-            { Pattern_Dur += Time.deltaTime; }
+            Boss_Entered = true;
+        }
 
-            if (shooted < 5)
+        if (Boss_Entered == true)
+        {
+            Random.InitState((int)(Time.time * 100));//랜덤 시드 초기화
+
+            if (Game_Manager.Inst.GetComponent<Game_Manager>().Pause)
             {
-                if (Pattern_Dur < val)//좌우 이동
-                { moveLNR(); }
-                else if (Pattern_Dur >= val && Game_Manager.Inst.GetComponent<Game_Manager>().Pause == false)//쏘기
-                {
-                    shoot();
-                    Pattern_Dur = 0f;
-                    val = 0;
-                }
+                moveSpeed = 0;
+                Pattern_Dur = 0f;
+                val = 0;
             }
             else
+            { moveSpeed = GetComponent<Enemy_Ctrl>().m_Speed; }
+
+            if (val == 0)
+            { val = (int)Random.Range(1f, 4f); }//패턴 시간 랜덤으로 생성
+
+            if (this.transform.position.y <= 5f)//보스 입장 뒤
             {
-                if (Pattern_Dur >= 1.5f)
+                //destructable.Boss_Entered = true;
+                if (Game_Manager.Inst.GetComponent<Game_Manager>().Pause == false)
+                { Pattern_Dur += Time.deltaTime; }
+
+                if (shooted < 5)
                 {
-                    Boss_Charge();
+                    if (Pattern_Dur < val)//좌우 이동
+                    { moveLNR(); }
+                    else if (Pattern_Dur >= val && Game_Manager.Inst.GetComponent<Game_Manager>().Pause == false)//쏘기
+                    {
+                        shoot();
+                        Pattern_Dur = 0f;
+                        val = 0;
+                    }
+                }
+                else
+                {
+                    if (Pattern_Dur >= 1.5f)
+                    {
+                        Boss_Charge();
+                    }
                 }
             }
-        }   
+        }
+        
     }
 
     void Boss_Charge()

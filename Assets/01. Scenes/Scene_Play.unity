@@ -1039,6 +1039,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
@@ -1334,6 +1335,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
@@ -1744,7 +1746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857926594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: -2.13, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1269060885}
@@ -1771,7 +1773,7 @@ MonoBehaviour:
   h: 0
   v: 0
   Init_moveSpeed: 7
-  SuperB: 3
+  SuperB: 1
   Super_Obj:
   - {fileID: 1963708716}
   - {fileID: 3360577561837472892, guid: 149e4a86cf6acf643b9fd488e12032eb, type: 3}
@@ -1779,7 +1781,7 @@ MonoBehaviour:
   M_LASER: {fileID: 1963708716}
   Crash_Bomb_Gun: {fileID: 533569240}
   Shield_Obj: {fileID: 853558571}
-  Nemesis_system: 1
+  Nemesis_system: 0
   TimeLimitedSkill_On: 0
   Super_Time: 0
   M_Weapon: 0
@@ -2230,6 +2232,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 1
   m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   m_MaxShootCool: 0.7
@@ -2457,6 +2460,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   m_MaxShootCool: 0.7
@@ -2588,6 +2592,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
@@ -3168,6 +3173,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
@@ -3375,6 +3381,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
@@ -3920,6 +3927,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
@@ -4404,6 +4412,7 @@ MonoBehaviour:
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shooted: 0
   R_2: 0
   m_BulletPrefab: {fileID: 1658428471224065995, guid: e1e02cc01dc809c4f82c6e03f22f9032, type: 3}
   m_MaxShootCool: 0.1
@@ -4522,7 +4531,7 @@ MonoBehaviour:
   P1_score: 0
   Hi_score: 0
   Coin: 0
-  Lives: 2
+  Lives: 99
   Cur_stage: 1
   Pause: 0
   Super_Ready: 0

@@ -18,7 +18,8 @@ public enum Mon_Type
     MT_Small,
     MT_Medium,
     MT_Big,
-    MT_BOSS
+    MT_BOSS,
+    MT_ELSE
 }
 
 public class Enemy_Ctrl : MonoBehaviour
@@ -27,8 +28,9 @@ public class Enemy_Ctrl : MonoBehaviour
     public AI_Type m_AIType = AI_Type.AI_Charge;
 
     //---- 몬스터 체력 변수
-    [HideInInspector] public float m_MaxHP = 200f;
     //[HideInInspector] 
+    public float m_MaxHP = 200f;
+    [HideInInspector] 
     public float m_CurHP = 200f;
     //public Image m_HpSdBar = null;
 
@@ -67,25 +69,23 @@ public class Enemy_Ctrl : MonoBehaviour
 
         if (m_MoType == Mon_Type.MT_Small)
         {
-            m_CurHP = m_MaxHP;
             Mon_Score = 10;    
         }
         if (m_MoType == Mon_Type.MT_Medium)
         {
             m_MaxHP *= 2f;
-            m_CurHP = m_MaxHP;
             Mon_Score = 50;
         }
         if (m_MoType == Mon_Type.MT_Big)
         {
             m_MaxHP *= 3f;
-            m_CurHP = m_MaxHP;
             Mon_Score = 100;
         }
         if (m_MoType == Mon_Type.MT_BOSS)
         {
             m_CurHP = m_MaxHP;
         }
+       
         
     }
     // Update is called once per frame

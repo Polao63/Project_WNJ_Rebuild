@@ -15,20 +15,35 @@ EditorBuildSettings:
     path: Assets/01. Scenes/Cockpit_Scene.unity
     guid: 18a16775d1e609746aa4acc49f513a9f
   - enabled: 1
-    path: Assets/01. Scenes/Stage_1_1.unity
+    path: Assets/01. Scenes/Stage_1/Stage_1_1.unity
     guid: 753c3a6a3f31cdc40b7bfafeb707888e
   - enabled: 1
-    path: Assets/01. Scenes/Stage_1_2.unity
+    path: Assets/01. Scenes/Stage_1/Stage_1_2.unity
     guid: e2156949d87f4284898e916f415fbecd
   - enabled: 1
-    path: Assets/01. Scenes/Stage_1_3.unity
+    path: Assets/01. Scenes/Stage_1/Stage_1_3.unity
     guid: d95b6b6c5d9e43d4faba4444f3262cf6
   - enabled: 1
-    path: Assets/01. Scenes/Stage_1_4.unity
+    path: Assets/01. Scenes/Stage_1/Stage_1_4.unity
     guid: 393269ea7fa3e944eb78257000295c36
   - enabled: 1
-    path: Assets/01. Scenes/Stage_1_5.unity
+    path: Assets/01. Scenes/Stage_1/Stage_1_5.unity
     guid: 5d787ffd8fbe0bc438b79be479b79c0a
+  - enabled: 1
+    path: Assets/01. Scenes/Stage_1/Stage_1_6.unity
+    guid: 866903f0ec041054c9879a9708e2a60b
+  - enabled: 1
+    path: Assets/01. Scenes/Stage_1/Stage_1_7.unity
+    guid: fb224265e1df33a4fa52a3e3602a76b5
+  - enabled: 1
+    path: Assets/01. Scenes/Stage_1/Stage_1_8.unity
+    guid: 6710921d399ac5f488fccbe5efd3fd26
+  - enabled: 1
+    path: Assets/01. Scenes/Stage_1/Stage_1_9.unity
+    guid: 0cfd6f4ad8f187849b6a2f0e0b3d0533
+  - enabled: 1
+    path: Assets/01. Scenes/Stage_1/Stage_1_10.unity
+    guid: 6417849d77612fe4298788cfe0e5919b
   - enabled: 1
     path: Assets/01. Scenes/Credits_Scene.unity
     guid: 8e3e9d7a814ed814283598b5b5d7bb5e

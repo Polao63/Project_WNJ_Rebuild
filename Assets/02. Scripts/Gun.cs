@@ -10,6 +10,8 @@ public class Gun : MonoBehaviour
 
     public float Autoshot_delay = 0f;
 
+    public int shooted = 0;
+
     public bool R_2 = false;
 
     float Chargetime = 0f;
@@ -166,6 +168,8 @@ public class Gun : MonoBehaviour
             a_CloneObj.transform.rotation = transform.rotation;
 
             m_ShootCool = m_MaxShootCool;
+
+            shooted++;
         }
         
     }

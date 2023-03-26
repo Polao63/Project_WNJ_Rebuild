@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -7592357483586913841, guid: 6913607c873bf01448ded02de286f55c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   Explosion_Splash: {fileID: 0}
   m_MoveSpeed: 3
   isEnemyBullet: 1
+  Damage: 10
   pierce: 2
   IsHoming: 0
   IsTarget: 0

@@ -26,6 +26,8 @@ public class Bullet : MonoBehaviour
 
     public int pierce = 2;
 
+    bool Parts_None = true;
+
     //유도탄 변수
     [HideInInspector] public bool IsHoming = false;//유도 On
     [HideInInspector] public bool IsTarget = false;
@@ -175,7 +177,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy" && !isEnemyBullet)
+        if (collision.tag == "Enemy_Parts" && !isEnemyBullet)
         {
             Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
             if (a_RefMon != null)
@@ -201,6 +203,52 @@ public class Bullet : MonoBehaviour
                     break;
             }
             Destroy(gameObject);
+
+        }
+
+        if ((collision.tag == "Enemy") && !isEnemyBullet)
+        {
+            GameObject[] Enemy_Parts_Obj = GameObject.FindGameObjectsWithTag("Enemy_Parts");
+
+            for (int i = 0; i < Enemy_Parts_Obj.Length; i++)
+            {
+                if (Enemy_Parts_Obj[i] != null)
+                { Parts_None = false; }
+                else { Parts_None = true; }
+            }
+            
+
+            if (Parts_None == true)
+            {
+                Enemy_Ctrl a_RefMon = collision.gameObject.GetComponent<Enemy_Ctrl>();
+                if (a_RefMon != null)
+                {
+                    a_RefMon.TakeDamage(Damage);
+                }
+
+                switch (B_Type)
+                {
+                    case Bullet_Type.Rocket:
+                        GameObject go = Instantiate(Explosion_Splash);
+                        go.transform.position = collision.gameObject.transform.position;
+                        break;
+
+                    case Bullet_Type.Pierce:
+                        if (pierce <= 1)
+                        { Destroy(gameObject); }
+                        else
+                        { pierce--; }
+                        break;
+
+                    default:
+                        break;
+                }
+                Destroy(gameObject);
+            }
+
+            
+
+            
         }
 
         ////if (PlayerStatus.ignition == true)

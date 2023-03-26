@@ -12,6 +12,7 @@ TagManager:
   - Homing_Missile
   - Scv_Item
   - Boss_PowerUp
+  - Enemy_Parts
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Bullet_E
   - Option
   - Enemy
-  - 
+  - Enemy_Parts
   - 
   - 
   - 

@@ -24,6 +24,10 @@ public class Game_Manager : MonoBehaviour
 
     public static Game_Manager Inst;
 
+    float delta = 0f;
+
+    bool Stage_Completed = false;
+
     private void Awake()
     {
         //60프레임 유지
@@ -44,17 +48,29 @@ public class Game_Manager : MonoBehaviour
         //}
 
         player_Ctrl = GameObject.FindObjectOfType<Player_Ctrl>().GetComponent<Player_Ctrl>();
+        Stage_Completed = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         Pause = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (delta < 3f && Stage_Completed)
+        { delta += Time.deltaTime; }
+
+        if (delta >= 3)
+        {
+            Next_Scene();
+            delta = 0;
+            Stage_Completed = false;
+        }
+
         Score_Counter_Stop();
 
         if (Input.GetKeyDown(KeyCode.P))//디버그용 스테이지 스킵
@@ -79,15 +95,22 @@ public class Game_Manager : MonoBehaviour
         }
 
         //스테이지 자동 이동
-        //if (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null)
-        //{
-        //    if (GameObject.FindWithTag("Enemy") == null
-        //        && GameObject.FindWithTag("Effect") == null
-        //        //&& GameObject.FindWithTag("PowerUP") == null
-        //        && GameObject.FindWithTag("Enemy_Bullet") == null
-        //        && GameObject.FindWithTag("Player_Bullet") == null)
-        //    { Next_Scene(); }
-        //}
+        if (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null)
+        {
+            if (GameObject.FindWithTag("Enemy") == null
+                && GameObject.FindWithTag("Effect") == null
+                && GameObject.FindWithTag("Boss_PowerUp") == null
+                && GameObject.FindWithTag("Enemy_Bullet") == null
+                && GameObject.FindWithTag("Player_Bullet") == null)
+            {
+                if (Stage_Completed == false)
+                {
+                    delta = 0;
+                    Stage_Completed = true;
+                }
+                
+            }
+        }
 
         if (fillamount_SuperGauge <= 0)
         {
