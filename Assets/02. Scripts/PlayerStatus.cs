@@ -20,4 +20,7 @@ public class PlayerStatus
     public static bool ChargeBarrier = false;
     public static bool ignition = false;
 
+
+    public static bool Stage_Completed = false;
+
 }

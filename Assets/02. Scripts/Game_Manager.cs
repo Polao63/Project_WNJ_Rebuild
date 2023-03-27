@@ -24,9 +24,9 @@ public class Game_Manager : MonoBehaviour
 
     public static Game_Manager Inst;
 
-    float delta = 0f;
+    public float delta = 0f;
 
-    bool Stage_Completed = false;
+    public bool Stage_Completed = false;
 
     private void Awake()
     {
@@ -61,15 +61,16 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (delta < 3f && Stage_Completed)
-        { delta += Time.deltaTime; }
-
-        if (delta >= 3)
-        {
-            Next_Scene();
-            delta = 0;
-            Stage_Completed = false;
+        if (delta < 3f && PlayerStatus.Stage_Completed)
+        { 
+            delta += Time.deltaTime;
+            if (delta >= 3)
+            {
+                Next_Scene();
+            }
         }
+
+        
 
         Score_Counter_Stop();
 
@@ -82,6 +83,12 @@ public class Game_Manager : MonoBehaviour
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("Stage_1_5"));
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))//디버그용 스테이지 스킵
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
+
         if (Input.GetKeyDown(KeyCode.S))
         {
             PlayerStatus.Scavenger = !PlayerStatus.Scavenger;
@@ -95,22 +102,26 @@ public class Game_Manager : MonoBehaviour
         }
 
         //스테이지 자동 이동
-        if (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null)
+        if (SceneManager.GetActiveScene().ToString() != "Scene_Play" && (GameObject.Find("Boss_Scene_Manage") == null || GameObject.Find("Title_Manager") == null))
         {
             if (GameObject.FindWithTag("Enemy") == null
                 && GameObject.FindWithTag("Effect") == null
                 && GameObject.FindWithTag("Boss_PowerUp") == null
-                && GameObject.FindWithTag("Enemy_Bullet") == null
-                && GameObject.FindWithTag("Player_Bullet") == null)
+                && Item_Manager.inst.Item_Select_Panel.activeSelf == false)
             {
-                if (Stage_Completed == false)
+                if (PlayerStatus.Stage_Completed == false)
                 {
-                    delta = 0;
-                    Stage_Completed = true;
+                    Debug.Log(Stage_Completed);
+                    PlayerStatus.Stage_Completed = true;
                 }
-                
+
+            }
+            else
+            {
+                PlayerStatus.Stage_Completed = false;
             }
         }
+        
 
         if (fillamount_SuperGauge <= 0)
         {
@@ -146,19 +157,22 @@ public class Game_Manager : MonoBehaviour
     float m_Dealy = 0.0f;
     public void Next_Scene()
     {
+        PlayerStatus.Stage_Completed = false;
+        delta = 0;
         if (SceneManager.GetActiveScene().name.Contains("Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString()))
         {
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-           
             Cur_SubStage++;
-
+            
             m_Dealy = 0.1f;
-            if (Cur_SubStage >= 10)
+            if (Cur_SubStage > 10)
             {
                 Cur_SubStage = 1;
                 Cur_stage++;
             }
+            Debug.Log("NEXT : Stage_" + Cur_stage.ToString() + "_" + Cur_SubStage.ToString());
+
         }
        
     }

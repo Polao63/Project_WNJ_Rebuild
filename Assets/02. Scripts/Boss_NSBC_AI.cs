@@ -58,10 +58,12 @@ public class Boss_NSBC_AI : MonoBehaviour
         if (transform.position.y > 3 && Boss_Entered == false)
         {
             transform.Translate(0, -Time.deltaTime, 0);
+            Ene_Ctrl.Invincible = true;
         }
         else 
         {
             Boss_Entered = true;
+            Ene_Ctrl.Invincible = false;
         }
 
         if (Boss_Entered == true)

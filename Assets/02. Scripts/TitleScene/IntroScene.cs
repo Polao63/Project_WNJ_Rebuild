@@ -65,7 +65,10 @@ public class IntroScene : MonoBehaviour
             }
         }
 
-
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
 
 
     }

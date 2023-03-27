@@ -29,7 +29,7 @@ public class Enemy_Ctrl : MonoBehaviour
 
     //---- 몬스터 체력 변수
     //[HideInInspector] 
-    public float m_MaxHP = 200f;
+    public float m_MaxHP = 10f;
     [HideInInspector] 
     public float m_CurHP = 200f;
     //public Image m_HpSdBar = null;
@@ -57,7 +57,7 @@ public class Enemy_Ctrl : MonoBehaviour
     GameObject Target_Obj = null;//타겟 참조 변수
     Vector3 m_DesiredDir; //타겟을 향하는 방향 변수
 
-    
+    public bool Invincible = false;
 
     float delta = 0f;
 
@@ -69,17 +69,20 @@ public class Enemy_Ctrl : MonoBehaviour
 
         if (m_MoType == Mon_Type.MT_Small)
         {
-            Mon_Score = 10;    
+            Mon_Score = 10;
+            m_CurHP = m_MaxHP;
         }
         if (m_MoType == Mon_Type.MT_Medium)
         {
             m_MaxHP *= 2f;
             Mon_Score = 50;
+            m_CurHP = m_MaxHP;
         }
         if (m_MoType == Mon_Type.MT_Big)
         {
             m_MaxHP *= 3f;
             Mon_Score = 100;
+            m_CurHP = m_MaxHP;
         }
         if (m_MoType == Mon_Type.MT_BOSS)
         {
@@ -192,6 +195,9 @@ public class Enemy_Ctrl : MonoBehaviour
 
     public void TakeDamage(float a_Value, bool ScoreON = true)
     {
+        if (Invincible)
+        { return; }
+
         if (m_CurHP <= 0)
         { return; }
 

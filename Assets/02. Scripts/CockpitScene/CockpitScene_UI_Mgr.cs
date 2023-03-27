@@ -31,6 +31,12 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
 
     int Cursor_num = 0;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,9 +76,9 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
                 if (ii == Cursor_num)
                 {
                     SuperBomb[ii].GetComponent<RawImage>().color = Color.white;
-                    if (SuperBomb_Parent.transform.localPosition.x != (ii * -150))
+                    if (SuperBomb_Parent.transform.localPosition.x != (ii * -200))
                     {
-                        SuperBomb_Parent.transform.localPosition = new Vector3((ii * -150), -378, 0);
+                        SuperBomb_Parent.transform.localPosition = new Vector3((ii * -200), -378, 0);
                     }
                     Help_Text.text = SuperList_HelpText[ii];
                 }
@@ -118,14 +124,14 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
             Help_Text.fontSize = 100;
             Help_Text.text = "OK!";
 
-            if (SuperBomb[Cursor_num].rectTransform.position.x > 75f)
-            { SuperBomb[Cursor_num].rectTransform.Translate(new Vector3(-10f, 0, 0)); }
-            if (SuperBomb[Cursor_num].rectTransform.position.y > 80f)
-            { SuperBomb[Cursor_num].rectTransform.Translate(new Vector3(0, -10f, 0)); }
+            //if (SuperBomb[Cursor_num].rectTransform.position.x > 105f)
+            //{ SuperBomb[Cursor_num].rectTransform.Translate(new Vector3(-10f, 0, 0)); }
+            //if (SuperBomb[Cursor_num].rectTransform.position.y > 108f)
+            //{ SuperBomb[Cursor_num].rectTransform.Translate(new Vector3(0, -10f, 0)); }
 
-            if (SuperBomb[Cursor_num].rectTransform.position.x <= 75f
-                && SuperBomb[Cursor_num].rectTransform.position.y <= 80f
-                && delta > 0)
+            if (//SuperBomb[Cursor_num].rectTransform.position.x <= 105f
+                //&& SuperBomb[Cursor_num].rectTransform.position.y <= 108f && 
+                delta > 0)
             {
                 delta -= Time.deltaTime;
                 // Super_Selected = false;

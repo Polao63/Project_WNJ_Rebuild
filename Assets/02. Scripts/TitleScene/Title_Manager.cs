@@ -66,6 +66,10 @@ public class Title_Manager : MonoBehaviour
 
         Title.SetActive(true);
 
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SceneManager.LoadScene("Cockpit_Scene");
+        }
 
     }
 

@@ -563,13 +563,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoType: 2
   m_AIType: 1
+  m_MaxHP: 10
+  m_CurHP: 200
+  Mon_Score: 10
+  ItemDrop: {fileID: 0}
   m_Speed: 2
   Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
   isHoming: 0
   isTracking: 0
   Path_Root: {fileID: 0}
   nextIdx: 1
-  ItemDrop: {fileID: 0}
 --- !u!114 &1449434575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5404954517194154097, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
       propertyPath: m_MoType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5404954517194154097, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
       propertyPath: Path_Root
@@ -866,7 +869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5404954517194154097, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
       propertyPath: m_MoType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5404954517194154097, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
       propertyPath: Path_Root
