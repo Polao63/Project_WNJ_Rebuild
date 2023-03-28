@@ -27,6 +27,8 @@ public class Homing_Missle : MonoBehaviour
 
     public bool isEnemyBullet = false;
 
+    public GameObject Explosion_Splash = null;
+
     // Update is called once per frame
     void Update()
     {
@@ -106,7 +108,20 @@ public class Homing_Missle : MonoBehaviour
             {
                 a_RefMon.TakeDamage(Player_Ctrl.inst.BulletDamage);
             }
+            
+            if (Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.Rocket && Item_Dictionary.EquippedItemList["Sy_H_Rocket"] == true)
+            {
+                if (Explosion_Splash != null)
+                {
+                    GameObject go = Instantiate(Explosion_Splash);
+                    go.transform.position = collision.gameObject.transform.position;
+                }
+            }
+
             Destroy(gameObject);
+
         }
+
+        
     }
 }

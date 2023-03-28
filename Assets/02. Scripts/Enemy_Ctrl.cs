@@ -236,7 +236,11 @@ public class Enemy_Ctrl : MonoBehaviour
                         UI_Manager.Inst.Boss_UI.SetActive(false);
                     }
                     else 
-                    { Game_Manager.Inst.fillamount_SuperGauge += 0.1f; }
+                    { 
+                        Game_Manager.Inst.fillamount_SuperGauge += 0.1f; 
+                        if(Item_Dictionary.EquippedItemList["Super_Up"] == true)
+                            Game_Manager.Inst.fillamount_SuperGauge += 0.05f;
+                    }
                 }
             }
             Game_Manager.Inst.P1_score += Mon_Score;

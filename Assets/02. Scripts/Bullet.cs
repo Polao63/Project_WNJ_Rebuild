@@ -243,7 +243,8 @@ public class Bullet : MonoBehaviour
                     default:
                         break;
                 }
-                Destroy(gameObject);
+                if (B_Type != Bullet_Type.Charge_Shot)
+                { Destroy(gameObject); }
             }
 
             

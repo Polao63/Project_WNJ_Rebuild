@@ -1198,7 +1198,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Arrow Keys = Move
 
-    Z = Shoot, C = SuperBomb
+    Z = Shoot, X = SuperBomb
 
     LeftShift = Option
     Ability

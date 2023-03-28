@@ -145,6 +145,11 @@ public class Player_Ctrl : MonoBehaviour
 
         if (Option_Parent.gameObject.activeSelf)
         { Option(); }
+
+        if (Item_Dictionary.EquippedItemList["ATK_Up"] == true)
+        {
+            BulletDamage = 15f;
+        }
         
     }
 
@@ -212,7 +217,7 @@ public class Player_Ctrl : MonoBehaviour
                 }
                 else
                 {
-                    if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
+                    if (Input.GetKeyDown(KeyCode.X) && Game_Manager.Inst.Super_Ready == true)
                     {
                         Game_Manager.Inst.Super_Ready = false;
                         M_LASER.transform.localScale = new Vector3(2, 2, 1);
@@ -222,7 +227,7 @@ public class Player_Ctrl : MonoBehaviour
                 break;
 
             case SUPER_BOMB.ATOMIC_WAVE:
-                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
+                if (Input.GetKeyDown(KeyCode.X) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("ATOMIC WAVE!!");
                     WAVE.SetActive(true);
@@ -234,7 +239,7 @@ public class Player_Ctrl : MonoBehaviour
                 break;
 
             case SUPER_BOMB.OVERLOAD:
-                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
+                if (Input.GetKeyDown(KeyCode.X) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("OVERLOAD!!");
                     TimeLimitedSkill_On = true;
@@ -246,7 +251,7 @@ public class Player_Ctrl : MonoBehaviour
                 break;
 
             case SUPER_BOMB.SHIELD_RECOVERY:
-                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
+                if (Input.GetKeyDown(KeyCode.X) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("SHIELD");
                     if (Shield_Obj != null)
@@ -270,7 +275,7 @@ public class Player_Ctrl : MonoBehaviour
             case SUPER_BOMB.ZE_WARUDO:
                 if (Game_Manager.Inst.fillamount_SuperGauge > 0 && Game_Manager.Inst.Super_ChargeStart == false) 
                 {
-                    if (Input.GetKey(KeyCode.C))
+                    if (Input.GetKey(KeyCode.X))
                     {
                         Debug.Log("ZE_WARUDO! TOKIO TOMARE!!");
                         Time.timeScale = 0.5f;
@@ -293,7 +298,7 @@ public class Player_Ctrl : MonoBehaviour
                 break;
 
             case SUPER_BOMB.LUCKY_3:
-                if (Input.GetKeyDown(KeyCode.C) && Game_Manager.Inst.Super_Ready == true)
+                if (Input.GetKeyDown(KeyCode.X) && Game_Manager.Inst.Super_Ready == true)
                 {
                     Debug.Log("Lucky 3");
                     TimeLimitedSkill_On = true;
@@ -449,9 +454,15 @@ public class Player_Ctrl : MonoBehaviour
 
         if (C_option == Cur_Option.Rolling && Sub_Option_Obj[2].activeSelf)
         {
-            if (GameObject.FindObjectsOfType<Option_Ctrl>().Length < Sub_Count)
+            if (Item_Dictionary.EquippedItemList["Sy_ChargeBarrier"] == true)
             {
-                for (int ii = 0; ii < Sub_Count; ii++)
+                Sub_Count = 4;
+            }
+            else { Sub_Count = 2; }
+
+            for (int ii = 0; ii < Sub_Count; ii++) 
+            {
+                if (GameObject.FindObjectsOfType<Option_Ctrl>().Length < Sub_Count)
                 {
                     GameObject obj = Instantiate(Sub_Rolling_Prefab) as GameObject;
                     obj.GetComponent<Option_Ctrl>().O_type = Option_Type.Rolling;

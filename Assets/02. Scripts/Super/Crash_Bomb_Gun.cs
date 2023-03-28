@@ -27,7 +27,7 @@ public class Crash_Bomb_Gun : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.C) == true && shoted == false)
+        if (Input.GetKeyDown(KeyCode.X) == true && shoted == false)
         {
             GameObject a_CloneObj = Instantiate(m_BulletPrefab) as GameObject;
             a_CloneObj.transform.position = this.transform.position;

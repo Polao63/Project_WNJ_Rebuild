@@ -72,7 +72,7 @@ public class Gun : MonoBehaviour
             m_ShootCool -= Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.X) == true)
+        if (Input.GetKey(KeyCode.V) == true)
         {
 
             if (m_ShootCool <= 0f)

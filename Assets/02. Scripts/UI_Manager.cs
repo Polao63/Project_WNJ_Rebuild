@@ -131,7 +131,8 @@ public class UI_Manager : MonoBehaviour
             }
 
         }
-        else if (Game_Manager.Inst.Super_Ready == true)
+        
+        if (Game_Manager.Inst.fillamount_SuperGauge >= 1)
         {
             SuperReady_Text.text = "SUPER READY!";
             SuperReady_Text.gameObject.SetActive(true);

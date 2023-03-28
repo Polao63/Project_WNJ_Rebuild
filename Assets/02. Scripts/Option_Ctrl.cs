@@ -38,6 +38,10 @@ public class Option_Ctrl : MonoBehaviour
 
     public bool R_2 = false;
 
+    public GameObject Charge_Bullet = null;
+
+    float charge_time = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,11 +58,43 @@ public class Option_Ctrl : MonoBehaviour
         if (O_type == Option_Type.Rolling)
         { Rolling_Option(); }
 
+        if (O_type != Option_Type.Rolling && Item_Dictionary.EquippedItemList["Sy_Mimic"] == true)
+        {
+            for (int ii = 0; ii < Player_Ctrl.inst.M_Weapon_Obj.Length; ii++)
+            {
+                if (Player_Ctrl.inst.M_Weapon_Obj[ii].activeSelf)
+                {
+                    GetComponentInChildren<Gun>().m_BulletPrefab = Player_Ctrl.inst.M_Weapon_Obj[ii].GetComponentInChildren<Gun>().m_BulletPrefab;
+                }
+            }
+
+        }
+
+        if (O_type == Option_Type.Rolling && Item_Dictionary.EquippedItemList["Sy_ChargeBarrier"])
+        {
+            if (Input.GetKey(KeyCode.Z) && Charge_Bullet.GetComponent<Option_ChargeShot>().Hit == false)
+            {
+                Charge_Bullet.SetActive(true);
+                
+                if (charge_time < 2f)
+                {
+                    charge_time += Time.deltaTime * 0.5f;
+                }
+                Charge_Bullet.transform.position = this.transform.position;
+                Charge_Bullet.transform.localScale = Vector3.one * (charge_time + 1);
+            }
+            else if(Input.GetKeyUp(KeyCode.Z))
+            {
+                Charge_Bullet.GetComponent<Option_ChargeShot>().Hit = false;
+                Charge_Bullet.SetActive(false);
+                charge_time = 0f;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (O_type == Option_Type.Rolling)
+        if (O_type == Option_Type.Rolling && Item_Dictionary.EquippedItemList["Sy_ChargeBarrier"] == false)
         {
             if (collision.tag == "Enemy_Bullet")
             {

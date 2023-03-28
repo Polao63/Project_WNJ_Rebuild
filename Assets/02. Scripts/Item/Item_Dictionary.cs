@@ -21,16 +21,16 @@ public class Item_Dictionary
 
 
         {"Pa_Scavenger", 31},
-        {"Pa_Pity", 32},
+        //{"Pa_Pity", 32},
         {"Pa_Nemesis", 33},
 
 
         {"Sy_Mimic", 41},
         {"Sy_H_Rocket", 42},
         {"Sy_ChargeBarrier", 43},
-        {"Sy_ignition", 44},
+        //{"Sy_ignition", 44},
 
-        {"Health_Up", 51},
+        //{"Health_Up", 51},
         {"ATK_Up", 52},
         {"Super_Up", 53}
 

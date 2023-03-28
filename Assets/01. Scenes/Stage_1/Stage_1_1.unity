@@ -573,6 +573,7 @@ MonoBehaviour:
   isTracking: 0
   Path_Root: {fileID: 0}
   nextIdx: 1
+  Invincible: 0
 --- !u!114 &1449434575
 MonoBehaviour:
   m_ObjectHideFlags: 0
