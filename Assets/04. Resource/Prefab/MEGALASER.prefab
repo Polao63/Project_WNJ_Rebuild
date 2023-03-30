@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4302041252369321760}
   - component: {fileID: 4302041252369321790}
   - component: {fileID: 4302041252369321789}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: MEGALASER
-  m_TagString: Player_Bullet
+  m_TagString: Boss_Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

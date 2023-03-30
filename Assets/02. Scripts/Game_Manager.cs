@@ -111,7 +111,7 @@ public class Game_Manager : MonoBehaviour
             {
                 if (PlayerStatus.Stage_Completed == false)
                 {
-                    Debug.Log(Stage_Completed);
+                    Debug.Log("Stage_Completed : " + Stage_Completed);
                     PlayerStatus.Stage_Completed = true;
                 }
 
@@ -165,7 +165,7 @@ public class Game_Manager : MonoBehaviour
             SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
             Cur_SubStage++;
             
-            m_Dealy = 0.1f;
+            m_Dealy = 0.5f;
             if (Cur_SubStage > 10)
             {
                 Cur_SubStage = 1;

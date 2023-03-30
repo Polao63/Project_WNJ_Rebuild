@@ -13,6 +13,7 @@ TagManager:
   - Scv_Item
   - Boss_PowerUp
   - Enemy_Parts
+  - Boss_Laser
   layers:
   - Default
   - TransparentFX

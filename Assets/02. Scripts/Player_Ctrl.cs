@@ -379,7 +379,10 @@ public class Player_Ctrl : MonoBehaviour
                             collision.gameObject.layer = LayerMask.NameToLayer("Bullet_P");
                         }
                     }
-                    else Destroy(collision.gameObject);
+                    else if (collision.tag != "Boss_Laser")
+                    {
+                        Destroy(collision.gameObject);
+                    }
 
                     Shield_Obj.GetComponent<Shield>().shield_dur--;
                     if (Shield_Obj.GetComponent<Shield>().shield_dur <= 0)

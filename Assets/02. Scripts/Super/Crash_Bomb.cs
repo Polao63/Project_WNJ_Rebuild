@@ -16,18 +16,25 @@ public class Crash_Bomb : MonoBehaviour
     float First_y;
     float Moving_y;
 
+    float Hit_Cooltime;
+
     // Start is called before the first frame update
     void Start()
     {
         First_size = Vector3.one;
         First_y = this.gameObject.transform.position.y;
         delta = 0f;
+        Hit_Cooltime = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        if (Hit_Cooltime > 0)
+        {
+            Hit_Cooltime -= Time.deltaTime;
+        }
+
         if (Moving_y >= m_Crash_site_y)
         {
             m_MoveSpeed = 0;
@@ -73,9 +80,10 @@ public class Crash_Bomb : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && Hit_Cooltime <= 0)
         {
             collision.gameObject.GetComponent<Enemy_Ctrl>().TakeDamage(Player_Ctrl.inst.BulletDamage, false);
+            Hit_Cooltime = 0.2f;
         }
 
     }
