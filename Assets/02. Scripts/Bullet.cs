@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
     public float Damage = 10f;
 
-    public int pierce = 2;
+    public int pierce = 3;
 
     bool Parts_None = true;
 
@@ -41,8 +41,6 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Damage = Player_Ctrl.inst.BulletDamage;
-
         if (gameObject.tag == "Enemy_Bullet")
         { 
             m_DirVec = Vector3.down;
@@ -202,7 +200,18 @@ public class Bullet : MonoBehaviour
                 default:
                     break;
             }
-            Destroy(gameObject);
+            if (Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.ChargeShot)
+            {
+                if (pierce <= 1)
+                { Destroy(gameObject); }
+                else
+                { pierce--; }
+            }
+            else 
+            {
+                Destroy(gameObject);
+            }
+                
 
         }
 
@@ -243,8 +252,17 @@ public class Bullet : MonoBehaviour
                     default:
                         break;
                 }
-                if (B_Type != Bullet_Type.Charge_Shot)
-                { Destroy(gameObject); }
+                if (Player_Ctrl.inst.M_Weapon == Cur_Main_Weapon.ChargeShot)
+                {
+                    if (pierce <= 1)
+                    { Destroy(gameObject); }
+                    else
+                    { pierce--; }
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
 
             
