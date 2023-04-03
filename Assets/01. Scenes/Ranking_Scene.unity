@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 414003866}
   - component: {fileID: 414003865}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,6 +496,14 @@ MonoBehaviour:
   Input_text: {fileID: 1311734364}
   Rank_Name_text: {fileID: 944088630}
   Rank_Score: {fileID: 414003865}
+  Selected_Super_image: {fileID: 1062943394}
+  Selected_Super_Icon:
+  - {fileID: 21300000, guid: f748d7bfa2b2dd648aab9deacdfc5074, type: 3}
+  - {fileID: 21300000, guid: 862c64108fcc6764f8df9e1886674c80, type: 3}
+  - {fileID: 21300000, guid: 32e64ef0eb6ee4b4f9b9f94807a05769, type: 3}
+  - {fileID: 21300000, guid: 236272b9cc18c544f9bc323a5effab0b, type: 3}
+  - {fileID: 21300000, guid: 3667737e4d7da1b4cb2a4d193dd728ff, type: 3}
+  - {fileID: 21300000, guid: cd555bf8b16747543aed227fd79bb17d, type: 3}
   Rank_Name: 000000000000
 --- !u!4 &707909964
 Transform:
@@ -598,7 +606,7 @@ GameObject:
   - component: {fileID: 944088631}
   - component: {fileID: 944088630}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +685,7 @@ GameObject:
   - component: {fileID: 1062943395}
   - component: {fileID: 1062943394}
   m_Layer: 5
-  m_Name: Node
+  m_Name: Selected_Super
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -820,7 +828,7 @@ GameObject:
   - component: {fileID: 1311734365}
   - component: {fileID: 1311734364}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: Input_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -899,7 +907,7 @@ GameObject:
   - component: {fileID: 1743171935}
   - component: {fileID: 1743171934}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Label_Ranking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
