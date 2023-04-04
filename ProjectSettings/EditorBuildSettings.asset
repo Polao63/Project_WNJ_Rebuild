@@ -48,6 +48,9 @@ EditorBuildSettings:
     path: Assets/01. Scenes/Credits_Scene.unity
     guid: 8e3e9d7a814ed814283598b5b5d7bb5e
   - enabled: 1
+    path: Assets/01. Scenes/Ranking_Scene.unity
+    guid: adc7684c12901e64093324e82ec57987
+  - enabled: 1
     path: Assets/01. Scenes/Scene_Play.unity
     guid: 997c0cd880a5dad42a21a8358549d242
   m_configObjects: {}

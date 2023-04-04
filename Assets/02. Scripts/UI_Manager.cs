@@ -154,47 +154,41 @@ public class UI_Manager : MonoBehaviour
             Game_Manager.Inst.Lives = 0;
             Game_Manager.Inst.Pause = true;
             //Time.timeScale = 0f;
-            GameOver.GetComponentInChildren<Text>().text = "GAME OVER";
             GameOver.SetActive(true);
-            Timer += Time.deltaTime;
-            if (Timer >= 3f)
+            
+            GameOver.GetComponentInChildren<Text>().text = "CONTINUE?\n" + ((int)CT_Time).ToString();
+            CT_Time -= Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Keypad1) && Game_Manager.Inst.Coin > 0)
             {
-
-                GameOver.GetComponentInChildren<Text>().text = "CONTINUE?\n" + ((int)CT_Time).ToString();
-                CT_Time -= Time.deltaTime;
-                if (Input.GetKeyDown(KeyCode.Keypad1) && Game_Manager.Inst.Coin > 0)
+                Game_Manager.Inst.Coin--;
+                Game_Manager.Inst.Pause = false;
+                Game_Manager.Inst.Lives = 3;
+                Timer = 0;
+                CT_Time = 9.9f;
+                GameOver.SetActive(false);
+                GameObject[] Bullet2Des = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+                //Debug.Log(Bullet2Des.Length);
+                for (int i = 0; i < Bullet2Des.Length; i++)
                 {
-                    Game_Manager.Inst.Coin--;
-                    Game_Manager.Inst.Pause = false;
-                    Game_Manager.Inst.Lives = 3;
-                    Timer = 0;
-                    CT_Time = 9.9f;
-                    GameOver.SetActive(false);
-                    GameObject[] Bullet2Des = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
-                    //Debug.Log(Bullet2Des.Length);
-                    for (int i = 0; i < Bullet2Des.Length; i++)
-                    {
-                        Destroy(Bullet2Des[i]);
-                    }
-                    Player_Ctrl.inst.Respawn();
-                    //SceneManager.LoadScene(gameObject.scene.name);
+                    Destroy(Bullet2Des[i]);
                 }
-
-                if (CT_Time < 0)
-                {
-                    Timer = 0;
-                    CT_Time = 9.9f;
-                    GameOver.SetActive(false);
-                    SceneManager.LoadScene(1);
-
-                    Destroy(GameObject.Find("PlayerShip"));
-                    Destroy(GameObject.Find("Game_Manager"));
-                    Destroy(GameObject.Find("DontDestroy"));
-
-                }
-
-
+                Player_Ctrl.inst.Respawn();
+                //SceneManager.LoadScene(gameObject.scene.name);
             }
+
+            if (CT_Time < 0)
+            {
+                Timer += Time.deltaTime;
+                GameOver.GetComponentInChildren<Text>().text = "GAME OVER";
+                if (Timer >= 3f)
+                {
+                    Timer = 0;
+                    CT_Time = 9.9f;
+                    //GameOver.SetActive(false);
+                    SceneManager.LoadScene("Ranking_Scene");
+                }
+            }
+
         }
         else { GameOver.SetActive(false); }
     }
