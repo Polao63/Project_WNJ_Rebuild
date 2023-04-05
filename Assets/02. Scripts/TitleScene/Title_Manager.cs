@@ -25,7 +25,7 @@ public class Title_Manager : MonoBehaviour
         //newColor = Warning.color;
         //newColor2 = Warning_Info.color;
 
-        delta = 0;
+        delta = 10;
     }
 
 
@@ -33,6 +33,11 @@ public class Title_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (delta > 0)
+        {
+            delta -= Time.deltaTime;
+        }
+
         //if (newColor.a < 1 && newColor2.a < 1 && !alphaDone)
         //{
         //    newColor.a += Time.deltaTime / 5;
@@ -65,6 +70,11 @@ public class Title_Manager : MonoBehaviour
         //}
 
         Title.SetActive(true);
+
+        if (delta <= 0)
+        {
+            SceneManager.LoadScene("DemoScene");
+        }
 
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {

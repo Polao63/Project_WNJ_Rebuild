@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/01. Scenes/TitleScene.unity
     guid: e735ffb87e3e3544889c643149d5c7c0
   - enabled: 1
+    path: Assets/01. Scenes/DemoScene.unity
+    guid: 742c1180f2b8cdb4f9749426cf94890b
+  - enabled: 1
     path: Assets/01. Scenes/Cockpit_Scene.unity
     guid: 18a16775d1e609746aa4acc49f513a9f
   - enabled: 1
