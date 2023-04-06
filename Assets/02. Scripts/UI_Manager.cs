@@ -176,6 +176,11 @@ public class UI_Manager : MonoBehaviour
                 //SceneManager.LoadScene(gameObject.scene.name);
             }
 
+            if (Input.GetKeyDown(KeyCode.Z) && CT_Time < 6 && CT_Time > 0)
+            {
+                CT_Time--;
+            }
+
             if (CT_Time < 0)
             {
                 Timer += Time.deltaTime;
@@ -184,6 +189,7 @@ public class UI_Manager : MonoBehaviour
                 {
                     Timer = 0;
                     CT_Time = 9.9f;
+                    PlayerStatus.Player_Score = Game_Manager.Inst.P1_score;
                     //GameOver.SetActive(false);
                     SceneManager.LoadScene("Ranking_Scene");
                 }

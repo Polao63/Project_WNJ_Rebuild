@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStatus
 {
     public static SUPER_BOMB Selected_Super;
+    public static int Player_Score;
 
 
     //--패시브 관련

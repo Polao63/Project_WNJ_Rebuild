@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public class Ranking_Manager : MonoBehaviour
     int Cur_Letter = 65;
 
     int Inputed_Letters = 0;
+
+    int PlayerScore = 0;
 
     public Text Input_text;
     public Text Rank_Name_text;
@@ -31,17 +34,8 @@ public class Ranking_Manager : MonoBehaviour
 
     bool Name_Done = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        delta = 0;
-        Timer_delta = 19.9f;
-        Inputed_Letters = 0;
-        Name_Done = false;
-
-        Input_text_Label.text = "Input Your Name";
-        Timer_Text.gameObject.SetActive(true);
-
         switch (PlayerStatus.Selected_Super)
         {
             case SUPER_BOMB.MEGALASER:
@@ -63,12 +57,27 @@ public class Ranking_Manager : MonoBehaviour
                 Selected_Super_image.sprite = Selected_Super_Icon[5];
                 break;
         }
-        
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        delta = 0;
+        Timer_delta = 19.9f;
+        Inputed_Letters = 0;
+        Name_Done = false;
+
+        Input_text_Label.text = "Input Your Name";
+        Timer_Text.gameObject.SetActive(true);
+
+        PlayerScore = PlayerStatus.Player_Score;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Rank_Update();
+
         if (delta > 0)
         {
             delta -= Time.deltaTime;
@@ -79,6 +88,23 @@ public class Ranking_Manager : MonoBehaviour
             Timer_delta -= Time.deltaTime;
         }
 
+        Rank_NameEntry();
+        
+
+        if (Name_Done && delta <= 0)
+        {
+            SceneManager.LoadScene("IntroScene");
+            Timer_Text.gameObject.SetActive(false);
+        }
+
+        Timer_Text.text = Timer_delta.ToString("N1");
+        Rank_Name_text.text = Rank_Name_str;
+
+        Rank_Score.text = PlayerScore.ToString();
+    }
+
+    void Rank_NameEntry()
+    {
         if (Inputed_Letters < Rank_Name.Length)
         {
             if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -91,7 +117,7 @@ public class Ranking_Manager : MonoBehaviour
             }
         }
 
-        if(Cur_Letter >=65+26) { Cur_Letter = 65; }
+        if (Cur_Letter >= 65 + 26) { Cur_Letter = 65; }
         else if (Cur_Letter < 65) { Cur_Letter = (int)'Z'; }
 
 
@@ -111,19 +137,19 @@ public class Ranking_Manager : MonoBehaviour
             {
                 Debug.Log("RankNameIsNull");
                 Rank_Name_str = "RND";
-                AddData(Rank_Name_str, 0);
+                AddData(Rank_Name_str, PlayerScore);
                 Debug.Log(Rank_Name_str + " : " + RankingStatus.PlayerScore[Rank_Name_str]);
-                Debug.Log(Rank_Name_str + " : " + RankingStatus.SuperBomb);
+                //Debug.Log(Rank_Name_str + " : " + RankingStatus.SuperBomb.ToString());
             }
-            else 
+            else
             {
                 Debug.Log("RankNameNotNull");
-                AddData(Rank_Name_str, 0);
+                AddData(Rank_Name_str, PlayerScore);
                 Debug.Log(Rank_Name_str + " : " + RankingStatus.PlayerScore[Rank_Name_str]);
-                Debug.Log(Rank_Name_str + " : " + RankingStatus.SuperBomb);
+                //Debug.Log(Rank_Name_str + " : " + RankingStatus.SuperBomb.ToString());
             }
-            
-            
+
+            Timer_Text.text = " ";
             delta = 3;
             Name_Done = true;
         }
@@ -139,22 +165,47 @@ public class Ranking_Manager : MonoBehaviour
             Rank_Name_str += "" + Rank_Name[Inputed_Letters];
             Inputed_Letters++;
         }
-
-        if (Name_Done && delta <= 0)
-        {
-            SceneManager.LoadScene("IntroScene");
-            Timer_Text.gameObject.SetActive(false);
-        }
-
-        Timer_Text.text = Timer_delta.ToString("N1");
-        Rank_Name_text.text = Rank_Name_str;
-
     }
 
     public void AddData(string Name, int Score)
     {
         RankingStatus.PlayerScore.Add(Name, Score);
         RankingStatus.SuperBomb.Add(Name, PlayerStatus.Selected_Super.GetHashCode());
+        RankingStatus.PlayerName.Add(Name);
     }
 
+
+    void Rank_Update()
+    {
+        List<int> scoreList = new List<int>();
+        scoreList = RankingStatus.PlayerScore.Values.ToList();
+        scoreList.Sort();
+        scoreList.Reverse();
+
+        for (int i = 0; i < RankingStatus.PlayerScore.Count; i++)
+        {
+            if (i > 0)
+            {
+                if (scoreList[i] == scoreList[i-1])
+                {
+                    List<string> imsi = new List<string>();
+                    imsi.Add(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i-1]).Key.ToString());
+                    imsi.Add(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString());
+                    imsi.Sort();
+                    imsi.Reverse();
+                }
+            }
+
+            RankingStatus.PlayerName[i] = RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString();
+
+            Debug.Log(i+1 + "µî : " + RankingStatus.PlayerName[i].ToString());
+            //RankingStatus.PlayerName.Add(RankingStatus.PlayerScore.Keys.ToString());
+        }
+
+       
+
+        
+
+        
+    }
 }
