@@ -93,14 +93,16 @@ public class Ranking_Manager : MonoBehaviour
 
         if (Name_Done && delta <= 0)
         {
-            SceneManager.LoadScene("IntroScene");
+            SceneManager.LoadScene("TitleScene");
             Timer_Text.gameObject.SetActive(false);
         }
 
         Timer_Text.text = Timer_delta.ToString("N1");
         Rank_Name_text.text = Rank_Name_str;
 
-        Rank_Score.text = PlayerScore.ToString();
+        ScoreFormat();
+
+
     }
 
     void Rank_NameEntry()
@@ -149,7 +151,7 @@ public class Ranking_Manager : MonoBehaviour
                 //Debug.Log(Rank_Name_str + " : " + RankingStatus.SuperBomb.ToString());
             }
 
-            Timer_Text.text = " ";
+            Timer_Text.gameObject.SetActive(false);
             delta = 3;
             Name_Done = true;
         }
@@ -169,9 +171,15 @@ public class Ranking_Manager : MonoBehaviour
 
     public void AddData(string Name, int Score)
     {
+        if (RankingStatus.PlayerScore.ContainsValue(Score))
+        {
+            RankingStatus.PlayerScore.Remove(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == Score).Key.ToString());
+        }
+
         RankingStatus.PlayerScore.Add(Name, Score);
         RankingStatus.SuperBomb.Add(Name, PlayerStatus.Selected_Super.GetHashCode());
         RankingStatus.PlayerName.Add(Name);
+
     }
 
 
@@ -184,17 +192,21 @@ public class Ranking_Manager : MonoBehaviour
 
         for (int i = 0; i < RankingStatus.PlayerScore.Count; i++)
         {
-            if (i > 0)
-            {
-                if (scoreList[i] == scoreList[i-1])
-                {
-                    List<string> imsi = new List<string>();
-                    imsi.Add(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i-1]).Key.ToString());
-                    imsi.Add(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString());
-                    imsi.Sort();
-                    imsi.Reverse();
-                }
-            }
+            //if (i > 0)
+            //{
+            //    if (scoreList[i] == scoreList[i-1])
+            //    {
+            //        List<string> imsi = new List<string>();
+            //        imsi.Add(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i-1]).Key.ToString());
+            //        imsi.Add(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString());
+            //        for (int ii = 0; ii < 2; ii++)
+            //        {
+            //            Debug.Log("imsi[" + ii.ToString() + "] : " + imsi[ii].ToString());
+            //        }
+            //        imsi.Sort();
+            //        imsi.Reverse();
+            //    }
+            //}
 
             RankingStatus.PlayerName[i] = RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString();
 
@@ -202,10 +214,38 @@ public class Ranking_Manager : MonoBehaviour
             //RankingStatus.PlayerName.Add(RankingStatus.PlayerScore.Keys.ToString());
         }
 
-       
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            for (int i = 0; i < RankingStatus.PlayerScore.Count; i++)
+            {
+                Debug.Log(i + 1 + "µî : " + RankingStatus.PlayerName[i].ToString());
+            }
+        }
 
-        
 
-        
+
+
+
+
+
+    }
+
+
+    public void ScoreFormat()
+    {
+        int Score_format = 8;
+
+        for (int ii = 7; ii > 0; ii--)
+        {
+            if (PlayerScore % (ii ^ 10) != 0)
+            {
+                Score_format = ii + 1;
+                break;
+            }
+        }
+        if (PlayerScore == 0)
+        { Rank_Score.text = PlayerScore.ToString("D8"); }
+        else
+        { Rank_Score.text = PlayerScore.ToString("D" + Score_format.ToString()); }
     }
 }
