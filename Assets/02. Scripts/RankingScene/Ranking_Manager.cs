@@ -7,20 +7,14 @@ using UnityEngine.UI;
 
 public class Ranking_Manager : MonoBehaviour
 {
-    int Cur_Letter = 65;
-
-    int Inputed_Letters = 0;
-
     int PlayerScore = 0;
 
-    public Text Input_text;
-    public Text Rank_Name_text;
-    public Text Rank_Score;
-    public Text Input_text_Label;
-    public Text Timer_Text;
+    public Text[] Rank_Name_text;
+    public Text[] Rank_Score;
+  
 
 
-    public Image Selected_Super_image;
+    public Image[] Selected_Super_image;
 
     public Sprite[] Selected_Super_Icon;
 
@@ -28,47 +22,42 @@ public class Ranking_Manager : MonoBehaviour
 
     string Rank_Name_str;
 
-    float Timer_delta = 19.9f;
-
     float delta = 0;
 
-    bool Name_Done = false;
 
     private void Awake()
     {
-        switch (PlayerStatus.Selected_Super)
-        {
-            case SUPER_BOMB.MEGALASER:
-                Selected_Super_image.sprite = Selected_Super_Icon[0];
-                break;
-            case SUPER_BOMB.ATOMIC_WAVE:
-                Selected_Super_image.sprite = Selected_Super_Icon[1];
-                break;
-            case SUPER_BOMB.OVERLOAD:
-                Selected_Super_image.sprite = Selected_Super_Icon[2];
-                break;
-            case SUPER_BOMB.SHIELD_RECOVERY:
-                Selected_Super_image.sprite = Selected_Super_Icon[3];
-                break;
-            case SUPER_BOMB.ZE_WARUDO:
-                Selected_Super_image.sprite = Selected_Super_Icon[4];
-                break;
-            case SUPER_BOMB.LUCKY_3:
-                Selected_Super_image.sprite = Selected_Super_Icon[5];
-                break;
-        }
+        //랭킹 초필살기 아이콘 관련 급히 수정해야함.
+
+        //for (int i = 0; i < RankingStatus.PlayerScore.Count; i++)
+
+        //switch (RankingStatus.SuperBomb[RankingStatus.PlayerScore.ToString])
+        //{
+        //    case SUPER_BOMB.MEGALASER:
+        //            Selected_Super_image[i].sprite = Selected_Super_Icon[0];
+        //        break;
+        //    case SUPER_BOMB.ATOMIC_WAVE:
+        //        Selected_Super_image[i].sprite = Selected_Super_Icon[1];
+        //        break;
+        //    case SUPER_BOMB.OVERLOAD:
+        //        Selected_Super_image[i].sprite = Selected_Super_Icon[2];
+        //        break;
+        //    case SUPER_BOMB.SHIELD_RECOVERY:
+        //        Selected_Super_image[i].sprite = Selected_Super_Icon[3];
+        //        break;
+        //    case SUPER_BOMB.ZE_WARUDO:
+        //        Selected_Super_image[i].sprite = Selected_Super_Icon[4];
+        //        break;
+        //    case SUPER_BOMB.LUCKY_3:
+        //        Selected_Super_image[i].sprite = Selected_Super_Icon[5];
+        //        break;
+        //}
     }
 
     // Start is called before the first frame update
     void Start()
     {
         delta = 0;
-        Timer_delta = 19.9f;
-        Inputed_Letters = 0;
-        Name_Done = false;
-
-        Input_text_Label.text = "Input Your Name";
-        Timer_Text.gameObject.SetActive(true);
 
         PlayerScore = PlayerStatus.Player_Score;
     }
@@ -78,29 +67,29 @@ public class Ranking_Manager : MonoBehaviour
     {
         Rank_Update();
 
-        if (delta > 0)
-        {
-            delta -= Time.deltaTime;
-        }
+        //if (delta > 0)
+        //{
+        //    delta -= Time.deltaTime;
+        //}
 
-        if (Timer_delta > 0)
-        {
-            Timer_delta -= Time.deltaTime;
-        }
+        //if (Timer_delta > 0)
+        //{
+        //    Timer_delta -= Time.deltaTime;
+        //}
 
         
         
 
-        if (Name_Done && delta <= 0)
-        {
-            SceneManager.LoadScene("TitleScene");
-            Timer_Text.gameObject.SetActive(false);
-        }
+        //if (Name_Done && delta <= 0)
+        //{
+        //    SceneManager.LoadScene("TitleScene");
+        //    Timer_Text.gameObject.SetActive(false);
+        //}
 
-        Timer_Text.text = Timer_delta.ToString("N1");
-        Rank_Name_text.text = Rank_Name_str;
+        //Timer_Text.text = Timer_delta.ToString("N1");
+        //Rank_Name_text.text = Rank_Name_str;
 
-        ScoreFormat();
+        //ScoreFormat();
 
 
     }
@@ -133,6 +122,8 @@ public class Ranking_Manager : MonoBehaviour
             //    }
             //}
 
+            ScoreFormat(i);
+
             RankingStatus.PlayerName[i] = RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString();
 
             Debug.Log(i+1 + "등 : " + RankingStatus.PlayerName[i].ToString());
@@ -156,7 +147,7 @@ public class Ranking_Manager : MonoBehaviour
     }
 
 
-    public void ScoreFormat()
+    public void ScoreFormat(int num)
     {
         int Score_format = 8;
 
@@ -169,8 +160,8 @@ public class Ranking_Manager : MonoBehaviour
             }
         }
         if (PlayerScore == 0)
-        { Rank_Score.text = PlayerScore.ToString("D8"); }
+        { Rank_Score[num].text = PlayerScore.ToString("D8"); }
         else
-        { Rank_Score.text = PlayerScore.ToString("D" + Score_format.ToString()); }
+        { Rank_Score[num].text = PlayerScore.ToString("D" + Score_format.ToString()); }
     }
 }

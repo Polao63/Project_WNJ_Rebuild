@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
@@ -47,11 +48,25 @@ public class RankNameInput_Mgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (delta > 0)
+        {
+            delta -= Time.deltaTime;
+        }
+
         if (Timer_delta > 0)
         {
             Timer_delta -= Time.deltaTime;
         }
 
+        Rank_Name_text.text = Rank_Name_str;
+
+        ScoreFormat();
+
+        if (Name_Done && delta <= 0)
+        {
+            SceneManager.LoadScene("Ranking_Scene");
+            Timer_Text.gameObject.SetActive(false);
+        }
 
         Rank_NameEntry();
 
@@ -134,5 +149,23 @@ public class RankNameInput_Mgr : MonoBehaviour
         RankingStatus.SuperBomb.Add(Name, PlayerStatus.Selected_Super.GetHashCode());
         RankingStatus.PlayerName.Add(Name);
 
+    }
+
+    public void ScoreFormat()
+    {
+        int Score_format = 8;
+
+        for (int ii = 7; ii > 0; ii--)
+        {
+            if (PlayerScore % (ii ^ 10) != 0)
+            {
+                Score_format = ii + 1;
+                break;
+            }
+        }
+        if (PlayerScore == 0)
+        { Rank_Score.text = PlayerScore.ToString("D8"); }
+        else
+        { Rank_Score.text = PlayerScore.ToString("D" + Score_format.ToString()); }
     }
 }

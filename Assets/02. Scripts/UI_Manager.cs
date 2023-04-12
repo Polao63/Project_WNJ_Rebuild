@@ -191,7 +191,7 @@ public class UI_Manager : MonoBehaviour
                     CT_Time = 9.9f;
                     PlayerStatus.Player_Score = Game_Manager.Inst.P1_score;
                     //GameOver.SetActive(false);
-                    SceneManager.LoadScene("Ranking_Scene");
+                    SceneManager.LoadScene("RankNameInput_Scene");
                 }
             }
 
