@@ -176,7 +176,7 @@ public class UI_Manager : MonoBehaviour
                 //SceneManager.LoadScene(gameObject.scene.name);
             }
 
-            if (Input.GetKeyDown(KeyCode.Z) && CT_Time < 6 && CT_Time > 0)
+            if (Input.GetKeyDown(KeyCode.Z) && CT_Time < 8 && CT_Time > 0)
             {
                 CT_Time--;
             }

@@ -4639,7 +4639,7 @@ MonoBehaviour:
   P1_score: 0
   Hi_score: 0
   Coin: 0
-  Lives: 2
+  Lives: 1
   Cur_stage: 1
   Pause: 0
   Super_Ready: 0

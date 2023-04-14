@@ -145,8 +145,32 @@ public class RankNameInput_Mgr : MonoBehaviour
             RankingStatus.PlayerScore.Remove(RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == Score).Key.ToString());
         }
 
+       
+
         RankingStatus.PlayerScore.Add(Name, Score);
-        RankingStatus.SuperBomb.Add(Name, PlayerStatus.Selected_Super.GetHashCode());
+
+        switch (PlayerStatus.Selected_Super)
+        {
+            case SUPER_BOMB.MEGALASER:
+                RankingStatus.SuperBomb.Add(Name, 0);
+                break;
+            case SUPER_BOMB.ATOMIC_WAVE:
+                RankingStatus.SuperBomb.Add(Name, 1);
+                break;
+            case SUPER_BOMB.OVERLOAD:
+                RankingStatus.SuperBomb.Add(Name, 2);
+                break;
+            case SUPER_BOMB.SHIELD_RECOVERY:
+                RankingStatus.SuperBomb.Add(Name, 3);
+                break;
+            case SUPER_BOMB.ZE_WARUDO:
+                RankingStatus.SuperBomb.Add(Name, 4);
+                break;
+            case SUPER_BOMB.LUCKY_3:
+                RankingStatus.SuperBomb.Add(Name, 5);
+                break;
+        }
+
         RankingStatus.PlayerName.Add(Name);
 
     }
