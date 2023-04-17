@@ -19,6 +19,10 @@ public class DemoScene : MonoBehaviour
     public Color newColor;
     public float fadeSpeed = 0.1f;
 
+    public AudioSource Audio;
+
+    public static bool Coin_Inputed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +39,15 @@ public class DemoScene : MonoBehaviour
         HelpText_Manage();
 
         currentTime = player.GetComponent<VideoPlayer>().time;
-        if (Input.anyKey)
+        
+
+        if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
         {
+            if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }
+            Coin_Inputed = true;
             SceneManager.LoadScene("TitleScene");
         }
+
     }
 
     void CheckOver(UnityEngine.Video.VideoPlayer vp)

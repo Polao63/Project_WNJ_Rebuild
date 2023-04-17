@@ -11,6 +11,7 @@ public class Game_Manager : MonoBehaviour
     public int Hi_score = 0;
     public int Coin = 0;
     public int Lives = 0;
+
     [HideInInspector]public int Cur_stage = 1;
     int Cur_SubStage = 1;
 
@@ -61,6 +62,8 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Coin = GlobalStatus.Coin;
+
         if (delta < 3f && PlayerStatus.Stage_Completed)
         { 
             delta += Time.deltaTime;
@@ -98,7 +101,7 @@ public class Game_Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
         {
             UI_Manager.Inst.CT_Time = 9.9f;
-            if (Coin < 9) { Coin++; }
+            if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }
         }
 
         //스테이지 자동 이동

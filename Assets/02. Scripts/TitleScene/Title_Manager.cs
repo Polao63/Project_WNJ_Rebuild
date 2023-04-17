@@ -13,7 +13,11 @@ public class Title_Manager : MonoBehaviour
     public float fadeSpeed = 0.1f;
     public float delta = 0f;
 
+    public Text Help_Text = null;
 
+    bool alphaDone;
+
+    public AudioSource Audio;
 
     // Start is called before the first frame update
     void Start()
@@ -38,54 +42,68 @@ public class Title_Manager : MonoBehaviour
             delta -= Time.deltaTime;
         }
 
-        //if (newColor.a < 1 && newColor2.a < 1 && !alphaDone)
-        //{
-        //    newColor.a += Time.deltaTime / 5;
-        //    newColor2.a += Time.deltaTime / 5;
-        //    Warning.color = newColor2;
-        //    Warning_Info.color = newColor2;
-        //    if (newColor.a >= 1 && newColor2.a >= 1)
-        //    {
-        //        alphaDone = true;
-        //        booted = false;
-        //    }
-        //}
-
-        //if (alphaDone == true)
-        //{ delta += Time.deltaTime; }
-        //else if (alphaDone == false)
-        //{ delta = 0; }
-
-        //if (newColor.a >= 0 && newColor2.a >= 0 && delta >= 5f)
-        //{
-        //    newColor.a -= Time.deltaTime / 5;
-        //    newColor2.a -= Time.deltaTime / 5;
-        //    Warning.color = newColor2;
-        //    Warning_Info.color = newColor2;
-        //    if (newColor.a <= 0 && newColor2.a <= 0)
-        //    {
-        //        alphaDone = false;
-        //        
-        //    }
-        //}
-
         Title.SetActive(true);
 
-        if (delta <= 0)
+        HelpText_Manage();
+
+        if (GlobalStatus.Coin > 0)
+        { Help_Text.text = "PRESS START"; }
+        else { Help_Text.text = "INSERT COIN"; }
+
+        if (delta <= 0 && !(GlobalStatus.Coin > 0))
         {
             SceneManager.LoadScene("DemoScene");
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) && GlobalStatus.Coin > 0)
         {
+            GlobalStatus.Coin--;
             SceneManager.LoadScene("Cockpit_Scene");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
+        {
+            Audio.Play();
+            if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }
+        }
+
+        if (GlobalStatus.Coin > 9 && DemoScene.Coin_Inputed) 
+        { 
+            Audio.Play(); 
+            DemoScene.Coin_Inputed = false;
         }
 
     }
 
-    public void Start_Btn_Click()
-    {
-        SceneManager.LoadScene("Cockpit_Scene");
-    }
+    //public void Start_Btn_Click()
+    //{
+    //    SceneManager.LoadScene("Cockpit_Scene");
+    //}
 
+
+    void HelpText_Manage()
+    {
+        if (newColor.a < 1 && !alphaDone)//페이드 인
+        {
+            newColor.a += Time.deltaTime / fadeSpeed;
+            Help_Text.color = newColor;
+
+            if (newColor.a >= 1)
+            {
+                alphaDone = true;
+            }
+        }
+        else
+        {
+            newColor.a -= Time.deltaTime / fadeSpeed;
+            Help_Text.color = newColor;
+
+            if (newColor.a <= 0)
+            {
+                alphaDone = false;
+            }
+        }
+
+
+    }
 }

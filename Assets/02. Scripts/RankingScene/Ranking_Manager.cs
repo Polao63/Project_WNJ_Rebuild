@@ -57,6 +57,7 @@ public class Ranking_Manager : MonoBehaviour
 
         for (int i = 0; i < RankingStatus.PlayerScore.Count; i++)
         {
+            Debug.Log("Count : " + i);
             //if (i > 0)
             //{
             //    if (scoreList[i] == scoreList[i-1])
@@ -73,44 +74,51 @@ public class Ranking_Manager : MonoBehaviour
             //    }
             //}
 
-            if (i >= Rank_Score.Length)
+            if (i < Rank_Score.Length)
             {
+
+                ScoreFormat(i);
+
+                RankingStatus.PlayerName[i] = RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString();
+                Rank_Name_text[i].text = RankingStatus.PlayerName[i].ToString();
+
+                switch (RankingStatus.SuperBomb[RankingStatus.PlayerName[i]])
+                {
+                    case 0:
+                        Selected_Super_image[i].sprite = Selected_Super_Icon[0];
+                        break;
+                    case 1:
+                        Selected_Super_image[i].sprite = Selected_Super_Icon[1];
+                        break;
+                    case 2:
+                        Selected_Super_image[i].sprite = Selected_Super_Icon[2];
+                        break;
+                    case 3:
+                        Selected_Super_image[i].sprite = Selected_Super_Icon[3];
+                        break;
+                    case 4:
+                        Selected_Super_image[i].sprite = Selected_Super_Icon[4];
+                        break;
+                    case 5:
+                        Selected_Super_image[i].sprite = Selected_Super_Icon[5];
+                        break;
+                }
+
+                Debug.Log(i + 1 + "µî : " + RankingStatus.PlayerName[i].ToString());
+
+                
+            }
+            else
+            {
+                RankingStatus.PlayerName.Add(RankingStatus.PlayerScore.Keys.ToString());
                 RankingStatus.PlayerScore.Remove(RankingStatus.PlayerName[i]);
                 RankingStatus.SuperBomb.Remove(RankingStatus.PlayerName[i]);
                 RankingStatus.PlayerName.RemoveAt(i);
                 return;
             }
-            
-            
-            ScoreFormat(i);
 
-            RankingStatus.PlayerName[i] = RankingStatus.PlayerScore.FirstOrDefault(x => x.Value == scoreList[i]).Key.ToString();
-            Rank_Name_text[i].text = RankingStatus.PlayerName[i].ToString();
 
-            switch (RankingStatus.SuperBomb[RankingStatus.PlayerName[i]])
-            {
-                case 0:
-                    Selected_Super_image[i].sprite = Selected_Super_Icon[0];
-                    break;
-                case 1:
-                    Selected_Super_image[i].sprite = Selected_Super_Icon[1];
-                    break;
-                case 2:
-                    Selected_Super_image[i].sprite = Selected_Super_Icon[2];
-                    break;
-                case 3:
-                    Selected_Super_image[i].sprite = Selected_Super_Icon[3];
-                    break;
-                case 4:
-                    Selected_Super_image[i].sprite = Selected_Super_Icon[4];
-                    break;
-                case 5:
-                    Selected_Super_image[i].sprite = Selected_Super_Icon[5];
-                    break;
-            }
 
-            Debug.Log(i+1 + "µî : " + RankingStatus.PlayerName[i].ToString());
-            //RankingStatus.PlayerName.Add(RankingStatus.PlayerScore.Keys.ToString());
         }
 
         if (Input.GetKeyDown(KeyCode.P))
