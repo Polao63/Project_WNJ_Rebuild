@@ -27,6 +27,8 @@ public class Gun : MonoBehaviour
     Player_Ctrl m_RefHero = null;
     Vector3 m_DirVec;
 
+    AudioSource audio;
+
     [HideInInspector] public bool IsHoming = false;
 
     // Start is called before the first frame update
@@ -34,6 +36,7 @@ public class Gun : MonoBehaviour
     {
         m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
         rocket2_shoot = m_MaxShootCool / 2;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -118,7 +121,8 @@ public class Gun : MonoBehaviour
                     a_CloneObj.transform.rotation = transform.rotation;
 
                     m_ShootCool = m_MaxShootCool;
-                    if (R_2) rocket2_shoot = m_MaxShootCool / 2; ;
+                    if (R_2) rocket2_shoot = m_MaxShootCool / 2; 
+                    audio.Play();
                 }
             }
         }

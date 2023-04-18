@@ -14,6 +14,7 @@ public class Title_Manager : MonoBehaviour
     public float delta = 0f;
 
     public Text Help_Text = null;
+    public Text Coin_Text = null;
 
     bool alphaDone;
 
@@ -45,6 +46,9 @@ public class Title_Manager : MonoBehaviour
         Title.SetActive(true);
 
         HelpText_Manage();
+
+
+        Coin_Text.text = "CREDIT(S) " + GlobalStatus.Coin.ToString();
 
         if (GlobalStatus.Coin > 0)
         { Help_Text.text = "PRESS START"; }

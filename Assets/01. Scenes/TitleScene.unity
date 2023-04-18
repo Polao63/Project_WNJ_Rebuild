@@ -238,6 +238,7 @@ MonoBehaviour:
   fadeSpeed: 1.2
   delta: 0
   Help_Text: {fileID: 1155172517}
+  Coin_Text: {fileID: 434794742}
   Audio: {fileID: 377960978}
 --- !u!4 &377960977
 Transform:
