@@ -2260,7 +2260,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.38
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2357,12 +2357,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   STAGE_BGM:
-  - {fileID: 8300000, guid: 2e53c2fd90498134f8e03f02c7bfe6b8, type: 3}
-  - {fileID: 8300000, guid: 2d4e3f0da0a59594582d3d3a2fbfc8ef, type: 3}
-  - {fileID: 8300000, guid: 5b4d6f226d4e42c45a63fbec04b4d456, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 8300000, guid: d385f7850cdd0a4488eda0df5a852e89, type: 3}
+  - {fileID: 8300000, guid: 7b92f38857f7e244b921c7a78f50d9dd, type: 3}
+  - {fileID: 8300000, guid: 3e15b1ba71e4e6a489383eabc1312ad5, type: 3}
+  - {fileID: 8300000, guid: 2ca82589bb1fbea4a8a54eb1cedd6752, type: 3}
+  - {fileID: 8300000, guid: 6d2469127ed3fc74292976a44a63f1d5, type: 3}
+  - {fileID: 8300000, guid: 2d21da159a5160f4a8714d9bf118bc8f, type: 3}
+  - {fileID: 8300000, guid: c52c1583f8ea5d445a308e4ec61c4b40, type: 3}
 --- !u!4 &948175865
 Transform:
   m_ObjectHideFlags: 0
