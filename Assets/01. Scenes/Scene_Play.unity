@@ -2363,6 +2363,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6d2469127ed3fc74292976a44a63f1d5, type: 3}
   - {fileID: 8300000, guid: 2d21da159a5160f4a8714d9bf118bc8f, type: 3}
   - {fileID: 8300000, guid: c52c1583f8ea5d445a308e4ec61c4b40, type: 3}
+  GameOver_BGM: {fileID: 8300000, guid: 92e0dd02f3b0fc0489e3a12f4c8bd87e, type: 3}
 --- !u!4 &948175865
 Transform:
   m_ObjectHideFlags: 0

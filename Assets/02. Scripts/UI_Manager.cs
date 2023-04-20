@@ -185,7 +185,7 @@ public class UI_Manager : MonoBehaviour
             {
                 Timer += Time.deltaTime;
                 GameOver.GetComponentInChildren<Text>().text = "GAME OVER";
-                if (Timer >= 3f)
+                if (Timer >= 8f)
                 {
                     Timer = 0;
                     CT_Time = 9.9f;

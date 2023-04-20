@@ -31,10 +31,16 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
 
     int Cursor_num = 0;
 
+    public AudioClip[] UI_Sounds;
+
+    AudioSource audioSource;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 0;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -61,6 +67,8 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
                 {
                     Cursor_num = 0;
                 }
+                audioSource.clip = UI_Sounds[0];
+                audioSource.Play();
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -69,6 +77,8 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
                 {
                     Cursor_num = SuperBomb.Length - 1;
                 }
+                audioSource.clip = UI_Sounds[0];
+                audioSource.Play();
             }
 
             for (int ii = 0; ii < SuperBomb.Length; ii++)
@@ -113,6 +123,9 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
                         PlayerStatus.Selected_Super = SUPER_BOMB.LUCKY_3;
                         break;
                 }
+
+                audioSource.clip = UI_Sounds[1];
+                audioSource.Play();
             }
         }
 
