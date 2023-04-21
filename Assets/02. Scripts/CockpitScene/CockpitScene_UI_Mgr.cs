@@ -28,6 +28,7 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
 
     public Text Help_Text;
     public Text Timer_Text;
+    public Text Coin_Text;
 
     int Cursor_num = 0;
 
@@ -57,6 +58,15 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
         Timer -= Time.deltaTime;
 
         Timer_Text.text = Timer.ToString("N2");
+
+        Coin_Text.text = "CREDIT(S) " + GlobalStatus.Coin.ToString();
+
+        if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
+        {
+            if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }
+            audioSource.clip = UI_Sounds[2];
+            audioSource.Play();
+        }
 
         if (Super_Selected == false)
         {

@@ -13,7 +13,7 @@ public class Game_Manager : MonoBehaviour
     public int Lives = 0;
 
     [HideInInspector]public int Cur_stage = 1;
-    int Cur_SubStage = 1;
+    [HideInInspector]public int Cur_SubStage = 1;
 
     public bool Pause = false;
     
@@ -28,6 +28,8 @@ public class Game_Manager : MonoBehaviour
     public float delta = 0f;
 
     public bool Stage_Completed = false;
+
+    AudioSource audioSource;
 
     private void Awake()
     {
@@ -50,6 +52,8 @@ public class Game_Manager : MonoBehaviour
 
         player_Ctrl = GameObject.FindObjectOfType<Player_Ctrl>().GetComponent<Player_Ctrl>();
         Stage_Completed = false;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -102,6 +106,8 @@ public class Game_Manager : MonoBehaviour
         {
             UI_Manager.Inst.CT_Time = 9.9f;
             if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }
+            audioSource.Play();
+
         }
 
         //스테이지 자동 이동

@@ -9,6 +9,8 @@ public class BG_Ctrl : MonoBehaviour
     MeshRenderer m_Renderer;
     Player_Ctrl player_Ctrl;
 
+    public Material[] BG_Matertial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,8 @@ public class BG_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_Renderer.material.mainTexture = BG_Matertial[Game_Manager.Inst.Cur_stage].mainTexture;
+
         if (!GameObject.FindObjectOfType<Game_Manager>().Pause)
         {
             Offset += Time.deltaTime * ScrollSpeed;

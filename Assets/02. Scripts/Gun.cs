@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
     Player_Ctrl m_RefHero = null;
     Vector3 m_DirVec;
 
-    AudioSource audio;
+    AudioSource audioSource;
 
     [HideInInspector] public bool IsHoming = false;
 
@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour
     {
         m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
         rocket2_shoot = m_MaxShootCool / 2;
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -121,8 +121,8 @@ public class Gun : MonoBehaviour
                     a_CloneObj.transform.rotation = transform.rotation;
 
                     m_ShootCool = m_MaxShootCool;
-                    if (R_2) rocket2_shoot = m_MaxShootCool / 2; 
-                    audio.Play();
+                    if (R_2) rocket2_shoot = m_MaxShootCool / 2;
+                    audioSource.Play();
                 }
             }
         }

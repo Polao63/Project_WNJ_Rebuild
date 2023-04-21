@@ -11,6 +11,10 @@ public class BGM_Mgr : MonoBehaviour
 
     public AudioClip GameOver_BGM;
 
+    public AudioClip Boss_BGM;
+
+    public AudioClip Victory_BGM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +38,22 @@ public class BGM_Mgr : MonoBehaviour
         else 
         {
             Stage_Num = Game_Manager.Inst.Cur_stage - 1;
-            audioSource.clip = STAGE_BGM[Stage_Num];
+            if (Game_Manager.Inst.Cur_SubStage == 10)
+            {
+                if (GameObject.FindGameObjectWithTag("Enemy"))
+                {
+                    audioSource.clip = Boss_BGM;
+                }
+                else 
+                {
+                    audioSource.clip = Victory_BGM;
+                }
+            }
+            else 
+            {
+                audioSource.clip = STAGE_BGM[Stage_Num];
+            }       
+            
             audioSource.volume = 0.38f;
             audioSource.loop = true;
 
