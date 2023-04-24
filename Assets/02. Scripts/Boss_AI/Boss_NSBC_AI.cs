@@ -34,6 +34,8 @@ public class Boss_NSBC_AI : MonoBehaviour
 
     public GameObject[] Gun_Aim;
 
+
+
     void Awake()
     {
         Ene_Ctrl = GetComponent<Enemy_Ctrl>();

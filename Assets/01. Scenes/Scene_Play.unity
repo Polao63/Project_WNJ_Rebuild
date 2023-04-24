@@ -1935,7 +1935,7 @@ MonoBehaviour:
   - {fileID: 1763562476}
   - {fileID: 1833225634}
   Sub_Rolling_Prefab: {fileID: 2600945948243158204, guid: 9cecefc7580dbc0468e738edee76b126, type: 3}
-  Explosion_Prefab: {fileID: 707436384755907473, guid: 5dc30bfcf56ddf946913b3d07e647ae3, type: 3}
+  Explosion_Prefab: {fileID: 707436384755907473, guid: de15b9f7984b4324a8e100a0f8e8fe86, type: 3}
   BulletDamage: 10
 --- !u!50 &857926597
 Rigidbody2D:

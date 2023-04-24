@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Explosion_Animation : MonoBehaviour
 {
+    //public AudioClip Explosion_Sfx;
+    public AudioClip Explosion_Boss_Sfx;
+
+
     void ExplosionDone()//폭발 애니메이션 종료뒤
     {
         if (GameObject.FindGameObjectWithTag("Player") == null)//플레이어 폭발

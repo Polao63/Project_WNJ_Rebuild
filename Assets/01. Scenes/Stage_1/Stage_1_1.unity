@@ -350,7 +350,8 @@ PrefabInstance:
       propertyPath: Aim2Player
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
 --- !u!4 &1345381015 stripped
 Transform:
@@ -578,7 +579,8 @@ PrefabInstance:
       propertyPath: Aim2Player
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
 --- !u!4 &1648753204 stripped
 Transform:
@@ -684,7 +686,8 @@ PrefabInstance:
       propertyPath: Aim2Player
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
 --- !u!1 &1960076185 stripped
 GameObject:
@@ -810,7 +813,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
 --- !u!1001 &5404954516868509181
 PrefabInstance:
@@ -882,11 +886,15 @@ PrefabInstance:
     - target: {fileID: 5404954517194154097, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
       propertyPath: Path_Root
       value: 
-      objectReference: {fileID: 1960076185}
+      objectReference: {fileID: 0}
     - target: {fileID: 5404954517194154097, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
       propertyPath: isTracking
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5404954517194154097, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
+      propertyPath: Explosion_Sfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 2aa221a93fdc1a442ae20900909ff7ac, type: 3}
     - target: {fileID: 5404954517194154102, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
       propertyPath: m_Name
       value: Enemy_S
@@ -903,7 +911,8 @@ PrefabInstance:
       propertyPath: Aim2Player
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 32214c08bdf024844ac001353fd8ddad, type: 3}
 --- !u!1001 &8710640940672791825
 PrefabInstance:

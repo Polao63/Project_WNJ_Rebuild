@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1319653268757028662, guid: 53a82035b1b181f4a856106c7d20468d, type: 3}
+      propertyPath: Explosion_Prefab
+      value: 
+      objectReference: {fileID: 707436384755907473, guid: 864f911ba3176614cba30328ac019a0f, type: 3}
     - target: {fileID: 1319653268836487308, guid: 53a82035b1b181f4a856106c7d20468d, type: 3}
       propertyPath: Aim2Player
       value: 0

@@ -46,6 +46,8 @@ public class Enemy_Ctrl : MonoBehaviour
     Vector3 m_DirVec;
 
     public GameObject Explosion_Prefab = null;
+
+
     public bool isHoming = false;
     public bool isTracking = false;
 
@@ -88,12 +90,13 @@ public class Enemy_Ctrl : MonoBehaviour
         {
             m_CurHP = m_MaxHP;
         }
-       
+
         
     }
     // Update is called once per frame
     void Update()
     {
+        
         if (m_MoType == Mon_Type.MT_BOSS)
         {
             UI_Manager.Inst.Boss_UI.SetActive(true);
@@ -209,13 +212,14 @@ public class Enemy_Ctrl : MonoBehaviour
         m_CurHP -= a_Value;
         delta = 0.1f;
 
+        GetComponent<AudioSource>().Play();
+
         
         if (m_CurHP < 0)
         { m_CurHP = 0; }
 
         if (m_CurHP <= 0)
         {//몬스터 사망처리
-
             if (PlayerStatus.Scavenger)
             {
                 if (ItemDrop != null)
@@ -248,6 +252,7 @@ public class Enemy_Ctrl : MonoBehaviour
             GameObject Explo = Instantiate(Explosion_Prefab);
             Explo.transform.position = this.transform.position;
             Destroy(gameObject); //<-- 몬스터 GameObject 제거
+
         }
 
     }
