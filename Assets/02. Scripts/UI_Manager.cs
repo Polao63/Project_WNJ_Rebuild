@@ -158,7 +158,7 @@ public class UI_Manager : MonoBehaviour
             
             GameOver.GetComponentInChildren<Text>().text = "CONTINUE?\n" + ((int)CT_Time).ToString();
             CT_Time -= Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Keypad1) && Game_Manager.Inst.Coin > 0)
+            if ((Input.GetKeyDown(KeyCode.Keypad1) || Input.GetMouseButtonDown(2)) && Game_Manager.Inst.Coin > 0)
             {
                 Game_Manager.Inst.Coin--;
                 Game_Manager.Inst.Pause = false;

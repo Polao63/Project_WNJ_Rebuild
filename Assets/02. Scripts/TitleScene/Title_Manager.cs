@@ -59,13 +59,13 @@ public class Title_Manager : MonoBehaviour
             SceneManager.LoadScene("DemoScene");
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad1) && GlobalStatus.Coin > 0)
+        if ((Input.GetKeyDown(KeyCode.Keypad1) || Input.GetMouseButtonDown(2)) && GlobalStatus.Coin > 0)
         {
             GlobalStatus.Coin--;
             SceneManager.LoadScene("Cockpit_Scene");
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
+        if (Input.GetKeyDown(KeyCode.Keypad0) || Input.GetMouseButtonDown(1))//코인 투입
         {
             Audio.Play();
             if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }

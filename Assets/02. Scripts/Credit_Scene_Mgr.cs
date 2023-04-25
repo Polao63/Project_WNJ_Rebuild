@@ -14,7 +14,7 @@ public class Credit_Scene_Mgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetMouseButtonDown(2))
         {
             SceneManager.LoadScene("IntroScene");
         }

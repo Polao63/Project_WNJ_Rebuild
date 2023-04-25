@@ -65,7 +65,7 @@ public class IntroScene : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetMouseButtonDown(2))
         {
             SceneManager.LoadScene("TitleScene");
         }

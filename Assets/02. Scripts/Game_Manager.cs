@@ -102,7 +102,7 @@ public class Game_Manager : MonoBehaviour
             Debug.Log("Scavenger : " + PlayerStatus.Scavenger.ToString());
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
+        if (Input.GetKeyDown(KeyCode.Keypad0) || Input.GetMouseButtonDown(1))//코인 투입
         {
             UI_Manager.Inst.CT_Time = 9.9f;
             if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }

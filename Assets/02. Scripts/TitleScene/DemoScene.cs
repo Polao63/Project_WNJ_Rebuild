@@ -41,7 +41,7 @@ public class DemoScene : MonoBehaviour
         currentTime = player.GetComponent<VideoPlayer>().time;
         
 
-        if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
+        if (Input.GetKeyDown(KeyCode.Keypad0) || Input.GetMouseButtonDown(1))//코인 투입
         {
             if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }
             Coin_Inputed = true;

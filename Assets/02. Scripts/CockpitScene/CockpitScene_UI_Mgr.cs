@@ -61,7 +61,7 @@ public class CockpitScene_UI_Mgr : MonoBehaviour
 
         Coin_Text.text = "CREDIT(S) " + GlobalStatus.Coin.ToString();
 
-        if (Input.GetKeyDown(KeyCode.Keypad0))//코인 투입
+        if (Input.GetKeyDown(KeyCode.Keypad0) || Input.GetMouseButtonDown(1))//코인 투입
         {
             if (GlobalStatus.Coin < 9) { GlobalStatus.Coin++; }
             audioSource.clip = UI_Sounds[2];
