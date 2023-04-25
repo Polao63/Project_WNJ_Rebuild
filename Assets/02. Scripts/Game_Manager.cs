@@ -71,7 +71,7 @@ public class Game_Manager : MonoBehaviour
         if (delta < 3f && PlayerStatus.Stage_Completed)
         { 
             delta += Time.deltaTime;
-            if (delta >= 3)
+            if (delta >= 3 && Player_Ctrl.inst.gameObject.activeSelf)
             {
                 Next_Scene();
             }
@@ -120,7 +120,7 @@ public class Game_Manager : MonoBehaviour
             {
                 if (PlayerStatus.Stage_Completed == false)
                 {
-                    Debug.Log("Stage_Completed : " + Stage_Completed);
+                    //Debug.Log("Stage_Completed : " + Stage_Completed);
                     PlayerStatus.Stage_Completed = true;
                 }
 
