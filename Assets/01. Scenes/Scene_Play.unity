@@ -1165,13 +1165,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!1 &533569240
@@ -1462,13 +1463,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!4 &738593213
@@ -2541,13 +2543,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 1
-  m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   m_MaxShootCool: 0.7
   IsHoming: 0
 --- !u!82 &966201083
@@ -2866,13 +2869,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   m_MaxShootCool: 0.7
   IsHoming: 0
 --- !u!82 &1092442453
@@ -3095,13 +3099,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!82 &1112676531
@@ -3834,13 +3839,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!1 &1558373001
@@ -4042,13 +4048,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!4 &1615440397 stripped
@@ -4589,13 +4596,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!1 &1891838102
@@ -5075,13 +5083,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56972fa2437856049a0ff1b1ee1bc985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BulletPrefab: {fileID: 1658428471224065995, guid: e1e02cc01dc809c4f82c6e03f22f9032, type: 3}
   isEnemy: 0
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
+  shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_BulletPrefab: {fileID: 1658428471224065995, guid: e1e02cc01dc809c4f82c6e03f22f9032, type: 3}
   m_MaxShootCool: 0.1
   IsHoming: 0
 --- !u!82 &2016040029
@@ -5313,7 +5322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069358729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0091552995, y: 3.0431638, z: 6.5012217}
+  m_LocalPosition: {x: 0.07, y: -8.74, z: 6.5012217}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

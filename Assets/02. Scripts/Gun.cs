@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    [Header("Common")]
+    public GameObject m_BulletPrefab = null;
     public bool isEnemy;
+
+    [Header("Enemy")]
     public bool Aim2Player;
     public bool Autoshot;
-
     public float Autoshot_delay = 0f;
-
+    public int shoot_Limit = 0;
     public int shooted = 0;
 
+    [Header("Player")]
     public bool R_2 = false;
-
     float Chargetime = 0f;
-    public GameObject m_BulletPrefab = null;
     float m_ShootCool = 0f; //주기 계산
     public float m_MaxShootCool = 2f;
     float rocket2_shoot;
@@ -45,7 +47,14 @@ public class Gun : MonoBehaviour
         if (!GameObject.FindObjectOfType<Game_Manager>().Pause && Item_Manager.inst.Item_Select == false)
         {
             if (isEnemy && Autoshot)
-            { EnemyShoot(); }
+            {
+                if (GetComponentInParent<Enemy_Ctrl>().transform.position.y <= CameraResolution.m_ScreenWMax.y)
+                {
+                    if (shoot_Limit == 0 || shooted < shoot_Limit)
+                    { EnemyShoot(); }
+                }
+                
+            }
             else if(isEnemy == false) { FireUpdate(); }
         }
 
@@ -169,6 +178,11 @@ public class Gun : MonoBehaviour
 
             a_BulletSc = a_CloneObj.GetComponent<Bullet>();
             a_BulletSc.direction = direction;
+            if (GetComponentInParent<Enemy_Ctrl>().bullet_Speed != 0)
+            {
+                a_BulletSc.m_MoveSpeed = GetComponentInParent<Enemy_Ctrl>().bullet_Speed;
+            }
+                
             a_CloneObj.transform.rotation = transform.rotation;
 
             m_ShootCool = m_MaxShootCool;

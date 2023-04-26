@@ -38,7 +38,10 @@ public class Enemy_Ctrl : MonoBehaviour
     public GameObject ItemDrop = null;
 
 
+    public float Move_Delay = 0f;
     public float m_Speed = 4; //이동속도
+    float Init_m_Speed = 0;
+    public float bullet_Speed = 0f;
     Vector3 m_CurPos; //위치 계산용 변수
     Vector3 m_SpawnPos; //스폰 위치
 
@@ -68,6 +71,7 @@ public class Enemy_Ctrl : MonoBehaviour
     {
         m_SpawnPos = this.transform.position;
         m_RefHero = GameObject.FindObjectOfType<Player_Ctrl>();
+        Init_m_Speed = m_Speed;
 
         if (m_MoType == Mon_Type.MT_Small)
         {
@@ -123,19 +127,39 @@ public class Enemy_Ctrl : MonoBehaviour
             { GetComponentInChildren<SpriteRenderer>().color = Color.white; }
         }
 
-        if (m_AIType == AI_Type.AI_Charge)
-        { AI_Charge_Update(); }
+        if (Move_Delay > 0)
+        {
+            Move_Delay -= Time.deltaTime; 
+        }
+
+        if (Move_Delay <= 0f)
+        {
+            if (m_AIType == AI_Type.AI_Charge)
+            { AI_Charge_Update(); }
+        }
+        
 
         if (this.transform.position.x < CameraResolution.m_ScreenWMin.x - 2)
         { Destroy(gameObject); }
+        if (this.transform.position.x > CameraResolution.m_ScreenWMax.x + 2)
+        { Destroy(gameObject); }
+        if (this.transform.position.y < CameraResolution.m_ScreenWMin.y - 2)
+        { Destroy(gameObject); }
+    
+
+        if (this.transform.position.y > CameraResolution.m_ScreenWMax.y)
+        { Invincible = true; }
+        else { Invincible = false; }
 
         if (GameObject.Find("Game_Mgr").GetComponent<Game_Manager>().Pause)
         { m_Speed = 0; }
+        else
+        { m_Speed = Init_m_Speed; }
     }
     void AI_Charge_Update()
     {
         m_CurPos = transform.position;
-        if (isHoming)
+        if (isHoming && (GetComponentInParent<Enemy_Ctrl>().transform.position.y <= CameraResolution.m_ScreenWMax.y))
         {
             this.GetComponentInChildren<SpriteRenderer>().flipY = false;
             m_DirVec.x = 0f;
@@ -167,9 +191,10 @@ public class Enemy_Ctrl : MonoBehaviour
         else
         {
             this.GetComponentInChildren<SpriteRenderer>().flipY = false;
-            transform.rotation = Quaternion.Euler(0,0,0);
-            m_CurPos.y += (-1f * Time.deltaTime * m_Speed);
-            transform.position = m_CurPos;
+            transform.rotation = transform.rotation;
+            transform.Translate(Vector3.up * -m_Speed * Time.deltaTime, Space.Self);
+            //m_CurPos.y += (-1f * Time.deltaTime * m_Speed);
+            //transform.position = m_CurPos;
 
         }
         
