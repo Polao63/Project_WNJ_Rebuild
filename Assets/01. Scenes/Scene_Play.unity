@@ -1167,13 +1167,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.15
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!1 &533569240
 GameObject:
@@ -1465,13 +1465,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.15
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!4 &738593213
 Transform:
@@ -2545,13 +2545,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.7
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 1
-  m_MaxShootCool: 0.7
   IsHoming: 0
 --- !u!82 &966201083
 AudioSource:
@@ -2871,13 +2871,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 1882330021388282565, guid: 83d44b15ee1cfb34b865fd9ac8298e91, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.7
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.7
   IsHoming: 0
 --- !u!82 &1092442453
 AudioSource:
@@ -3101,13 +3101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.15
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!82 &1112676531
 AudioSource:
@@ -3841,13 +3841,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.15
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!1 &1558373001
 GameObject:
@@ -4050,13 +4050,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.15
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!4 &1615440397 stripped
 Transform:
@@ -4598,13 +4598,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 6039460692050424641, guid: e2de02eae321ffe4e9f9ae9206ededfa, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.15
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.15
   IsHoming: 0
 --- !u!1 &1891838102
 GameObject:
@@ -4623,7 +4623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1891838103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5085,13 +5085,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletPrefab: {fileID: 1658428471224065995, guid: e1e02cc01dc809c4f82c6e03f22f9032, type: 3}
   isEnemy: 0
+  m_MaxShootCool: 0.1
   Aim2Player: 0
   Autoshot: 0
   Autoshot_delay: 0
   shoot_Limit: 0
   shooted: 0
   R_2: 0
-  m_MaxShootCool: 0.1
   IsHoming: 0
 --- !u!82 &2016040029
 AudioSource:
@@ -5304,7 +5304,7 @@ MonoBehaviour:
   P1_score: 0
   Hi_score: 0
   Coin: 0
-  Lives: 1
+  Lives: 3
   Cur_stage: 1
   Cur_SubStage: 1
   Pause: 0

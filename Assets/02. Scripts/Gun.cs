@@ -7,6 +7,9 @@ public class Gun : MonoBehaviour
     [Header("Common")]
     public GameObject m_BulletPrefab = null;
     public bool isEnemy;
+    public float m_MaxShootCool = 2f;
+    
+    float m_ShootCool = 0f; //주기 계산
 
     [Header("Enemy")]
     public bool Aim2Player;
@@ -18,8 +21,7 @@ public class Gun : MonoBehaviour
     [Header("Player")]
     public bool R_2 = false;
     float Chargetime = 0f;
-    float m_ShootCool = 0f; //주기 계산
-    public float m_MaxShootCool = 2f;
+
     float rocket2_shoot;
 
     Bullet a_BulletSc;
@@ -48,7 +50,8 @@ public class Gun : MonoBehaviour
         {
             if (isEnemy && Autoshot)
             {
-                if (GetComponentInParent<Enemy_Ctrl>().transform.position.y <= CameraResolution.m_ScreenWMax.y)
+                if (GetComponentInParent<Enemy_Ctrl>().transform.position.y <= CameraResolution.m_ScreenWMax.y
+                    || GetComponentInParent<Enemy_Ctrl>().transform.position.y >= CameraResolution.m_ScreenWMin.y)
                 {
                     if (shoot_Limit == 0 || shooted < shoot_Limit)
                     { EnemyShoot(); }

@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
 
     Vector3 m_DirVec = Vector3.up; //날아가야 할 방향 벡터
     public float m_MoveSpeed = 15f;
+    float m_Init_Speed = 0f;
     public bool isEnemyBullet = false;
 
     public float Damage = 10f;
@@ -46,6 +47,7 @@ public class Bullet : MonoBehaviour
             m_DirVec = Vector3.down;
             m_MoveSpeed = m_MoveSpeed * -1;
         }
+        m_Init_Speed = m_MoveSpeed;
     }
 
     // Update is called once per frame
@@ -97,6 +99,7 @@ public class Bullet : MonoBehaviour
 
         if (GameObject.Find("Game_Mgr").GetComponent<Game_Manager>().Pause)
         { m_MoveSpeed = 0; }
+        else { m_MoveSpeed = m_Init_Speed; }
     }
 
     public void BulletSpawn(Vector3 a_StPos, Vector3 a_DirVec, float a_MvSpeed = 15f, float att = 20f)
